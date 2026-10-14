@@ -1,0 +1,316 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.Limitless.Master.vb" Inherits="ReportingSuite.SiteLimitlessMaster" %>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NAMFISA - Reporting Suite</title>
+
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- Bootstrap -->
+    <link href="Content/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="Content/vendor/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="Content/vendor/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="Content/vendor/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="Content/vendor/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="Content/vendor/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="Content/vendor/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="Content/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="Content/vendor/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="Content/vendor/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="Content/vendor/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="Content/vendor/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="Content/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="Content/vendor/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="Content/build/css/custom.css" rel="stylesheet">
+</head>
+<body style="height: 100%" class="nav-md footer_fixed">
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col ">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <a href="Default.aspx" class="site_title"><img src="images/namfisa-logo-min.png" />Reporting Suite</span></a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+
+                        <br />
+
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>Chart of Account</h3>
+                                <ul class="nav side-menu">
+
+                                    
+                                    <li><a><i class="fa fa-edit"></i>Quarterly Reports <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                           <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns">Quarterly Return - Aggregated Report</a></li>
+                                           <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Per_Entity">Quarterly Return - Entity Level (Vertical),</a></li>
+                                           <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Extra">Quarterly Return - Entity Level (Horizontal)</a></li>
+                                           <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_ExtraAdditional">Quarterly Return - Entity Level (Additional Informations)</a></li>
+                                            <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_By_Entity">Quarterly Return - Single Entity</a></li>
+                                            <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities">Quarterly Return  - Cross-Entity Group - Aggregated Report</a></li>
+                                            <li><a href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities_Per_Entity">Quarterly Return  - Cross-Entity Group - Entity Level</a></li>
+										   
+                                            
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-edit"></i>Monthly Reports <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                           <li><a href="Report?report=ERS-Reports/OCoA_Monthly_Returns_Per_Entity">Monthly Return Per Entity Group - Aggregated Report</a></li>
+                                            
+                                        </ul>
+                                    </li>
+
+                                    
+                                </ul>
+                            </div>
+                            <div class="menu_section">
+                                <h3>Report Settings</h3>
+                                <ul class="nav side-menu">
+
+                                   <li><a href="Parameters.aspx">BI Report Parameters</a></li>
+                                </ul>
+                            </div>
+                            <div class="menu_section">
+                                <h3>Divisions</h3>
+                                <ul class="nav side-menu">
+
+                                    <%For Each s In db.Sections
+                                    %>
+                                    <li><a><i class="fa fa-edit"></i><%=s.SectionName %> <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <%For Each r In s.Reports.Where(Function(f) f.Is_Deleted = False).OrderBy(Function(f) f.Sort_Order)
+
+                                                    If r.ReportTypeID = 3 Then
+                                                        %>
+                                            <li><a href="<%=r.ReportURL %>"><%=r.Report_Name %></a></li>
+                                            <%
+                                                    Else
+                                                        %>
+                                            <li><a href="Report?report=<%=r.ReportURL %>"><%=r.Report_Name %></a></li>
+                                            <%
+                                                    End If
+
+                                                Next
+                                            %>
+                                        </ul>
+                                    </li>
+
+                                    <%
+                        Next%>
+                                </ul>
+                            </div>
+							<%If IsAdmin Then
+                                    %>
+                            <div class="menu_section">
+                                <h3>Administration</h3>
+                                <ul class="nav side-menu">
+                                    <li><a data-toggle="modal" data-target="#new-report" href="#"><i class="fa fa-edit"></i>Create Report</a>
+
+                                    </li>
+                                    <li><a href="Builder.aspx"><i class="fa fa-edit"></i>Report Builder</a>
+
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+                            <%
+                                End If %>
+                            
+							
+                            <!-- <div class="menu_section">
+                                <h3>General</h3>
+                                <ul class="nav side-menu">
+                                    
+                                    <%For Each s In db.EntityGroups
+                                    %>
+                                    <li><a><i class="fa fa-edit"></i><%=s.EntityGroupName %> <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <%For Each r In s.Reports.Where(Function(f) f.Is_Dynamic = False).OrderBy(Function(f) f.Sort_Order)
+                                            %>
+                                            <li><a href="Report?report=<%=r.ReportURL %>"><%=r.Report_Name %></a></li>
+                                            <%
+                    Next
+                                            %>
+                                        </ul>
+                                    </li>
+
+                                    <%
+                    Next%>
+                                </ul>
+                            </div>
+                               -->
+
+
+                        </div>
+                        <!-- /sidebar menu -->
+
+                        <!-- /menu footer buttons -->
+                        <div class="sidebar-footer hidden-small">
+                            <a data-toggle="tooltip" data-placement="top" title="Settings">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                            </a>
+                            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                        <!-- /menu footer buttons -->
+                    </div>
+                </div>
+
+                <!-- top navigation -->
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="">
+                                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        Hello, <%=userName %>!
+                                       
+                                        <span class=" fa fa-angle-down"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                        <li><a href="javascript:;">Profile</a></li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <span class="badge bg-red pull-right">50%</span>
+                                                <span>Settings</span>
+                                            </a>
+                                        </li>
+                                        <li><a href="javascript:;">Help</a></li>
+                                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                                    </ul>
+                                </li>
+
+                               </ul>
+
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+
+            </div>
+            <footer>
+            <div class="pull-right">
+                &copy; <%: DateTime.Now.Year %> - Reporting Suite - Namfisa ICT Division
+           
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        </div>
+
+        
+
+
+
+
+    </form>
+    <!-- jQuery -->
+    <script src="Content/vendor/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="Content/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="Content/vendor/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="Content/vendor/nprogress/nprogress.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="Content/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="Content/vendor/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="Content/vendor/moment/min/moment.min.js"></script>
+    <script src="Content/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="Content/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="Content/vendor/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="Content/vendor/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="Content/vendor/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="Content/vendor/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="Content/vendor/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="Content/vendor/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    <script src="Content/vendor/parsleyjs/dist/parsley.min.js"></script>
+    <!-- Autosize -->
+    <script src="Content/vendor/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="Content/vendor/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="Content/vendor/starrr/dist/starrr.js"></script>
+    <!-- Custom Theme Scripts -->
+    
+    <!-- Datatables -->
+    <script src="Content/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="Content/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="Content/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="Content/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="Content/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="Content/vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="Content/vendor/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="Content/vendor/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <script src="Content/vendor/jszip/dist/jszip.min.js"></script>
+    <script src="Content/vendor/pdfmake/build/pdfmake.min.js"></script>
+    <script src="Content/vendor/pdfmake/build/vfs_fonts.js"></script>
+    <script src="Content/build/js/custom.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+            });
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReportingSuiteModelPFStoreContainer" CdmEntityContainer="ReportingSuiteEntities1">
+    <EntitySetMapping Name="PF_Fund_Submissions">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_Fund_Submissions">
+        <MappingFragment StoreEntitySet="PF_Fund_Submissions">
+          <ScalarProperty Name="PeriodTo" ColumnName="PeriodTo" />
+          <ScalarProperty Name="PeriodFrom" ColumnName="PeriodFrom" />
+          <ScalarProperty Name="PF_Fund_SubmissionID" ColumnName="PF_Fund_SubmissionID" />
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="PF_SubmissionTypeID" ColumnName="PF_SubmissionTypeID" />
+          <ScalarProperty Name="ReportingDate" ColumnName="ReportingDate" />
+          <ScalarProperty Name="LastSubmitted" ColumnName="LastSubmitted" />
+          <ScalarProperty Name="NextDue" ColumnName="NextDue" />
+          <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_Funds">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_Funds">
+        <MappingFragment StoreEntitySet="PF_Funds">
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="FundName" ColumnName="FundName" />
+          <ScalarProperty Name="PrincipalOfficer" ColumnName="PrincipalOfficer" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="FinYearEnd" ColumnName="FinYearEnd" />
+          <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+          <ScalarProperty Name="LastDateReviewed" ColumnName="LastDateReviewed" />
+          <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+          <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+          <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+          <ScalarProperty Name="entity_group_id" ColumnName="entity_group_id" />
+          <ScalarProperty Name="schema_instance_id" ColumnName="schema_instance_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_IndicatorTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_IndicatorTypes">
+        <MappingFragment StoreEntitySet="PF_IndicatorTypes">
+          <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+          <ScalarProperty Name="RatingCode" ColumnName="RatingCode" />
+          <ScalarProperty Name="RatingDescription" ColumnName="RatingDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_InterimAllocationTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_InterimAllocationTypes">
+        <MappingFragment StoreEntitySet="PF_InterimAllocationTypes">
+          <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+          <ScalarProperty Name="InterimAllocation" ColumnName="InterimAllocation" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_PortfolioTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_PortfolioTypes">
+        <MappingFragment StoreEntitySet="PF_PortfolioTypes">
+          <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+          <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_SubmissionTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_SubmissionTypes">
+        <MappingFragment StoreEntitySet="PF_SubmissionTypes">
+          <ScalarProperty Name="PF_SubmissionTypeID" ColumnName="PF_SubmissionTypeID" />
+          <ScalarProperty Name="PF_SubmissionType" ColumnName="PF_SubmissionType" />
+          <ScalarProperty Name="formset_id" ColumnName="formset_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetPFDashboardCompanies" FunctionName="ReportingSuiteModelPF.Store.GetPFDashboardCompanies">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModelPF.GetPFDashboardCompanies_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="item_poname" ColumnName="item_poname" />
+          <ScalarProperty Name="item_email" ColumnName="item_email" />
+          <ScalarProperty Name="item_telephone" ColumnName="item_telephone" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="De_Registration_Date" ColumnName="De-Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="PF_Indicators">
+      <EntityTypeMapping TypeName="ReportingSuiteModelPF.PF_Indicators">
+        <MappingFragment StoreEntitySet="PF_Indicators">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+          <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+          <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+          <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+          <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+          <ScalarProperty Name="ReportingDate" ColumnName="ReportingDate" />
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="PF_IndicatorID" ColumnName="PF_IndicatorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

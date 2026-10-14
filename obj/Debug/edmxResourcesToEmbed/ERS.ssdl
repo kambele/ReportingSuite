@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VSABModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="schema_item_details">
+    <Key>
+      <PropertyRef Name="item_version_id" />
+    </Key>
+    <Property Name="item_version_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="item_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="version_number" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="owner_schema_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="parent_element_id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="path" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dependency" Type="nvarchar(max)" />
+    <Property Name="initial_value" Type="nvarchar(max)" />
+    <Property Name="calculated_value" Type="nvarchar(max)" />
+    <Property Name="is_mandatory" Type="bit" Nullable="false" />
+    <Property Name="data_type_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="column_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="is_primary_key" Type="bit" Nullable="false" />
+    <Property Name="initial_Value_type" Type="nvarchar" MaxLength="100" />
+    <Property Name="data_type_guid" Type="uniqueidentifier" />
+    <Property Name="data_type_version_number" Type="int" />
+    <Property Name="is_searchable" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="VSABModelStoreContainer">
+    <EntitySet Name="schema_item_details" EntityType="Self.schema_item_details" Schema="vsabuser" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

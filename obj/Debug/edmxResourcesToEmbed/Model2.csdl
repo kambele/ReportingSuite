@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReportingSuiteModelPF" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PF_Fund_Submissions">
+    <Key>
+      <PropertyRef Name="PF_Fund_SubmissionID" />
+    </Key>
+    <Property Name="PF_Fund_SubmissionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FundID" Type="Int64" />
+    <Property Name="PF_SubmissionTypeID" Type="Int64" />
+    <Property Name="ReportingDate" Type="DateTime" Precision="0" />
+    <Property Name="LastSubmitted" Type="DateTime" Precision="0" />
+    <Property Name="NextDue" Type="DateTime" Precision="0" />
+    <Property Name="DateSubmitted" Type="DateTime" Precision="0" />
+    <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PF_Funds" Relationship="Self.FK_PF_Fund_Submissions_PF_Funds" FromRole="PF_Fund_Submissions" ToRole="PF_Funds" />
+    <NavigationProperty Name="PF_SubmissionTypes" Relationship="Self.FK_PF_Fund_Submissions_PF_SubmissionTypes" FromRole="PF_Fund_Submissions" ToRole="PF_SubmissionTypes" />
+    <Property Name="PeriodFrom" Type="DateTime" Precision="0" />
+    <Property Name="PeriodTo" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="PF_Funds">
+    <Key>
+      <PropertyRef Name="FundID" />
+    </Key>
+    <Property Name="FundID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FundName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PrincipalOfficer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FinYearEnd" Type="DateTime" Precision="0" />
+    <Property Name="PF_IndicatorTypeID" Type="Int64" />
+    <Property Name="LastDateReviewed" Type="DateTime" Precision="0" />
+    <Property Name="PF_PortfolioTypeID" Type="Int64" />
+    <Property Name="PF_InterimAllocationTypeID" Type="Int64" />
+    <Property Name="ReviewedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="entity_instance_id" Type="Int64" />
+    <Property Name="entity_group_id" Type="Int64" />
+    <Property Name="schema_instance_id" Type="Int64" />
+    <NavigationProperty Name="PF_Fund_Submissions" Relationship="Self.FK_PF_Fund_Submissions_PF_Funds" FromRole="PF_Funds" ToRole="PF_Fund_Submissions" />
+    <NavigationProperty Name="PF_IndicatorTypes" Relationship="Self.FK_PF_Funds_PF_IndicatorTypes" FromRole="PF_Funds" ToRole="PF_IndicatorTypes" />
+    <NavigationProperty Name="PF_InterimAllocationTypes" Relationship="Self.FK_PF_Funds_PF_InterimAllocationTypes" FromRole="PF_Funds" ToRole="PF_InterimAllocationTypes" />
+    <NavigationProperty Name="PF_PortfolioTypes" Relationship="Self.FK_PF_Funds_PF_PortfolioTypes" FromRole="PF_Funds" ToRole="PF_PortfolioTypes" />
+    <NavigationProperty Name="PF_Indicators" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_Funds" FromRole="PF_Funds" ToRole="PF_Indicators" />
+  </EntityType>
+  <EntityType Name="PF_IndicatorTypes">
+    <Key>
+      <PropertyRef Name="PF_IndicatorTypeID" />
+    </Key>
+    <Property Name="PF_IndicatorTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RatingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RatingDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PF_Funds" Relationship="Self.FK_PF_Funds_PF_IndicatorTypes" FromRole="PF_IndicatorTypes" ToRole="PF_Funds" />
+    <NavigationProperty Name="PF_Indicators" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_IndicatorTypes" FromRole="PF_IndicatorTypes" ToRole="PF_Indicators" />
+  </EntityType>
+  <EntityType Name="PF_InterimAllocationTypes">
+    <Key>
+      <PropertyRef Name="PF_InterimAllocationTypeID" />
+    </Key>
+    <Property Name="PF_InterimAllocationTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InterimAllocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PF_Funds" Relationship="Self.FK_PF_Funds_PF_InterimAllocationTypes" FromRole="PF_InterimAllocationTypes" ToRole="PF_Funds" />
+    <NavigationProperty Name="PF_Indicators" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_InterimAllocationTypes" FromRole="PF_InterimAllocationTypes" ToRole="PF_Indicators" />
+  </EntityType>
+  <EntityType Name="PF_PortfolioTypes">
+    <Key>
+      <PropertyRef Name="PF_PortfolioTypeID" />
+    </Key>
+    <Property Name="PF_PortfolioTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PortfolioName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PF_Funds" Relationship="Self.FK_PF_Funds_PF_PortfolioTypes" FromRole="PF_PortfolioTypes" ToRole="PF_Funds" />
+    <NavigationProperty Name="PF_Indicators" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_PortfolioTypes" FromRole="PF_PortfolioTypes" ToRole="PF_Indicators" />
+  </EntityType>
+  <EntityType Name="PF_SubmissionTypes">
+    <Key>
+      <PropertyRef Name="PF_SubmissionTypeID" />
+    </Key>
+    <Property Name="PF_SubmissionTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PF_SubmissionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="formset_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PF_Fund_Submissions" Relationship="Self.FK_PF_Fund_Submissions_PF_SubmissionTypes" FromRole="PF_SubmissionTypes" ToRole="PF_Fund_Submissions" />
+  </EntityType>
+  <Association Name="FK_PF_Fund_Submissions_PF_Funds">
+    <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="0..1" />
+    <End Role="PF_Fund_Submissions" Type="Self.PF_Fund_Submissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_Funds">
+        <PropertyRef Name="FundID" />
+      </Principal>
+      <Dependent Role="PF_Fund_Submissions">
+        <PropertyRef Name="FundID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Fund_Submissions_PF_SubmissionTypes">
+    <End Role="PF_SubmissionTypes" Type="Self.PF_SubmissionTypes" Multiplicity="0..1" />
+    <End Role="PF_Fund_Submissions" Type="Self.PF_Fund_Submissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_SubmissionTypes">
+        <PropertyRef Name="PF_SubmissionTypeID" />
+      </Principal>
+      <Dependent Role="PF_Fund_Submissions">
+        <PropertyRef Name="PF_SubmissionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Funds_PF_IndicatorTypes">
+    <End Role="PF_IndicatorTypes" Type="Self.PF_IndicatorTypes" Multiplicity="0..1" />
+    <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_IndicatorTypes">
+        <PropertyRef Name="PF_IndicatorTypeID" />
+      </Principal>
+      <Dependent Role="PF_Funds">
+        <PropertyRef Name="PF_IndicatorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Funds_PF_InterimAllocationTypes">
+    <End Role="PF_InterimAllocationTypes" Type="Self.PF_InterimAllocationTypes" Multiplicity="0..1" />
+    <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_InterimAllocationTypes">
+        <PropertyRef Name="PF_InterimAllocationTypeID" />
+      </Principal>
+      <Dependent Role="PF_Funds">
+        <PropertyRef Name="PF_InterimAllocationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Funds_PF_PortfolioTypes">
+    <End Role="PF_PortfolioTypes" Type="Self.PF_PortfolioTypes" Multiplicity="0..1" />
+    <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_PortfolioTypes">
+        <PropertyRef Name="PF_PortfolioTypeID" />
+      </Principal>
+      <Dependent Role="PF_Funds">
+        <PropertyRef Name="PF_PortfolioTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ReportingSuiteEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PF_Fund_Submissions" EntityType="Self.PF_Fund_Submissions" />
+    <EntitySet Name="PF_Funds" EntityType="Self.PF_Funds" />
+    <EntitySet Name="PF_IndicatorTypes" EntityType="Self.PF_IndicatorTypes" />
+    <EntitySet Name="PF_InterimAllocationTypes" EntityType="Self.PF_InterimAllocationTypes" />
+    <EntitySet Name="PF_PortfolioTypes" EntityType="Self.PF_PortfolioTypes" />
+    <EntitySet Name="PF_SubmissionTypes" EntityType="Self.PF_SubmissionTypes" />
+    <AssociationSet Name="FK_PF_Fund_Submissions_PF_Funds" Association="Self.FK_PF_Fund_Submissions_PF_Funds">
+      <End Role="PF_Funds" EntitySet="PF_Funds" />
+      <End Role="PF_Fund_Submissions" EntitySet="PF_Fund_Submissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Fund_Submissions_PF_SubmissionTypes" Association="Self.FK_PF_Fund_Submissions_PF_SubmissionTypes">
+      <End Role="PF_SubmissionTypes" EntitySet="PF_SubmissionTypes" />
+      <End Role="PF_Fund_Submissions" EntitySet="PF_Fund_Submissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Funds_PF_IndicatorTypes" Association="Self.FK_PF_Funds_PF_IndicatorTypes">
+      <End Role="PF_IndicatorTypes" EntitySet="PF_IndicatorTypes" />
+      <End Role="PF_Funds" EntitySet="PF_Funds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Funds_PF_InterimAllocationTypes" Association="Self.FK_PF_Funds_PF_InterimAllocationTypes">
+      <End Role="PF_InterimAllocationTypes" EntitySet="PF_InterimAllocationTypes" />
+      <End Role="PF_Funds" EntitySet="PF_Funds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Funds_PF_PortfolioTypes" Association="Self.FK_PF_Funds_PF_PortfolioTypes">
+      <End Role="PF_PortfolioTypes" EntitySet="PF_PortfolioTypes" />
+      <End Role="PF_Funds" EntitySet="PF_Funds" />
+    </AssociationSet>
+    <FunctionImport Name="GetPFDashboardCompanies" ReturnType="Collection(ReportingSuiteModelPF.GetPFDashboardCompanies_Result)" />
+    <EntitySet Name="PF_Indicators" EntityType="ReportingSuiteModelPF.PF_Indicators" />
+    <AssociationSet Name="FK_PF_Indicators_PF_Funds" Association="ReportingSuiteModelPF.FK_PF_Indicators_PF_Funds">
+      <End Role="PF_Funds" EntitySet="PF_Funds" />
+      <End Role="PF_Indicators" EntitySet="PF_Indicators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Indicators_PF_IndicatorTypes" Association="ReportingSuiteModelPF.FK_PF_Indicators_PF_IndicatorTypes">
+      <End Role="PF_IndicatorTypes" EntitySet="PF_IndicatorTypes" />
+      <End Role="PF_Indicators" EntitySet="PF_Indicators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Indicators_PF_InterimAllocationTypes" Association="ReportingSuiteModelPF.FK_PF_Indicators_PF_InterimAllocationTypes">
+      <End Role="PF_InterimAllocationTypes" EntitySet="PF_InterimAllocationTypes" />
+      <End Role="PF_Indicators" EntitySet="PF_Indicators" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PF_Indicators_PF_PortfolioTypes" Association="ReportingSuiteModelPF.FK_PF_Indicators_PF_PortfolioTypes">
+      <End Role="PF_PortfolioTypes" EntitySet="PF_PortfolioTypes" />
+      <End Role="PF_Indicators" EntitySet="PF_Indicators" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetPFDashboardCompanies_Result">
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="License_Number" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="entity_instance_id" Nullable="false" />
+    <Property Type="Int32" Name="owner_schema_instance_id" Nullable="true" />
+    <Property Type="String" Name="item_poname" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="item_email" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="item_telephone" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="Company_Status" Nullable="true" MaxLength="12" />
+    <Property Type="DateTime" Name="Registration_Date" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="De_Registration_Date" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Financial_Year_End" Nullable="true" MaxLength="61" />
+    <Property Type="String" Name="Physical_Address_1" Nullable="false" MaxLength="4000" />
+    <Property Type="String" Name="Physical_Address_2" Nullable="false" MaxLength="4000" />
+  </ComplexType>
+  <EntityType Name="PF_Indicators">
+    <Key>
+      <PropertyRef Name="PF_IndicatorID" />
+    </Key>
+    <Property Name="PF_IndicatorID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FundID" Type="Int64" />
+    <Property Name="ReportingDate" Type="DateTime" Precision="0" />
+    <Property Name="PF_IndicatorTypeID" Type="Int64" />
+    <Property Name="DateReviewed" Type="DateTime" Precision="0" />
+    <Property Name="PF_PortfolioTypeID" Type="Int64" />
+    <Property Name="PF_InterimAllocationTypeID" Type="Int64" />
+    <Property Name="ReviewedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PF_Funds" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_Funds" FromRole="PF_Indicators" ToRole="PF_Funds" />
+    <NavigationProperty Name="PF_IndicatorTypes" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_IndicatorTypes" FromRole="PF_Indicators" ToRole="PF_IndicatorTypes" />
+    <NavigationProperty Name="PF_InterimAllocationTypes" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_InterimAllocationTypes" FromRole="PF_Indicators" ToRole="PF_InterimAllocationTypes" />
+    <NavigationProperty Name="PF_PortfolioTypes" Relationship="ReportingSuiteModelPF.FK_PF_Indicators_PF_PortfolioTypes" FromRole="PF_Indicators" ToRole="PF_PortfolioTypes" />
+  </EntityType>
+  <Association Name="FK_PF_Indicators_PF_Funds">
+    <End Type="ReportingSuiteModelPF.PF_Funds" Role="PF_Funds" Multiplicity="0..1" />
+    <End Type="ReportingSuiteModelPF.PF_Indicators" Role="PF_Indicators" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_Funds">
+        <PropertyRef Name="FundID" />
+      </Principal>
+      <Dependent Role="PF_Indicators">
+        <PropertyRef Name="FundID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Indicators_PF_IndicatorTypes">
+    <End Type="ReportingSuiteModelPF.PF_IndicatorTypes" Role="PF_IndicatorTypes" Multiplicity="0..1" />
+    <End Type="ReportingSuiteModelPF.PF_Indicators" Role="PF_Indicators" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_IndicatorTypes">
+        <PropertyRef Name="PF_IndicatorTypeID" />
+      </Principal>
+      <Dependent Role="PF_Indicators">
+        <PropertyRef Name="PF_IndicatorTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Indicators_PF_InterimAllocationTypes">
+    <End Type="ReportingSuiteModelPF.PF_InterimAllocationTypes" Role="PF_InterimAllocationTypes" Multiplicity="0..1" />
+    <End Type="ReportingSuiteModelPF.PF_Indicators" Role="PF_Indicators" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_InterimAllocationTypes">
+        <PropertyRef Name="PF_InterimAllocationTypeID" />
+      </Principal>
+      <Dependent Role="PF_Indicators">
+        <PropertyRef Name="PF_InterimAllocationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PF_Indicators_PF_PortfolioTypes">
+    <End Type="ReportingSuiteModelPF.PF_PortfolioTypes" Role="PF_PortfolioTypes" Multiplicity="0..1" />
+    <End Type="ReportingSuiteModelPF.PF_Indicators" Role="PF_Indicators" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PF_PortfolioTypes">
+        <PropertyRef Name="PF_PortfolioTypeID" />
+      </Principal>
+      <Dependent Role="PF_Indicators">
+        <PropertyRef Name="PF_PortfolioTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

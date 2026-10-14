@@ -1,0 +1,2588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ReportingSuiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AggregationTypes">
+          <Key>
+            <PropertyRef Name="AggregationTypeID" />
+          </Key>
+          <Property Name="AggregationTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AggregationTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CalculatedBy">
+          <Key>
+            <PropertyRef Name="CalculatedByID" />
+          </Key>
+          <Property Name="CalculatedByID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CalculatedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Copy of Pension-Funds-Data-Update (002)">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Fund " Type="varchar" MaxLength="50" />
+          <Property Name="Fund Name" Type="varchar" MaxLength="500" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Column 3" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS MATCHED" Type="varchar" MaxLength="50" />
+          <Property Name="To be actioned" Type="varchar" MaxLength="500" />
+          <Property Name="Assigned To" Type="varchar" MaxLength="50" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntityGroupLineItem_Columns">
+          <Key>
+            <PropertyRef Name="EntityGroupLineItem_ColumnID" />
+          </Key>
+          <Property Name="EntityGroupLineItem_ColumnID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LineItemColumnID" Type="bigint" />
+          <Property Name="EntityGroupID" Type="bigint" />
+          <Property Name="TableName" Type="varchar(max)" />
+          <Property Name="ColumnName" Type="varchar(max)" />
+          <Property Name="StoredProc" Type="varchar(max)" />
+          <Property Name="AggregationTypeID" Type="bigint" Nullable="false" />
+          <Property Name="CountParameter" Type="varchar" MaxLength="50" />
+          <Property Name="CountDataType" Type="nchar" MaxLength="10" />
+          <Property Name="Is_CalculatedValue" Type="bit" Nullable="false" />
+          <Property Name="Expression" Type="varchar(max)" />
+          <Property Name="SchemaFieldName" Type="varchar(max)" />
+          <Property Name="Updated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntityGroups">
+          <Key>
+            <PropertyRef Name="EntityGroupID" />
+          </Key>
+          <Property Name="EntityGroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntityGroupName" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="FinUpdates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="License" Type="varchar(max)" />
+          <Property Name="Month" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar(max)" />
+          <Property Name="Is_Updated" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ReportingSuite.dbo.Gaps' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Gaps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="No" Type="varchar" MaxLength="50" />
+          <Property Name="License" Type="varchar" MaxLength="50" />
+          <Property Name="Company Name" Type="varchar" MaxLength="500" />
+          <Property Name="Financial year end date" Type="varchar" MaxLength="50" />
+          <Property Name="Physical Address" Type="varchar" MaxLength="500" />
+          <Property Name="Postal address" Type="varchar" MaxLength="500" />
+          <Property Name="Registration date" Type="varchar" MaxLength="50" />
+          <Property Name="De-registration date" Type="varchar" MaxLength="50" />
+          <Property Name="POName" Type="varchar" MaxLength="500" />
+          <Property Name="POemail address" Type="varchar" MaxLength="500" />
+          <Property Name="POTelephone number" Type="varchar" MaxLength="50" />
+          <Property Name="AName" Type="varchar" MaxLength="500" />
+          <Property Name="Aemail address" Type="varchar" MaxLength="500" />
+          <Property Name="ATelephone number" Type="varchar" MaxLength="50" />
+          <Property Name="VName" Type="varchar" MaxLength="500" />
+          <Property Name="Vemail address" Type="varchar" MaxLength="500" />
+          <Property Name="VTelephone number" Type="varchar" MaxLength="50" />
+          <Property Name="Column 17" Type="varchar" MaxLength="50" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineItem_Columns">
+          <Key>
+            <PropertyRef Name="LineItemColumnID" />
+          </Key>
+          <Property Name="LineItemColumnID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Report_LineItemID" Type="bigint" />
+          <Property Name="Report_ColumnID" Type="bigint" />
+          <Property Name="TableName" Type="varchar(max)" />
+          <Property Name="ColumnName" Type="varchar(max)" />
+          <Property Name="StoredProc" Type="varchar(max)" />
+          <Property Name="AggregationTypeID" Type="bigint" />
+          <Property Name="CountParameter" Type="varchar" MaxLength="50" />
+          <Property Name="CountDataType" Type="varchar" MaxLength="50" />
+          <Property Name="SchemaID" Type="bigint" />
+          <Property Name="Show" Type="bit" Nullable="false" />
+          <Property Name="Sort_Order" Type="int" />
+          <Property Name="Is_CalculatedValue" Type="bit" Nullable="false" />
+          <Property Name="Expression" Type="varchar(max)" />
+          <Property Name="SchemaFieldName" Type="varchar(max)" />
+          <Property Name="Updated" Type="bit" />
+          <Property Name="EntityGroupBasedMapping" Type="bit" />
+          <Property Name="AddMonthToReportingPeriod" Type="int" />
+          <Property Name="Is_Inherited" Type="bit" Nullable="false" />
+          <Property Name="Inherited_Lineitem_ColumnID" Type="bigint" />
+          <Property Name="ProcessTypeID" Type="bigint" />
+          <Property Name="RuntimeExpression" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="LineItemTypes">
+          <Key>
+            <PropertyRef Name="LineItemTypeID" />
+          </Key>
+          <Property Name="LineItemTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LineItemTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Months">
+          <Key>
+            <PropertyRef Name="MonthID" />
+          </Key>
+          <Property Name="MonthID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Month" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PF_Fund_Submissions">
+          <Key>
+            <PropertyRef Name="PF_Fund_SubmissionID" />
+          </Key>
+          <Property Name="PF_Fund_SubmissionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FundID" Type="bigint" />
+          <Property Name="PF_SubmissionTypeID" Type="bigint" />
+          <Property Name="ReportingDate" Type="date" />
+          <Property Name="LastSubmitted" Type="date" />
+          <Property Name="NextDue" Type="date" />
+          <Property Name="DateSubmitted" Type="date" />
+          <Property Name="Comment" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PF_Funds">
+          <Key>
+            <PropertyRef Name="FundID" />
+          </Key>
+          <Property Name="FundID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FundName" Type="varchar" MaxLength="100" />
+          <Property Name="PrincipalOfficer" Type="varchar" MaxLength="100" />
+          <Property Name="RegNo" Type="varchar" MaxLength="50" />
+          <Property Name="FinYearEnd" Type="date" />
+          <Property Name="PF_IndicatorTypeID" Type="bigint" />
+          <Property Name="LastDateReviewed" Type="date" />
+          <Property Name="PF_PortfolioTypeID" Type="bigint" />
+          <Property Name="PF_InterimAllocationTypeID" Type="bigint" />
+          <Property Name="ReviewedBy" Type="varchar" MaxLength="50" />
+          <Property Name="Comment" Type="varchar(max)" />
+          <Property Name="entity_instance_id" Type="bigint" />
+          <Property Name="entity_group_id" Type="bigint" />
+          <Property Name="schema_instance_id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PF_InterimAllocationTypes">
+          <Key>
+            <PropertyRef Name="PF_InterimAllocationTypeID" />
+          </Key>
+          <Property Name="PF_InterimAllocationTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InterimAllocation" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PF_PortfolioTypes">
+          <Key>
+            <PropertyRef Name="PF_PortfolioTypeID" />
+          </Key>
+          <Property Name="PF_PortfolioTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortfolioName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PF_SubmissionTypes">
+          <Key>
+            <PropertyRef Name="PF_SubmissionTypeID" />
+          </Key>
+          <Property Name="PF_SubmissionTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PF_SubmissionType" Type="varchar" MaxLength="50" />
+          <Property Name="formset_id" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProcessTypes">
+          <Key>
+            <PropertyRef Name="ProcessTypeID" />
+          </Key>
+          <Property Name="ProcessTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcessTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Quarters">
+          <Key>
+            <PropertyRef Name="QuarterID" />
+          </Key>
+          <Property Name="QuarterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quarter" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Report_Columns">
+          <Key>
+            <PropertyRef Name="Report_ColumnID" />
+          </Key>
+          <Property Name="Report_ColumnID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="ColumnName" Type="varchar" MaxLength="100" />
+          <Property Name="Sort_Order" Type="int" />
+          <Property Name="Show" Type="bit" Nullable="false" />
+          <Property Name="ReportSectionID" Type="bigint" />
+          <Property Name="Is_Calculated" Type="bit" Nullable="false" />
+          <Property Name="CalculatedByID" Type="bigint" />
+          <Property Name="CalculationValue" Type="int" />
+          <Property Name="CalculatedFromReportColumnID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Report_LineItems">
+          <Key>
+            <PropertyRef Name="Report_LineItemID" />
+          </Key>
+          <Property Name="Report_LineItemID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="Line_itemName" Type="varchar(max)" />
+          <Property Name="TableName" Type="varchar(max)" />
+          <Property Name="ColumnName" Type="varchar(max)" />
+          <Property Name="Is_Main" Type="bit" Nullable="false" />
+          <Property Name="StoredProc" Type="varchar(max)" />
+          <Property Name="Sort_Order" Type="int" />
+          <Property Name="AggregationTypeID" Type="bigint" Nullable="false" />
+          <Property Name="CountParameter" Type="varchar" MaxLength="50" />
+          <Property Name="CountDataType" Type="varchar" MaxLength="50" />
+          <Property Name="SchemaID" Type="bigint" />
+          <Property Name="Is_Calculated_Value" Type="bit" />
+          <Property Name="Expression" Type="varchar(max)" />
+          <Property Name="Show" Type="bit" />
+          <Property Name="SchemaFieldName" Type="varchar(max)" />
+          <Property Name="Updated" Type="bit" />
+          <Property Name="ReportSectionID" Type="bigint" />
+          <Property Name="Is_Title" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReportDataCube">
+          <Key>
+            <PropertyRef Name="ReportDataID" />
+          </Key>
+          <Property Name="ReportDataID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Quarter" Type="char" MaxLength="2" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="Report_Name" Type="varchar(max)" />
+          <Property Name="Report_Title" Type="varchar(max)" />
+          <Property Name="Entity_GroupID" Type="bigint" />
+          <Property Name="Report_Description" Type="varchar(max)" />
+          <Property Name="Report_Subtitle" Type="varchar(max)" />
+          <Property Name="Sort_Order" Type="int" />
+          <Property Name="SectionID" Type="bigint" />
+          <Property Name="ReportTypeID" Type="bigint" />
+          <Property Name="ReportURL" Type="varchar(max)" />
+          <Property Name="Is_Dynamic" Type="bit" />
+          <Property Name="LineItemTypeID" Type="bigint" />
+          <Property Name="Is_Deleted" Type="bit" />
+          <Property Name="Report_LineItemID" Type="bigint" />
+          <Property Name="Line_ItemName" Type="varchar(max)" />
+          <Property Name="Is_Main" Type="bit" />
+          <Property Name="LineItemValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Sort_Order2" Type="int" />
+          <Property Name="Sort_Order3" Type="int" />
+          <Property Name="EntityGroupName" Type="varchar" MaxLength="200" />
+          <Property Name="ColumnName" Type="varchar" MaxLength="200" />
+          <Property Name="EntityName" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ReportEntityGroups">
+          <Key>
+            <PropertyRef Name="ReportEntityGroupID" />
+          </Key>
+          <Property Name="ReportEntityGroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="EntityGroupID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ReportParameters">
+          <Key>
+            <PropertyRef Name="ReportParameterID" />
+          </Key>
+          <Property Name="ReportParameterID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="YearFrom" Type="int" />
+          <Property Name="YearTo" Type="int" />
+          <Property Name="QuarterFrom" Type="int" />
+          <Property Name="QuarterTo" Type="int" />
+        </EntityType>
+        <EntityType Name="ReportRoles">
+          <Key>
+            <PropertyRef Name="ReportRoleID" />
+          </Key>
+          <Property Name="ReportRoleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="RoleTypeID" Type="bigint" />
+          <Property Name="Grantee" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Report_Name" Type="varchar" MaxLength="200" />
+          <Property Name="Report_Title" Type="varchar" MaxLength="100" />
+          <Property Name="Entity_GroupID" Type="bigint" />
+          <Property Name="Report_Description" Type="varchar(max)" />
+          <Property Name="Report_SubTitle" Type="varchar" MaxLength="100" />
+          <Property Name="Sort_Order" Type="int" />
+          <Property Name="SectionID" Type="bigint" />
+          <Property Name="ReportTypeID" Type="bigint" />
+          <Property Name="ReportURL" Type="varchar" MaxLength="200" />
+          <Property Name="Is_Dynamic" Type="bit" Nullable="false" />
+          <Property Name="LineItemTypeID" Type="bigint" />
+          <Property Name="Is_Deleted" Type="bit" Nullable="false" />
+          <Property Name="Is_MulitpleEntities" Type="bit" />
+          <Property Name="YearFrom" Type="int" />
+          <Property Name="YearTo" Type="int" />
+          <Property Name="QuarterFrom" Type="int" />
+          <Property Name="QuarterTo" Type="int" />
+          <Property Name="ReportCode" Type="varchar" MaxLength="50" />
+          <Property Name="Updated" Type="bit" />
+          <Property Name="ShowMappedItems" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReportSections">
+          <Key>
+            <PropertyRef Name="ReportSectionID" />
+          </Key>
+          <Property Name="ReportSectionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportID" Type="bigint" />
+          <Property Name="ReportSectionName" Type="varchar" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="Show" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReportTypes">
+          <Key>
+            <PropertyRef Name="ReportTypeID" />
+          </Key>
+          <Property Name="ReportTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RoleTypes">
+          <Key>
+            <PropertyRef Name="RoleTypeID" />
+          </Key>
+          <Property Name="RoleTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleTypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="SchemaID" />
+          </Key>
+          <Property Name="SchemaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormName" Type="varchar" MaxLength="200" />
+          <Property Name="SectionName" Type="varchar" MaxLength="200" />
+          <Property Name="FieldName" Type="varchar" MaxLength="200" />
+          <Property Name="DatabaseTable" Type="varchar" MaxLength="200" />
+          <Property Name="DatabaseField" Type="varchar" MaxLength="200" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="SchemaGroups">
+          <Key>
+            <PropertyRef Name="SchemaGroupID" />
+          </Key>
+          <Property Name="SchemaGroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchemaGroupName" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="SchemaResources">
+          <Key>
+            <PropertyRef Name="SchemaResourseID" />
+          </Key>
+          <Property Name="SchemaResourseID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="50" />
+          <Property Name="Value" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="StatusUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="License" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="Updated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="Domain" Type="varchar" MaxLength="50" />
+          <Property Name="Is_Admin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Years">
+          <Key>
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EntityGroupLineItem_Columns_EntityGroups">
+          <End Role="EntityGroups" Type="Self.EntityGroups" Multiplicity="0..1" />
+          <End Role="EntityGroupLineItem_Columns" Type="Self.EntityGroupLineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Principal>
+            <Dependent Role="EntityGroupLineItem_Columns">
+              <PropertyRef Name="EntityGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntityGroupLineItem_Columns_LineItem_Columns">
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="0..1" />
+          <End Role="EntityGroupLineItem_Columns" Type="Self.EntityGroupLineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineItem_Columns">
+              <PropertyRef Name="LineItemColumnID" />
+            </Principal>
+            <Dependent Role="EntityGroupLineItem_Columns">
+              <PropertyRef Name="LineItemColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_AggregationTypes">
+          <End Role="AggregationTypes" Type="Self.AggregationTypes" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AggregationTypes">
+              <PropertyRef Name="AggregationTypeID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="AggregationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_LineItem_Columns">
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="0..1" />
+          <End Role="LineItem_Columns1" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineItem_Columns">
+              <PropertyRef Name="LineItemColumnID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns1">
+              <PropertyRef Name="Inherited_Lineitem_ColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_ProcessTypes">
+          <End Role="ProcessTypes" Type="Self.ProcessTypes" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessTypes">
+              <PropertyRef Name="ProcessTypeID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="ProcessTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_Report_Columns">
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report_Columns">
+              <PropertyRef Name="Report_ColumnID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="Report_ColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_Report_LineItems">
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report_LineItems">
+              <PropertyRef Name="Report_LineItemID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="Report_LineItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_Schema">
+          <End Role="Schema" Type="Self.Schema" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schema">
+              <PropertyRef Name="SchemaID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="SchemaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Fund_Submissions_PF_Funds">
+          <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="0..1" />
+          <End Role="PF_Fund_Submissions" Type="Self.PF_Fund_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_Funds">
+              <PropertyRef Name="FundID" />
+            </Principal>
+            <Dependent Role="PF_Fund_Submissions">
+              <PropertyRef Name="FundID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Fund_Submissions_PF_SubmissionTypes">
+          <End Role="PF_SubmissionTypes" Type="Self.PF_SubmissionTypes" Multiplicity="0..1" />
+          <End Role="PF_Fund_Submissions" Type="Self.PF_Fund_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_SubmissionTypes">
+              <PropertyRef Name="PF_SubmissionTypeID" />
+            </Principal>
+            <Dependent Role="PF_Fund_Submissions">
+              <PropertyRef Name="PF_SubmissionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Funds_PF_InterimAllocationTypes">
+          <End Role="PF_InterimAllocationTypes" Type="Self.PF_InterimAllocationTypes" Multiplicity="0..1" />
+          <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_InterimAllocationTypes">
+              <PropertyRef Name="PF_InterimAllocationTypeID" />
+            </Principal>
+            <Dependent Role="PF_Funds">
+              <PropertyRef Name="PF_InterimAllocationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Funds_PF_PortfolioTypes">
+          <End Role="PF_PortfolioTypes" Type="Self.PF_PortfolioTypes" Multiplicity="0..1" />
+          <End Role="PF_Funds" Type="Self.PF_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_PortfolioTypes">
+              <PropertyRef Name="PF_PortfolioTypeID" />
+            </Principal>
+            <Dependent Role="PF_Funds">
+              <PropertyRef Name="PF_PortfolioTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_CalculatedBy">
+          <End Role="CalculatedBy" Type="Self.CalculatedBy" Multiplicity="0..1" />
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalculatedBy">
+              <PropertyRef Name="CalculatedByID" />
+            </Principal>
+            <Dependent Role="Report_Columns">
+              <PropertyRef Name="CalculatedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_Report_Columns1">
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="0..1" />
+          <End Role="Report_Columns1" Type="Self.Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report_Columns">
+              <PropertyRef Name="Report_ColumnID" />
+            </Principal>
+            <Dependent Role="Report_Columns1">
+              <PropertyRef Name="CalculatedFromReportColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="Report_Columns">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_ReportSections">
+          <End Role="ReportSections" Type="Self.ReportSections" Multiplicity="0..1" />
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSections">
+              <PropertyRef Name="ReportSectionID" />
+            </Principal>
+            <Dependent Role="Report_Columns">
+              <PropertyRef Name="ReportSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_AggregationTypes">
+          <End Role="AggregationTypes" Type="Self.AggregationTypes" Multiplicity="1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AggregationTypes">
+              <PropertyRef Name="AggregationTypeID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="AggregationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_ReportSections">
+          <End Role="ReportSections" Type="Self.ReportSections" Multiplicity="0..1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSections">
+              <PropertyRef Name="ReportSectionID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="ReportSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_Schema">
+          <End Role="Schema" Type="Self.Schema" Multiplicity="0..1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schema">
+              <PropertyRef Name="SchemaID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="SchemaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportEntityGroups_EntityGroups">
+          <End Role="EntityGroups" Type="Self.EntityGroups" Multiplicity="0..1" />
+          <End Role="ReportEntityGroups" Type="Self.ReportEntityGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Principal>
+            <Dependent Role="ReportEntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportEntityGroups_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="ReportEntityGroups" Type="Self.ReportEntityGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportEntityGroups">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportParameters_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="ReportParameters" Type="Self.ReportParameters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportParameters">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportRoles_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="ReportRoles" Type="Self.ReportRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportRoles">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportRoles_RoleTypes">
+          <End Role="RoleTypes" Type="Self.RoleTypes" Multiplicity="0..1" />
+          <End Role="ReportRoles" Type="Self.ReportRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTypes">
+              <PropertyRef Name="RoleTypeID" />
+            </Principal>
+            <Dependent Role="ReportRoles">
+              <PropertyRef Name="RoleTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_EntityGroups">
+          <End Role="EntityGroups" Type="Self.EntityGroups" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="Entity_GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_LineItemTypes">
+          <End Role="LineItemTypes" Type="Self.LineItemTypes" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineItemTypes">
+              <PropertyRef Name="LineItemTypeID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="LineItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ReportTypes">
+          <End Role="ReportTypes" Type="Self.ReportTypes" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportTypes">
+              <PropertyRef Name="ReportTypeID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="ReportTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_Sections">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSections_Reports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="ReportSections" Type="Self.ReportSections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportSections">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateStoredFunctions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tableName" Type="varchar" Mode="In" />
+          <Parameter Name="fieldName" Type="varchar" Mode="In" />
+          <Parameter Name="AggregationTypeID" Type="bigint" Mode="In" />
+          <Parameter Name="func" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="get_ACoA_Reports" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Report_id" Type="bigint" Mode="In" />
+          <Parameter Name="quarter_from" Type="bigint" Mode="In" />
+          <Parameter Name="quarter_to" Type="bigint" Mode="In" />
+          <Parameter Name="year_from" Type="int" Mode="In" />
+          <Parameter Name="year_to" Type="int" Mode="In" />
+          <Parameter Name="entity_type" Type="varchar" Mode="In" />
+          <Parameter Name="entities" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetSchemaDatabaseColumnByFieldName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="GetSchemaDatabaseTableByPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar(max)">
+          <Parameter Name="path" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetSchemaGroupByPath" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ReportDataCubeEmpty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ReportDataCubeFill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="r" Type="int" Mode="In" />
+          <Parameter Name="q" Type="int" Mode="In" />
+          <Parameter Name="q2" Type="int" Mode="In" />
+          <Parameter Name="y" Type="int" Mode="In" />
+          <Parameter Name="y2" Type="int" Mode="In" />
+          <Parameter Name="entity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateBIViews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReportID" Type="bigint" Mode="In" />
+          <Parameter Name="y1" Type="int" Mode="In" />
+          <Parameter Name="y2" Type="int" Mode="In" />
+          <Parameter Name="q1" Type="int" Mode="In" />
+          <Parameter Name="q2" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="group" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ReportingSuiteModelStoreContainer">
+          <EntitySet Name="AggregationTypes" EntityType="Self.AggregationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalculatedBy" EntityType="Self.CalculatedBy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Copy of Pension-Funds-Data-Update (002)" EntityType="Self.Copy of Pension-Funds-Data-Update (002)" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntityGroupLineItem_Columns" EntityType="Self.EntityGroupLineItem_Columns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntityGroups" EntityType="Self.EntityGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinUpdates" EntityType="Self.FinUpdates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineItem_Columns" EntityType="Self.LineItem_Columns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineItemTypes" EntityType="Self.LineItemTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Months" EntityType="Self.Months" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PF_Fund_Submissions" EntityType="Self.PF_Fund_Submissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PF_Funds" EntityType="Self.PF_Funds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PF_InterimAllocationTypes" EntityType="Self.PF_InterimAllocationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PF_PortfolioTypes" EntityType="Self.PF_PortfolioTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PF_SubmissionTypes" EntityType="Self.PF_SubmissionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessTypes" EntityType="Self.ProcessTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quarters" EntityType="Self.Quarters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report_Columns" EntityType="Self.Report_Columns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report_LineItems" EntityType="Self.Report_LineItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportDataCube" EntityType="Self.ReportDataCube" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportEntityGroups" EntityType="Self.ReportEntityGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportParameters" EntityType="Self.ReportParameters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportRoles" EntityType="Self.ReportRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportSections" EntityType="Self.ReportSections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportTypes" EntityType="Self.ReportTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleTypes" EntityType="Self.RoleTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schema" EntityType="Self.Schema" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchemaGroups" EntityType="Self.SchemaGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchemaResources" EntityType="Self.SchemaResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusUpdate" EntityType="Self.StatusUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gaps" EntityType="Self.Gaps" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Gaps].[No] AS [No], 
+    [Gaps].[License] AS [License], 
+    [Gaps].[Company Name] AS [Company Name], 
+    [Gaps].[Financial year end date] AS [Financial year end date], 
+    [Gaps].[Physical Address] AS [Physical Address], 
+    [Gaps].[Postal address] AS [Postal address], 
+    [Gaps].[Registration date] AS [Registration date], 
+    [Gaps].[De-registration date] AS [De-registration date], 
+    [Gaps].[POName] AS [POName], 
+    [Gaps].[POemail address] AS [POemail address], 
+    [Gaps].[POTelephone number] AS [POTelephone number], 
+    [Gaps].[AName] AS [AName], 
+    [Gaps].[Aemail address] AS [Aemail address], 
+    [Gaps].[ATelephone number] AS [ATelephone number], 
+    [Gaps].[VName] AS [VName], 
+    [Gaps].[Vemail address] AS [Vemail address], 
+    [Gaps].[VTelephone number] AS [VTelephone number], 
+    [Gaps].[Column 17] AS [Column 17], 
+    [Gaps].[ID] AS [ID]
+    FROM [dbo].[Gaps] AS [Gaps]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_EntityGroupLineItem_Columns_EntityGroups" Association="Self.FK_EntityGroupLineItem_Columns_EntityGroups">
+            <End Role="EntityGroups" EntitySet="EntityGroups" />
+            <End Role="EntityGroupLineItem_Columns" EntitySet="EntityGroupLineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntityGroupLineItem_Columns_LineItem_Columns" Association="Self.FK_EntityGroupLineItem_Columns_LineItem_Columns">
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+            <End Role="EntityGroupLineItem_Columns" EntitySet="EntityGroupLineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_AggregationTypes" Association="Self.FK_LineItem_Columns_AggregationTypes">
+            <End Role="AggregationTypes" EntitySet="AggregationTypes" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_LineItem_Columns" Association="Self.FK_LineItem_Columns_LineItem_Columns">
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+            <End Role="LineItem_Columns1" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_ProcessTypes" Association="Self.FK_LineItem_Columns_ProcessTypes">
+            <End Role="ProcessTypes" EntitySet="ProcessTypes" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_Report_Columns" Association="Self.FK_LineItem_Columns_Report_Columns">
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_Report_LineItems" Association="Self.FK_LineItem_Columns_Report_LineItems">
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_Schema" Association="Self.FK_LineItem_Columns_Schema">
+            <End Role="Schema" EntitySet="Schema" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Fund_Submissions_PF_Funds" Association="Self.FK_PF_Fund_Submissions_PF_Funds">
+            <End Role="PF_Funds" EntitySet="PF_Funds" />
+            <End Role="PF_Fund_Submissions" EntitySet="PF_Fund_Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Fund_Submissions_PF_SubmissionTypes" Association="Self.FK_PF_Fund_Submissions_PF_SubmissionTypes">
+            <End Role="PF_SubmissionTypes" EntitySet="PF_SubmissionTypes" />
+            <End Role="PF_Fund_Submissions" EntitySet="PF_Fund_Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Funds_PF_InterimAllocationTypes" Association="Self.FK_PF_Funds_PF_InterimAllocationTypes">
+            <End Role="PF_InterimAllocationTypes" EntitySet="PF_InterimAllocationTypes" />
+            <End Role="PF_Funds" EntitySet="PF_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Funds_PF_PortfolioTypes" Association="Self.FK_PF_Funds_PF_PortfolioTypes">
+            <End Role="PF_PortfolioTypes" EntitySet="PF_PortfolioTypes" />
+            <End Role="PF_Funds" EntitySet="PF_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_CalculatedBy" Association="Self.FK_Report_Columns_CalculatedBy">
+            <End Role="CalculatedBy" EntitySet="CalculatedBy" />
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_Report_Columns1" Association="Self.FK_Report_Columns_Report_Columns1">
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+            <End Role="Report_Columns1" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_Reports" Association="Self.FK_Report_Columns_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_ReportSections" Association="Self.FK_Report_Columns_ReportSections">
+            <End Role="ReportSections" EntitySet="ReportSections" />
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_AggregationTypes" Association="Self.FK_Report_LineItems_AggregationTypes">
+            <End Role="AggregationTypes" EntitySet="AggregationTypes" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_Reports" Association="Self.FK_Report_LineItems_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_ReportSections" Association="Self.FK_Report_LineItems_ReportSections">
+            <End Role="ReportSections" EntitySet="ReportSections" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_Schema" Association="Self.FK_Report_LineItems_Schema">
+            <End Role="Schema" EntitySet="Schema" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportEntityGroups_EntityGroups" Association="Self.FK_ReportEntityGroups_EntityGroups">
+            <End Role="EntityGroups" EntitySet="EntityGroups" />
+            <End Role="ReportEntityGroups" EntitySet="ReportEntityGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportEntityGroups_Reports" Association="Self.FK_ReportEntityGroups_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportEntityGroups" EntitySet="ReportEntityGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportParameters_Reports" Association="Self.FK_ReportParameters_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportParameters" EntitySet="ReportParameters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportRoles_Reports" Association="Self.FK_ReportRoles_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportRoles" EntitySet="ReportRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportRoles_RoleTypes" Association="Self.FK_ReportRoles_RoleTypes">
+            <End Role="RoleTypes" EntitySet="RoleTypes" />
+            <End Role="ReportRoles" EntitySet="ReportRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_EntityGroups" Association="Self.FK_Reports_EntityGroups">
+            <End Role="EntityGroups" EntitySet="EntityGroups" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_LineItemTypes" Association="Self.FK_Reports_LineItemTypes">
+            <End Role="LineItemTypes" EntitySet="LineItemTypes" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ReportTypes" Association="Self.FK_Reports_ReportTypes">
+            <End Role="ReportTypes" EntitySet="ReportTypes" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_Sections" Association="Self.FK_Reports_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSections_Reports" Association="Self.FK_ReportSections_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportSections" EntitySet="ReportSections" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportingSuiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AggregationType">
+          <Key>
+            <PropertyRef Name="AggregationTypeID" />
+          </Key>
+          <Property Name="AggregationTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AggregationTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LineItem_Columns" Relationship="Self.FK_LineItem_Columns_AggregationTypes" FromRole="AggregationTypes" ToRole="LineItem_Columns" />
+          <NavigationProperty Name="Report_LineItems" Relationship="Self.FK_Report_LineItems_AggregationTypes" FromRole="AggregationTypes" ToRole="Report_LineItems" />
+        </EntityType>
+        <EntityType Name="Copy_of_Pension_Funds_Data_Update__002_">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Fund_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fund_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_MATCHED" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="To_be_actioned" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Assigned_To" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="EntityGroupLineItem_Columns">
+          <Key>
+            <PropertyRef Name="EntityGroupLineItem_ColumnID" />
+          </Key>
+          <Property Name="EntityGroupLineItem_ColumnID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LineItemColumnID" Type="Int64" />
+          <Property Name="EntityGroupID" Type="Int64" />
+          <Property Name="TableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StoredProc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AggregationTypeID" Type="Int64" Nullable="false" />
+          <Property Name="CountParameter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountDataType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Is_CalculatedValue" Type="Boolean" Nullable="false" />
+          <Property Name="Expression" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SchemaFieldName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Updated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EntityGroup" Relationship="Self.FK_EntityGroupLineItem_Columns_EntityGroups" FromRole="EntityGroupLineItem_Columns" ToRole="EntityGroups" />
+          <NavigationProperty Name="LineItem_Columns" Relationship="Self.FK_EntityGroupLineItem_Columns_LineItem_Columns" FromRole="EntityGroupLineItem_Columns" ToRole="LineItem_Columns" />
+        </EntityType>
+        <EntityType Name="EntityGroup">
+          <Key>
+            <PropertyRef Name="EntityGroupID" />
+          </Key>
+          <Property Name="EntityGroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntityGroupName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EntityGroupLineItem_Columns" Relationship="Self.FK_EntityGroupLineItem_Columns_EntityGroups" FromRole="EntityGroups" ToRole="EntityGroupLineItem_Columns" />
+          <NavigationProperty Name="ReportEntityGroups" Relationship="Self.FK_ReportEntityGroups_EntityGroups" FromRole="EntityGroups" ToRole="ReportEntityGroups" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_EntityGroups" FromRole="EntityGroups" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="FinUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="License" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Month" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Updated" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LineItem_Columns">
+          <Key>
+            <PropertyRef Name="LineItemColumnID" />
+          </Key>
+          <Property Name="LineItemColumnID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Report_LineItemID" Type="Int64" />
+          <Property Name="Report_ColumnID" Type="Int64" />
+          <Property Name="TableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StoredProc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AggregationTypeID" Type="Int64" />
+          <Property Name="CountParameter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountDataType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SchemaID" Type="Int64" />
+          <Property Name="Show" Type="Boolean" Nullable="false" />
+          <Property Name="Sort_Order" Type="Int32" />
+          <Property Name="Is_CalculatedValue" Type="Boolean" Nullable="false" />
+          <Property Name="Expression" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SchemaFieldName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Updated" Type="Boolean" />
+          <Property Name="EntityGroupBasedMapping" Type="Boolean" />
+          <Property Name="AddMonthToReportingPeriod" Type="Int32" />
+          <NavigationProperty Name="AggregationType" Relationship="Self.FK_LineItem_Columns_AggregationTypes" FromRole="LineItem_Columns" ToRole="AggregationTypes" />
+          <NavigationProperty Name="EntityGroupLineItem_Columns" Relationship="Self.FK_EntityGroupLineItem_Columns_LineItem_Columns" FromRole="LineItem_Columns" ToRole="EntityGroupLineItem_Columns" />
+          <NavigationProperty Name="Report_Columns" Relationship="Self.FK_LineItem_Columns_Report_Columns" FromRole="LineItem_Columns" ToRole="Report_Columns" />
+          <NavigationProperty Name="Report_LineItems" Relationship="Self.FK_LineItem_Columns_Report_LineItems" FromRole="LineItem_Columns" ToRole="Report_LineItems" />
+          <NavigationProperty Name="Schema" Relationship="Self.FK_LineItem_Columns_Schema" FromRole="LineItem_Columns" ToRole="Schema" />
+          <Property Name="Is_Inherited" Type="Boolean" Nullable="false" />
+          <Property Name="Inherited_Lineitem_ColumnID" Type="Int64" />
+          <NavigationProperty Name="LineItem_Columns1" Relationship="ReportingSuiteModel.FK_LineItem_Columns_LineItem_Columns" FromRole="LineItem_Columns" ToRole="LineItem_Columns1" />
+          <NavigationProperty Name="LineItem_Columns2" Relationship="ReportingSuiteModel.FK_LineItem_Columns_LineItem_Columns" FromRole="LineItem_Columns1" ToRole="LineItem_Columns" />
+          <Property Name="ProcessTypeID" Type="Int64" />
+          <NavigationProperty Name="ProcessType" Relationship="ReportingSuiteModel.FK_LineItem_Columns_ProcessTypes" FromRole="LineItem_Columns" ToRole="ProcessType" />
+          <Property Name="RuntimeExpression" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LineItemType">
+          <Key>
+            <PropertyRef Name="LineItemTypeID" />
+          </Key>
+          <Property Name="LineItemTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LineItemTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_LineItemTypes" FromRole="LineItemTypes" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="MonthID" />
+          </Key>
+          <Property Name="MonthID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Month1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Quarter">
+          <Key>
+            <PropertyRef Name="QuarterID" />
+          </Key>
+          <Property Name="QuarterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quarter1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Report_Columns">
+          <Key>
+            <PropertyRef Name="Report_ColumnID" />
+          </Key>
+          <Property Name="Report_ColumnID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="ColumnName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sort_Order" Type="Int32" />
+          <Property Name="Show" Type="Boolean" Nullable="false" />
+          <Property Name="ReportSectionID" Type="Int64" />
+          <NavigationProperty Name="LineItem_Columns" Relationship="Self.FK_LineItem_Columns_Report_Columns" FromRole="Report_Columns" ToRole="LineItem_Columns" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_Report_Columns_Reports" FromRole="Report_Columns" ToRole="Reports" />
+          <NavigationProperty Name="ReportSection" Relationship="Self.FK_Report_Columns_ReportSections" FromRole="Report_Columns" ToRole="ReportSections" />
+          <Property Name="Is_Calculated" Type="Boolean" Nullable="false" />
+          <Property Name="CalculatedByID" Type="Int64" />
+          <Property Name="CalculationValue" Type="Int32" />
+          <NavigationProperty Name="CalculatedBy" Relationship="ReportingSuiteModel.FK_Report_Columns_CalculatedBy" FromRole="Report_Columns" ToRole="CalculatedBy" />
+          <Property Name="CalculatedFromReportColumnID" Type="Int64" />
+          <NavigationProperty Name="Report_Columns1" Relationship="ReportingSuiteModel.FK_Report_Columns_Report_Columns1" FromRole="Report_Columns" ToRole="Report_Columns1" />
+          <NavigationProperty Name="Report_Columns2" Relationship="ReportingSuiteModel.FK_Report_Columns_Report_Columns1" FromRole="Report_Columns1" ToRole="Report_Columns" />
+        </EntityType>
+        <EntityType Name="Report_LineItems">
+          <Key>
+            <PropertyRef Name="Report_LineItemID" />
+          </Key>
+          <Property Name="Report_LineItemID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="Line_itemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Main" Type="Boolean" Nullable="false" />
+          <Property Name="StoredProc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sort_Order" Type="Int32" />
+          <Property Name="AggregationTypeID" Type="Int64" Nullable="false" />
+          <Property Name="CountParameter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CountDataType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SchemaID" Type="Int64" />
+          <Property Name="Is_Calculated_Value" Type="Boolean" />
+          <Property Name="Expression" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Show" Type="Boolean" />
+          <Property Name="SchemaFieldName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Updated" Type="Boolean" />
+          <Property Name="ReportSectionID" Type="Int64" />
+          <Property Name="Is_Title" Type="Boolean" />
+          <NavigationProperty Name="AggregationType" Relationship="Self.FK_Report_LineItems_AggregationTypes" FromRole="Report_LineItems" ToRole="AggregationTypes" />
+          <NavigationProperty Name="LineItem_Columns" Relationship="Self.FK_LineItem_Columns_Report_LineItems" FromRole="Report_LineItems" ToRole="LineItem_Columns" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_Report_LineItems_Reports" FromRole="Report_LineItems" ToRole="Reports" />
+          <NavigationProperty Name="ReportSection" Relationship="Self.FK_Report_LineItems_ReportSections" FromRole="Report_LineItems" ToRole="ReportSections" />
+          <NavigationProperty Name="Schema" Relationship="Self.FK_Report_LineItems_Schema" FromRole="Report_LineItems" ToRole="Schema" />
+        </EntityType>
+        <EntityType Name="ReportDataCube">
+          <Key>
+            <PropertyRef Name="ReportDataID" />
+          </Key>
+          <Property Name="ReportDataID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Quarter" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="Report_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Report_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Entity_GroupID" Type="Int64" />
+          <Property Name="Report_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Report_Subtitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sort_Order" Type="Int32" />
+          <Property Name="SectionID" Type="Int64" />
+          <Property Name="ReportTypeID" Type="Int64" />
+          <Property Name="ReportURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Dynamic" Type="Boolean" />
+          <Property Name="LineItemTypeID" Type="Int64" />
+          <Property Name="Is_Deleted" Type="Boolean" />
+          <Property Name="Report_LineItemID" Type="Int64" />
+          <Property Name="Line_ItemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Main" Type="Boolean" />
+          <Property Name="LineItemValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Sort_Order2" Type="Int32" />
+          <Property Name="Sort_Order3" Type="Int32" />
+          <Property Name="EntityGroupName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EntityName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ReportEntityGroup">
+          <Key>
+            <PropertyRef Name="ReportEntityGroupID" />
+          </Key>
+          <Property Name="ReportEntityGroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="EntityGroupID" Type="Int64" />
+          <NavigationProperty Name="EntityGroup" Relationship="Self.FK_ReportEntityGroups_EntityGroups" FromRole="ReportEntityGroups" ToRole="EntityGroups" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_ReportEntityGroups_Reports" FromRole="ReportEntityGroups" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="ReportRole">
+          <Key>
+            <PropertyRef Name="ReportRoleID" />
+          </Key>
+          <Property Name="ReportRoleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="RoleTypeID" Type="Int64" />
+          <Property Name="Grantee" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_ReportRoles_Reports" FromRole="ReportRoles" ToRole="Reports" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK_ReportRoles_RoleTypes" FromRole="ReportRoles" ToRole="RoleTypes" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Report_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Report_Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Entity_GroupID" Type="Int64" />
+          <Property Name="Report_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Report_SubTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sort_Order" Type="Int32" />
+          <Property Name="SectionID" Type="Int64" />
+          <Property Name="ReportTypeID" Type="Int64" />
+          <Property Name="ReportURL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Dynamic" Type="Boolean" Nullable="false" />
+          <Property Name="LineItemTypeID" Type="Int64" />
+          <Property Name="Is_Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Is_MulitpleEntities" Type="Boolean" />
+          <NavigationProperty Name="EntityGroup" Relationship="Self.FK_Reports_EntityGroups" FromRole="Reports" ToRole="EntityGroups" />
+          <NavigationProperty Name="LineItemType" Relationship="Self.FK_Reports_LineItemTypes" FromRole="Reports" ToRole="LineItemTypes" />
+          <NavigationProperty Name="Report_Columns" Relationship="Self.FK_Report_Columns_Reports" FromRole="Reports" ToRole="Report_Columns" />
+          <NavigationProperty Name="Report_LineItems" Relationship="Self.FK_Report_LineItems_Reports" FromRole="Reports" ToRole="Report_LineItems" />
+          <NavigationProperty Name="ReportEntityGroups" Relationship="Self.FK_ReportEntityGroups_Reports" FromRole="Reports" ToRole="ReportEntityGroups" />
+          <NavigationProperty Name="ReportRoles" Relationship="Self.FK_ReportRoles_Reports" FromRole="Reports" ToRole="ReportRoles" />
+          <NavigationProperty Name="ReportType" Relationship="Self.FK_Reports_ReportTypes" FromRole="Reports" ToRole="ReportTypes" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Reports_Sections" FromRole="Reports" ToRole="Sections" />
+          <NavigationProperty Name="ReportSections" Relationship="Self.FK_ReportSections_Reports" FromRole="Reports" ToRole="ReportSections" />
+          <Property Name="YearFrom" Type="Int32" />
+          <Property Name="YearTo" Type="Int32" />
+          <Property Name="QuarterFrom" Type="Int32" />
+          <Property Name="QuarterTo" Type="Int32" />
+          <NavigationProperty Name="ReportParameters" Relationship="ReportingSuiteModel.FK_ReportParameters_Reports" FromRole="Report" ToRole="ReportParameter" />
+          <Property Name="ReportCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Updated" Type="Boolean" />
+          <Property Name="ShowMappedItems" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ReportSection">
+          <Key>
+            <PropertyRef Name="ReportSectionID" />
+          </Key>
+          <Property Name="ReportSectionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="ReportSectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Show" Type="Boolean" />
+          <NavigationProperty Name="Report_Columns" Relationship="Self.FK_Report_Columns_ReportSections" FromRole="ReportSections" ToRole="Report_Columns" />
+          <NavigationProperty Name="Report_LineItems" Relationship="Self.FK_Report_LineItems_ReportSections" FromRole="ReportSections" ToRole="Report_LineItems" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_ReportSections_Reports" FromRole="ReportSections" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="ReportType">
+          <Key>
+            <PropertyRef Name="ReportTypeID" />
+          </Key>
+          <Property Name="ReportTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_ReportTypes" FromRole="ReportTypes" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="RoleTypeID" />
+          </Key>
+          <Property Name="RoleTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ReportRoles" Relationship="Self.FK_ReportRoles_RoleTypes" FromRole="RoleTypes" ToRole="ReportRoles" />
+        </EntityType>
+        <EntityType Name="Schema">
+          <Key>
+            <PropertyRef Name="SchemaID" />
+          </Key>
+          <Property Name="SchemaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SectionName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FieldName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DatabaseTable" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DatabaseField" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LineItem_Columns" Relationship="Self.FK_LineItem_Columns_Schema" FromRole="Schema" ToRole="LineItem_Columns" />
+          <NavigationProperty Name="Report_LineItems" Relationship="Self.FK_Report_LineItems_Schema" FromRole="Schema" ToRole="Report_LineItems" />
+        </EntityType>
+        <EntityType Name="SchemaGroup">
+          <Key>
+            <PropertyRef Name="SchemaGroupID" />
+          </Key>
+          <Property Name="SchemaGroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchemaGroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SchemaResource">
+          <Key>
+            <PropertyRef Name="SchemaResourseID" />
+          </Key>
+          <Property Name="SchemaResourseID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_Sections" FromRole="Sections" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="StatusUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="License" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Updated" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="Year1" />
+          </Key>
+          <Property Name="Year1" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="License" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company_Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Financial_year_end_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Physical_Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Postal_address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Registration_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="De_registration_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="POName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="POemail_address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="POTelephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Aemail_address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ATelephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Vemail_address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VTelephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Column_17" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_LineItem_Columns_AggregationTypes">
+          <End Role="AggregationTypes" Type="Self.AggregationType" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AggregationTypes">
+              <PropertyRef Name="AggregationTypeID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="AggregationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_AggregationTypes">
+          <End Role="AggregationTypes" Type="Self.AggregationType" Multiplicity="1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AggregationTypes">
+              <PropertyRef Name="AggregationTypeID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="AggregationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntityGroupLineItem_Columns_EntityGroups">
+          <End Role="EntityGroups" Type="Self.EntityGroup" Multiplicity="0..1" />
+          <End Role="EntityGroupLineItem_Columns" Type="Self.EntityGroupLineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Principal>
+            <Dependent Role="EntityGroupLineItem_Columns">
+              <PropertyRef Name="EntityGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntityGroupLineItem_Columns_LineItem_Columns">
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="0..1" />
+          <End Role="EntityGroupLineItem_Columns" Type="Self.EntityGroupLineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineItem_Columns">
+              <PropertyRef Name="LineItemColumnID" />
+            </Principal>
+            <Dependent Role="EntityGroupLineItem_Columns">
+              <PropertyRef Name="LineItemColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportEntityGroups_EntityGroups">
+          <End Role="EntityGroups" Type="Self.EntityGroup" Multiplicity="0..1" />
+          <End Role="ReportEntityGroups" Type="Self.ReportEntityGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Principal>
+            <Dependent Role="ReportEntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_EntityGroups">
+          <End Role="EntityGroups" Type="Self.EntityGroup" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntityGroups">
+              <PropertyRef Name="EntityGroupID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="Entity_GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_Report_Columns">
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report_Columns">
+              <PropertyRef Name="Report_ColumnID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="Report_ColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_Report_LineItems">
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report_LineItems">
+              <PropertyRef Name="Report_LineItemID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="Report_LineItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_Schema">
+          <End Role="Schema" Type="Self.Schema" Multiplicity="0..1" />
+          <End Role="LineItem_Columns" Type="Self.LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schema">
+              <PropertyRef Name="SchemaID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="SchemaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_LineItemTypes">
+          <End Role="LineItemTypes" Type="Self.LineItemType" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineItemTypes">
+              <PropertyRef Name="LineItemTypeID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="LineItemTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_Reports">
+          <End Role="Reports" Type="Self.Report" Multiplicity="0..1" />
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="Report_Columns">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_ReportSections">
+          <End Role="ReportSections" Type="Self.ReportSection" Multiplicity="0..1" />
+          <End Role="Report_Columns" Type="Self.Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSections">
+              <PropertyRef Name="ReportSectionID" />
+            </Principal>
+            <Dependent Role="Report_Columns">
+              <PropertyRef Name="ReportSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_Reports">
+          <End Role="Reports" Type="Self.Report" Multiplicity="0..1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_ReportSections">
+          <End Role="ReportSections" Type="Self.ReportSection" Multiplicity="0..1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportSections">
+              <PropertyRef Name="ReportSectionID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="ReportSectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_LineItems_Schema">
+          <End Role="Schema" Type="Self.Schema" Multiplicity="0..1" />
+          <End Role="Report_LineItems" Type="Self.Report_LineItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schema">
+              <PropertyRef Name="SchemaID" />
+            </Principal>
+            <Dependent Role="Report_LineItems">
+              <PropertyRef Name="SchemaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportEntityGroups_Reports">
+          <End Role="Reports" Type="Self.Report" Multiplicity="0..1" />
+          <End Role="ReportEntityGroups" Type="Self.ReportEntityGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportEntityGroups">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportRoles_Reports">
+          <End Role="Reports" Type="Self.Report" Multiplicity="0..1" />
+          <End Role="ReportRoles" Type="Self.ReportRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportRoles">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportRoles_RoleTypes">
+          <End Role="RoleTypes" Type="Self.RoleType" Multiplicity="0..1" />
+          <End Role="ReportRoles" Type="Self.ReportRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTypes">
+              <PropertyRef Name="RoleTypeID" />
+            </Principal>
+            <Dependent Role="ReportRoles">
+              <PropertyRef Name="RoleTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ReportTypes">
+          <End Role="ReportTypes" Type="Self.ReportType" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportTypes">
+              <PropertyRef Name="ReportTypeID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="ReportTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_Sections">
+          <End Role="Sections" Type="Self.Section" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportSections_Reports">
+          <End Role="Reports" Type="Self.Report" Multiplicity="0..1" />
+          <End Role="ReportSections" Type="Self.ReportSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportSections">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ReportingSuiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AggregationTypes" EntityType="Self.AggregationType" />
+          <EntitySet Name="Copy_of_Pension_Funds_Data_Update__002_" EntityType="Self.Copy_of_Pension_Funds_Data_Update__002_" />
+          <EntitySet Name="EntityGroupLineItem_Columns" EntityType="Self.EntityGroupLineItem_Columns" />
+          <EntitySet Name="EntityGroups" EntityType="Self.EntityGroup" />
+          <EntitySet Name="FinUpdates" EntityType="Self.FinUpdate" />
+          <EntitySet Name="LineItem_Columns" EntityType="Self.LineItem_Columns" />
+          <EntitySet Name="LineItemTypes" EntityType="Self.LineItemType" />
+          <EntitySet Name="Months" EntityType="Self.Month" />
+          <EntitySet Name="Quarters" EntityType="Self.Quarter" />
+          <EntitySet Name="Report_Columns" EntityType="Self.Report_Columns" />
+          <EntitySet Name="Report_LineItems" EntityType="Self.Report_LineItems" />
+          <EntitySet Name="ReportDataCubes" EntityType="Self.ReportDataCube" />
+          <EntitySet Name="ReportEntityGroups" EntityType="Self.ReportEntityGroup" />
+          <EntitySet Name="ReportRoles" EntityType="Self.ReportRole" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="ReportSections" EntityType="Self.ReportSection" />
+          <EntitySet Name="ReportTypes" EntityType="Self.ReportType" />
+          <EntitySet Name="RoleTypes" EntityType="Self.RoleType" />
+          <EntitySet Name="Schemata" EntityType="Self.Schema" />
+          <EntitySet Name="SchemaGroups" EntityType="Self.SchemaGroup" />
+          <EntitySet Name="SchemaResources" EntityType="Self.SchemaResource" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="StatusUpdates" EntityType="Self.StatusUpdate" />
+          <EntitySet Name="Years" EntityType="Self.Year" />
+          <EntitySet Name="Gaps" EntityType="Self.Gap" />
+          <AssociationSet Name="FK_LineItem_Columns_AggregationTypes" Association="Self.FK_LineItem_Columns_AggregationTypes">
+            <End Role="AggregationTypes" EntitySet="AggregationTypes" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_AggregationTypes" Association="Self.FK_Report_LineItems_AggregationTypes">
+            <End Role="AggregationTypes" EntitySet="AggregationTypes" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntityGroupLineItem_Columns_EntityGroups" Association="Self.FK_EntityGroupLineItem_Columns_EntityGroups">
+            <End Role="EntityGroups" EntitySet="EntityGroups" />
+            <End Role="EntityGroupLineItem_Columns" EntitySet="EntityGroupLineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntityGroupLineItem_Columns_LineItem_Columns" Association="Self.FK_EntityGroupLineItem_Columns_LineItem_Columns">
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+            <End Role="EntityGroupLineItem_Columns" EntitySet="EntityGroupLineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportEntityGroups_EntityGroups" Association="Self.FK_ReportEntityGroups_EntityGroups">
+            <End Role="EntityGroups" EntitySet="EntityGroups" />
+            <End Role="ReportEntityGroups" EntitySet="ReportEntityGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_EntityGroups" Association="Self.FK_Reports_EntityGroups">
+            <End Role="EntityGroups" EntitySet="EntityGroups" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_Report_Columns" Association="Self.FK_LineItem_Columns_Report_Columns">
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_Report_LineItems" Association="Self.FK_LineItem_Columns_Report_LineItems">
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_Schema" Association="Self.FK_LineItem_Columns_Schema">
+            <End Role="Schema" EntitySet="Schemata" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_LineItemTypes" Association="Self.FK_Reports_LineItemTypes">
+            <End Role="LineItemTypes" EntitySet="LineItemTypes" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_Reports" Association="Self.FK_Report_Columns_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_ReportSections" Association="Self.FK_Report_Columns_ReportSections">
+            <End Role="ReportSections" EntitySet="ReportSections" />
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_Reports" Association="Self.FK_Report_LineItems_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_ReportSections" Association="Self.FK_Report_LineItems_ReportSections">
+            <End Role="ReportSections" EntitySet="ReportSections" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_LineItems_Schema" Association="Self.FK_Report_LineItems_Schema">
+            <End Role="Schema" EntitySet="Schemata" />
+            <End Role="Report_LineItems" EntitySet="Report_LineItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportEntityGroups_Reports" Association="Self.FK_ReportEntityGroups_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportEntityGroups" EntitySet="ReportEntityGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportRoles_Reports" Association="Self.FK_ReportRoles_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportRoles" EntitySet="ReportRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportRoles_RoleTypes" Association="Self.FK_ReportRoles_RoleTypes">
+            <End Role="RoleTypes" EntitySet="RoleTypes" />
+            <End Role="ReportRoles" EntitySet="ReportRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ReportTypes" Association="Self.FK_Reports_ReportTypes">
+            <End Role="ReportTypes" EntitySet="ReportTypes" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_Sections" Association="Self.FK_Reports_Sections">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportSections_Reports" Association="Self.FK_ReportSections_Reports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="ReportSections" EntitySet="ReportSections" />
+          </AssociationSet>
+          <FunctionImport Name="CreateStoredFunctions">
+            <Parameter Name="tableName" Mode="In" Type="String" />
+            <Parameter Name="fieldName" Mode="In" Type="String" />
+            <Parameter Name="AggregationTypeID" Mode="In" Type="Int64" />
+            <Parameter Name="func" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ReportDataCubeEmpty" />
+          <FunctionImport Name="ReportDataCubeFill">
+            <Parameter Name="r" Mode="In" Type="Int32" />
+            <Parameter Name="q" Mode="In" Type="Int32" />
+            <Parameter Name="q2" Mode="In" Type="Int32" />
+            <Parameter Name="y" Mode="In" Type="Int32" />
+            <Parameter Name="y2" Mode="In" Type="Int32" />
+            <Parameter Name="entity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="get_ACoA_Reports" ReturnType="Collection(ReportingSuiteModel.get_ACoA_Reports_Result)">
+            <Parameter Name="Report_id" Mode="In" Type="Int64" />
+            <Parameter Name="quarter_from" Mode="In" Type="Int64" />
+            <Parameter Name="quarter_to" Mode="In" Type="Int64" />
+            <Parameter Name="year_from" Mode="In" Type="Int32" />
+            <Parameter Name="year_to" Mode="In" Type="Int32" />
+            <Parameter Name="entity_type" Mode="In" Type="String" />
+            <Parameter Name="entities" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Users" EntityType="ReportingSuiteModel.User" />
+          <FunctionImport Name="UpdateBIViews">
+            <Parameter Name="ReportID" Mode="In" Type="Int64" />
+            <Parameter Name="y1" Mode="In" Type="Int32" />
+            <Parameter Name="y2" Mode="In" Type="Int32" />
+            <Parameter Name="q1" Mode="In" Type="Int32" />
+            <Parameter Name="q2" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="group" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ReportParameters" EntityType="ReportingSuiteModel.ReportParameter" />
+          <AssociationSet Name="FK_ReportParameters_Reports" Association="ReportingSuiteModel.FK_ReportParameters_Reports">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ReportParameter" EntitySet="ReportParameters" />
+          </AssociationSet>
+          <FunctionImport Name="GetSchemaDatabaseColumnByFieldName" ReturnType="Collection(ReportingSuiteModel.GetSchemaDatabaseColumnByFieldName_Result)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSchemaGroupByPath" ReturnType="Collection(ReportingSuiteModel.GetSchemaGroupByPath_Result)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CalculatedBies" EntityType="ReportingSuiteModel.CalculatedBy" />
+          <AssociationSet Name="FK_Report_Columns_CalculatedBy" Association="ReportingSuiteModel.FK_Report_Columns_CalculatedBy">
+            <End Role="CalculatedBy" EntitySet="CalculatedBies" />
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Columns_Report_Columns1" Association="ReportingSuiteModel.FK_Report_Columns_Report_Columns1">
+            <End Role="Report_Columns" EntitySet="Report_Columns" />
+            <End Role="Report_Columns1" EntitySet="Report_Columns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LineItem_Columns_LineItem_Columns" Association="ReportingSuiteModel.FK_LineItem_Columns_LineItem_Columns">
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+            <End Role="LineItem_Columns1" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <EntitySet Name="ProcessTypes" EntityType="ReportingSuiteModel.ProcessType" />
+          <AssociationSet Name="FK_LineItem_Columns_ProcessTypes" Association="ReportingSuiteModel.FK_LineItem_Columns_ProcessTypes">
+            <End Role="ProcessType" EntitySet="ProcessTypes" />
+            <End Role="LineItem_Columns" EntitySet="LineItem_Columns" />
+          </AssociationSet>
+          <EntitySet Name="PF_Fund_Submissions" EntityType="ReportingSuiteModel.PF_Fund_Submissions" />
+          <EntitySet Name="PF_Funds" EntityType="ReportingSuiteModel.PF_Funds" />
+          <EntitySet Name="PF_InterimAllocationTypes" EntityType="ReportingSuiteModel.PF_InterimAllocationTypes" />
+          <EntitySet Name="PF_PortfolioTypes" EntityType="ReportingSuiteModel.PF_PortfolioTypes" />
+          <EntitySet Name="PF_SubmissionTypes" EntityType="ReportingSuiteModel.PF_SubmissionTypes" />
+          <AssociationSet Name="FK_PF_Fund_Submissions_PF_Funds" Association="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_Funds">
+            <End Role="PF_Funds" EntitySet="PF_Funds" />
+            <End Role="PF_Fund_Submissions" EntitySet="PF_Fund_Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Fund_Submissions_PF_SubmissionTypes" Association="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_SubmissionTypes">
+            <End Role="PF_SubmissionTypes" EntitySet="PF_SubmissionTypes" />
+            <End Role="PF_Fund_Submissions" EntitySet="PF_Fund_Submissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Funds_PF_InterimAllocationTypes" Association="ReportingSuiteModel.FK_PF_Funds_PF_InterimAllocationTypes">
+            <End Role="PF_InterimAllocationTypes" EntitySet="PF_InterimAllocationTypes" />
+            <End Role="PF_Funds" EntitySet="PF_Funds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PF_Funds_PF_PortfolioTypes" Association="ReportingSuiteModel.FK_PF_Funds_PF_PortfolioTypes">
+            <End Role="PF_PortfolioTypes" EntitySet="PF_PortfolioTypes" />
+            <End Role="PF_Funds" EntitySet="PF_Funds" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="get_ACoA_Reports_Result">
+          <Property Type="Int32" Name="Year" Nullable="false" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="PeriodID" Nullable="true" />
+          <Property Type="Int64" Name="ReportID" Nullable="true" />
+          <Property Type="String" Name="Report_Name" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Report_Title" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Entity_GroupID" Nullable="true" />
+          <Property Type="String" Name="Report_Description" Nullable="true" />
+          <Property Type="String" Name="Report_SubTitle" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Sort_Order" Nullable="true" />
+          <Property Type="Int64" Name="SectionID" Nullable="true" />
+          <Property Type="Int64" Name="ReportTypeID" Nullable="true" />
+          <Property Type="String" Name="ReportURL" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="Is_Dynamic" Nullable="true" />
+          <Property Type="Int64" Name="LineItemTypeID" Nullable="true" />
+          <Property Type="Boolean" Name="Is_Deleted" Nullable="true" />
+          <Property Type="Boolean" Name="Is_MulitpleEntities" Nullable="true" />
+          <Property Type="Int64" Name="Report_LineItemID" Nullable="false" />
+          <Property Type="String" Name="Line_itemName" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="Is_Main" Nullable="false" />
+          <Property Type="Boolean" Name="Is_Title" Nullable="true" />
+          <Property Type="Decimal" Name="LineItemValue" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Sort_Order2" Nullable="true" />
+          <Property Type="Int32" Name="Sort_Order3" Nullable="true" />
+          <Property Type="Int32" Name="Sort_Order4" Nullable="true" />
+          <Property Type="String" Name="EntityGroupName" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="ColumnName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Entity_Name" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="License_Number" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Domain" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Admin" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportParameter">
+          <Key>
+            <PropertyRef Name="ReportParameterID" />
+          </Key>
+          <Property Name="ReportParameterID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportID" Type="Int64" />
+          <Property Name="YearFrom" Type="Int32" />
+          <Property Name="YearTo" Type="Int32" />
+          <Property Name="QuarterFrom" Type="Int32" />
+          <Property Name="QuarterTo" Type="Int32" />
+          <NavigationProperty Name="Report" Relationship="ReportingSuiteModel.FK_ReportParameters_Reports" FromRole="ReportParameter" ToRole="Report" />
+        </EntityType>
+        <Association Name="FK_ReportParameters_Reports">
+          <End Type="ReportingSuiteModel.Report" Role="Report" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.ReportParameter" Role="ReportParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportID" />
+            </Principal>
+            <Dependent Role="ReportParameter">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetSchemaDatabaseColumnByFieldName_Result">
+          <Property Type="String" Name="path" Nullable="false" />
+          <Property Type="String" Name="dependency" Nullable="true" />
+          <Property Type="String" Name="calculated_value" Nullable="true" />
+          <Property Type="String" Name="column_name" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="GetSchemaGroupByPath_Result">
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="false" />
+          <Property Type="String" Name="path" Nullable="false" />
+          <Property Type="String" Name="dependency" Nullable="true" />
+          <Property Type="String" Name="table_name" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <EntityType Name="CalculatedBy">
+          <Key>
+            <PropertyRef Name="CalculatedByID" />
+          </Key>
+          <Property Name="CalculatedByID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CalculatedBy1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Report_Columns" Relationship="ReportingSuiteModel.FK_Report_Columns_CalculatedBy" FromRole="CalculatedBy" ToRole="Report_Columns" />
+        </EntityType>
+        <Association Name="FK_Report_Columns_CalculatedBy">
+          <End Type="ReportingSuiteModel.CalculatedBy" Role="CalculatedBy" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.Report_Columns" Role="Report_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalculatedBy">
+              <PropertyRef Name="CalculatedByID" />
+            </Principal>
+            <Dependent Role="Report_Columns">
+              <PropertyRef Name="CalculatedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Columns_Report_Columns1">
+          <End Type="ReportingSuiteModel.Report_Columns" Role="Report_Columns" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.Report_Columns" Role="Report_Columns1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report_Columns">
+              <PropertyRef Name="Report_ColumnID" />
+            </Principal>
+            <Dependent Role="Report_Columns1">
+              <PropertyRef Name="CalculatedFromReportColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LineItem_Columns_LineItem_Columns">
+          <End Type="ReportingSuiteModel.LineItem_Columns" Role="LineItem_Columns" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.LineItem_Columns" Role="LineItem_Columns1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LineItem_Columns">
+              <PropertyRef Name="LineItemColumnID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns1">
+              <PropertyRef Name="Inherited_Lineitem_ColumnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProcessType">
+          <Key>
+            <PropertyRef Name="ProcessTypeID" />
+          </Key>
+          <Property Name="ProcessTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcessTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LineItem_Columns" Relationship="ReportingSuiteModel.FK_LineItem_Columns_ProcessTypes" FromRole="ProcessType" ToRole="LineItem_Columns" />
+        </EntityType>
+        <Association Name="FK_LineItem_Columns_ProcessTypes">
+          <End Type="ReportingSuiteModel.ProcessType" Role="ProcessType" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.LineItem_Columns" Role="LineItem_Columns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessType">
+              <PropertyRef Name="ProcessTypeID" />
+            </Principal>
+            <Dependent Role="LineItem_Columns">
+              <PropertyRef Name="ProcessTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PF_Fund_Submissions">
+          <Key>
+            <PropertyRef Name="PF_Fund_SubmissionID" />
+          </Key>
+          <Property Name="PF_Fund_SubmissionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FundID" Type="Int64" />
+          <Property Name="PF_SubmissionTypeID" Type="Int64" />
+          <Property Name="ReportingDate" Type="DateTime" Precision="0" />
+          <Property Name="LastSubmitted" Type="DateTime" Precision="0" />
+          <Property Name="NextDue" Type="DateTime" Precision="0" />
+          <Property Name="DateSubmitted" Type="DateTime" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PF_Funds" Relationship="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_Funds" FromRole="PF_Fund_Submissions" ToRole="PF_Funds" />
+          <NavigationProperty Name="PF_SubmissionTypes" Relationship="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_SubmissionTypes" FromRole="PF_Fund_Submissions" ToRole="PF_SubmissionTypes" />
+        </EntityType>
+        <EntityType Name="PF_Funds">
+          <Key>
+            <PropertyRef Name="FundID" />
+          </Key>
+          <Property Name="FundID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FundName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PrincipalOfficer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RegNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FinYearEnd" Type="DateTime" Precision="0" />
+          <Property Name="PF_IndicatorTypeID" Type="Int64" />
+          <Property Name="LastDateReviewed" Type="DateTime" Precision="0" />
+          <Property Name="PF_PortfolioTypeID" Type="Int64" />
+          <Property Name="PF_InterimAllocationTypeID" Type="Int64" />
+          <Property Name="ReviewedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="entity_instance_id" Type="Int64" />
+          <Property Name="entity_group_id" Type="Int64" />
+          <Property Name="schema_instance_id" Type="Int64" />
+          <NavigationProperty Name="PF_Fund_Submissions" Relationship="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_Funds" FromRole="PF_Funds" ToRole="PF_Fund_Submissions" />
+          <NavigationProperty Name="PF_InterimAllocationTypes" Relationship="ReportingSuiteModel.FK_PF_Funds_PF_InterimAllocationTypes" FromRole="PF_Funds" ToRole="PF_InterimAllocationTypes" />
+          <NavigationProperty Name="PF_PortfolioTypes" Relationship="ReportingSuiteModel.FK_PF_Funds_PF_PortfolioTypes" FromRole="PF_Funds" ToRole="PF_PortfolioTypes" />
+        </EntityType>
+        <EntityType Name="PF_InterimAllocationTypes">
+          <Key>
+            <PropertyRef Name="PF_InterimAllocationTypeID" />
+          </Key>
+          <Property Name="PF_InterimAllocationTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InterimAllocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PF_Funds" Relationship="ReportingSuiteModel.FK_PF_Funds_PF_InterimAllocationTypes" FromRole="PF_InterimAllocationTypes" ToRole="PF_Funds" />
+        </EntityType>
+        <EntityType Name="PF_PortfolioTypes">
+          <Key>
+            <PropertyRef Name="PF_PortfolioTypeID" />
+          </Key>
+          <Property Name="PF_PortfolioTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortfolioName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PF_Funds" Relationship="ReportingSuiteModel.FK_PF_Funds_PF_PortfolioTypes" FromRole="PF_PortfolioTypes" ToRole="PF_Funds" />
+        </EntityType>
+        <EntityType Name="PF_SubmissionTypes">
+          <Key>
+            <PropertyRef Name="PF_SubmissionTypeID" />
+          </Key>
+          <Property Name="PF_SubmissionTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PF_SubmissionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PF_Fund_Submissions" Relationship="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_SubmissionTypes" FromRole="PF_SubmissionTypes" ToRole="PF_Fund_Submissions" />
+          <Property Name="formset_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_PF_Fund_Submissions_PF_Funds">
+          <End Type="ReportingSuiteModel.PF_Funds" Role="PF_Funds" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.PF_Fund_Submissions" Role="PF_Fund_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_Funds">
+              <PropertyRef Name="FundID" />
+            </Principal>
+            <Dependent Role="PF_Fund_Submissions">
+              <PropertyRef Name="FundID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Fund_Submissions_PF_SubmissionTypes">
+          <End Type="ReportingSuiteModel.PF_SubmissionTypes" Role="PF_SubmissionTypes" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.PF_Fund_Submissions" Role="PF_Fund_Submissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_SubmissionTypes">
+              <PropertyRef Name="PF_SubmissionTypeID" />
+            </Principal>
+            <Dependent Role="PF_Fund_Submissions">
+              <PropertyRef Name="PF_SubmissionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Funds_PF_InterimAllocationTypes">
+          <End Type="ReportingSuiteModel.PF_InterimAllocationTypes" Role="PF_InterimAllocationTypes" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.PF_Funds" Role="PF_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_InterimAllocationTypes">
+              <PropertyRef Name="PF_InterimAllocationTypeID" />
+            </Principal>
+            <Dependent Role="PF_Funds">
+              <PropertyRef Name="PF_InterimAllocationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PF_Funds_PF_PortfolioTypes">
+          <End Type="ReportingSuiteModel.PF_PortfolioTypes" Role="PF_PortfolioTypes" Multiplicity="0..1" />
+          <End Type="ReportingSuiteModel.PF_Funds" Role="PF_Funds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PF_PortfolioTypes">
+              <PropertyRef Name="PF_PortfolioTypeID" />
+            </Principal>
+            <Dependent Role="PF_Funds">
+              <PropertyRef Name="PF_PortfolioTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportingSuiteModelStoreContainer" CdmEntityContainer="ReportingSuiteEntities">
+          <EntitySetMapping Name="AggregationTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.AggregationType">
+              <MappingFragment StoreEntitySet="AggregationTypes">
+                <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+                <ScalarProperty Name="AggregationTypeName" ColumnName="AggregationTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Copy_of_Pension_Funds_Data_Update__002_">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Copy_of_Pension_Funds_Data_Update__002_">
+              <MappingFragment StoreEntitySet="Copy of Pension-Funds-Data-Update (002)">
+                <ScalarProperty Name="Fund_" ColumnName="Fund " />
+                <ScalarProperty Name="Fund_Name" ColumnName="Fund Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Column_3" ColumnName="Column 3" />
+                <ScalarProperty Name="STATUS_MATCHED" ColumnName="STATUS MATCHED" />
+                <ScalarProperty Name="To_be_actioned" ColumnName="To be actioned" />
+                <ScalarProperty Name="Assigned_To" ColumnName="Assigned To" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntityGroupLineItem_Columns">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.EntityGroupLineItem_Columns">
+              <MappingFragment StoreEntitySet="EntityGroupLineItem_Columns">
+                <ScalarProperty Name="EntityGroupLineItem_ColumnID" ColumnName="EntityGroupLineItem_ColumnID" />
+                <ScalarProperty Name="LineItemColumnID" ColumnName="LineItemColumnID" />
+                <ScalarProperty Name="EntityGroupID" ColumnName="EntityGroupID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="StoredProc" ColumnName="StoredProc" />
+                <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+                <ScalarProperty Name="CountParameter" ColumnName="CountParameter" />
+                <ScalarProperty Name="CountDataType" ColumnName="CountDataType" />
+                <ScalarProperty Name="Is_CalculatedValue" ColumnName="Is_CalculatedValue" />
+                <ScalarProperty Name="Expression" ColumnName="Expression" />
+                <ScalarProperty Name="SchemaFieldName" ColumnName="SchemaFieldName" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntityGroups">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.EntityGroup">
+              <MappingFragment StoreEntitySet="EntityGroups">
+                <ScalarProperty Name="EntityGroupID" ColumnName="EntityGroupID" />
+                <ScalarProperty Name="EntityGroupName" ColumnName="EntityGroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinUpdates">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.FinUpdate">
+              <MappingFragment StoreEntitySet="FinUpdates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Is_Updated" ColumnName="Is_Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineItem_Columns">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.LineItem_Columns">
+              <MappingFragment StoreEntitySet="LineItem_Columns">
+                <ScalarProperty Name="RuntimeExpression" ColumnName="RuntimeExpression" />
+                <ScalarProperty Name="ProcessTypeID" ColumnName="ProcessTypeID" />
+                <ScalarProperty Name="Inherited_Lineitem_ColumnID" ColumnName="Inherited_Lineitem_ColumnID" />
+                <ScalarProperty Name="Is_Inherited" ColumnName="Is_Inherited" />
+                <ScalarProperty Name="LineItemColumnID" ColumnName="LineItemColumnID" />
+                <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+                <ScalarProperty Name="Report_ColumnID" ColumnName="Report_ColumnID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="StoredProc" ColumnName="StoredProc" />
+                <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+                <ScalarProperty Name="CountParameter" ColumnName="CountParameter" />
+                <ScalarProperty Name="CountDataType" ColumnName="CountDataType" />
+                <ScalarProperty Name="SchemaID" ColumnName="SchemaID" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+                <ScalarProperty Name="Is_CalculatedValue" ColumnName="Is_CalculatedValue" />
+                <ScalarProperty Name="Expression" ColumnName="Expression" />
+                <ScalarProperty Name="SchemaFieldName" ColumnName="SchemaFieldName" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="EntityGroupBasedMapping" ColumnName="EntityGroupBasedMapping" />
+                <ScalarProperty Name="AddMonthToReportingPeriod" ColumnName="AddMonthToReportingPeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineItemTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.LineItemType">
+              <MappingFragment StoreEntitySet="LineItemTypes">
+                <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+                <ScalarProperty Name="LineItemTypeName" ColumnName="LineItemTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Months">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Month">
+              <MappingFragment StoreEntitySet="Months">
+                <ScalarProperty Name="MonthID" ColumnName="MonthID" />
+                <ScalarProperty Name="Month1" ColumnName="Month" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quarters">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Quarter">
+              <MappingFragment StoreEntitySet="Quarters">
+                <ScalarProperty Name="QuarterID" ColumnName="QuarterID" />
+                <ScalarProperty Name="Quarter1" ColumnName="Quarter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report_Columns">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Report_Columns">
+              <MappingFragment StoreEntitySet="Report_Columns">
+                <ScalarProperty Name="CalculatedFromReportColumnID" ColumnName="CalculatedFromReportColumnID" />
+                <ScalarProperty Name="CalculationValue" ColumnName="CalculationValue" />
+                <ScalarProperty Name="CalculatedByID" ColumnName="CalculatedByID" />
+                <ScalarProperty Name="Is_Calculated" ColumnName="Is_Calculated" />
+                <ScalarProperty Name="Report_ColumnID" ColumnName="Report_ColumnID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report_LineItems">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Report_LineItems">
+              <MappingFragment StoreEntitySet="Report_LineItems">
+                <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="Line_itemName" ColumnName="Line_itemName" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="Is_Main" ColumnName="Is_Main" />
+                <ScalarProperty Name="StoredProc" ColumnName="StoredProc" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+                <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+                <ScalarProperty Name="CountParameter" ColumnName="CountParameter" />
+                <ScalarProperty Name="CountDataType" ColumnName="CountDataType" />
+                <ScalarProperty Name="SchemaID" ColumnName="SchemaID" />
+                <ScalarProperty Name="Is_Calculated_Value" ColumnName="Is_Calculated_Value" />
+                <ScalarProperty Name="Expression" ColumnName="Expression" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+                <ScalarProperty Name="SchemaFieldName" ColumnName="SchemaFieldName" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
+                <ScalarProperty Name="Is_Title" ColumnName="Is_Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportDataCubes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ReportDataCube">
+              <MappingFragment StoreEntitySet="ReportDataCube">
+                <ScalarProperty Name="ReportDataID" ColumnName="ReportDataID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="Report_Name" ColumnName="Report_Name" />
+                <ScalarProperty Name="Report_Title" ColumnName="Report_Title" />
+                <ScalarProperty Name="Entity_GroupID" ColumnName="Entity_GroupID" />
+                <ScalarProperty Name="Report_Description" ColumnName="Report_Description" />
+                <ScalarProperty Name="Report_Subtitle" ColumnName="Report_Subtitle" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+                <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+                <ScalarProperty Name="Is_Dynamic" ColumnName="Is_Dynamic" />
+                <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+                <ScalarProperty Name="Line_ItemName" ColumnName="Line_ItemName" />
+                <ScalarProperty Name="Is_Main" ColumnName="Is_Main" />
+                <ScalarProperty Name="LineItemValue" ColumnName="LineItemValue" />
+                <ScalarProperty Name="Sort_Order2" ColumnName="Sort_Order2" />
+                <ScalarProperty Name="Sort_Order3" ColumnName="Sort_Order3" />
+                <ScalarProperty Name="EntityGroupName" ColumnName="EntityGroupName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportEntityGroups">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ReportEntityGroup">
+              <MappingFragment StoreEntitySet="ReportEntityGroups">
+                <ScalarProperty Name="ReportEntityGroupID" ColumnName="ReportEntityGroupID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="EntityGroupID" ColumnName="EntityGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportRoles">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ReportRole">
+              <MappingFragment StoreEntitySet="ReportRoles">
+                <ScalarProperty Name="ReportRoleID" ColumnName="ReportRoleID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+                <ScalarProperty Name="Grantee" ColumnName="Grantee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="ShowMappedItems" ColumnName="ShowMappedItems" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="ReportCode" ColumnName="ReportCode" />
+                <ScalarProperty Name="QuarterTo" ColumnName="QuarterTo" />
+                <ScalarProperty Name="QuarterFrom" ColumnName="QuarterFrom" />
+                <ScalarProperty Name="YearTo" ColumnName="YearTo" />
+                <ScalarProperty Name="YearFrom" ColumnName="YearFrom" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="Report_Name" ColumnName="Report_Name" />
+                <ScalarProperty Name="Report_Title" ColumnName="Report_Title" />
+                <ScalarProperty Name="Entity_GroupID" ColumnName="Entity_GroupID" />
+                <ScalarProperty Name="Report_Description" ColumnName="Report_Description" />
+                <ScalarProperty Name="Report_SubTitle" ColumnName="Report_SubTitle" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+                <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+                <ScalarProperty Name="Is_Dynamic" ColumnName="Is_Dynamic" />
+                <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Is_MulitpleEntities" ColumnName="Is_MulitpleEntities" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportSections">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ReportSection">
+              <MappingFragment StoreEntitySet="ReportSections">
+                <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="ReportSectionName" ColumnName="ReportSectionName" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Show" ColumnName="Show" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ReportType">
+              <MappingFragment StoreEntitySet="ReportTypes">
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+                <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.RoleType">
+              <MappingFragment StoreEntitySet="RoleTypes">
+                <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+                <ScalarProperty Name="RoleTypeName" ColumnName="RoleTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schemata">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Schema">
+              <MappingFragment StoreEntitySet="Schema">
+                <ScalarProperty Name="SchemaID" ColumnName="SchemaID" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="DatabaseTable" ColumnName="DatabaseTable" />
+                <ScalarProperty Name="DatabaseField" ColumnName="DatabaseField" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchemaGroups">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.SchemaGroup">
+              <MappingFragment StoreEntitySet="SchemaGroups">
+                <ScalarProperty Name="SchemaGroupID" ColumnName="SchemaGroupID" />
+                <ScalarProperty Name="SchemaGroupName" ColumnName="SchemaGroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchemaResources">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.SchemaResource">
+              <MappingFragment StoreEntitySet="SchemaResources">
+                <ScalarProperty Name="SchemaResourseID" ColumnName="SchemaResourseID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusUpdates">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.StatusUpdate">
+              <MappingFragment StoreEntitySet="StatusUpdate">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Year">
+              <MappingFragment StoreEntitySet="Years">
+                <ScalarProperty Name="Year1" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gaps">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.Gap">
+              <MappingFragment StoreEntitySet="Gaps">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="Financial_year_end_date" ColumnName="Financial year end date" />
+                <ScalarProperty Name="Physical_Address" ColumnName="Physical Address" />
+                <ScalarProperty Name="Postal_address" ColumnName="Postal address" />
+                <ScalarProperty Name="Registration_date" ColumnName="Registration date" />
+                <ScalarProperty Name="De_registration_date" ColumnName="De-registration date" />
+                <ScalarProperty Name="POName" ColumnName="POName" />
+                <ScalarProperty Name="POemail_address" ColumnName="POemail address" />
+                <ScalarProperty Name="POTelephone_number" ColumnName="POTelephone number" />
+                <ScalarProperty Name="AName" ColumnName="AName" />
+                <ScalarProperty Name="Aemail_address" ColumnName="Aemail address" />
+                <ScalarProperty Name="ATelephone_number" ColumnName="ATelephone number" />
+                <ScalarProperty Name="VName" ColumnName="VName" />
+                <ScalarProperty Name="Vemail_address" ColumnName="Vemail address" />
+                <ScalarProperty Name="VTelephone_number" ColumnName="VTelephone number" />
+                <ScalarProperty Name="Column_17" ColumnName="Column 17" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateStoredFunctions" FunctionName="ReportingSuiteModel.Store.CreateStoredFunctions" />
+          <FunctionImportMapping FunctionImportName="ReportDataCubeEmpty" FunctionName="ReportingSuiteModel.Store.ReportDataCubeEmpty" />
+          <FunctionImportMapping FunctionImportName="ReportDataCubeFill" FunctionName="ReportingSuiteModel.Store.ReportDataCubeFill" />
+          <FunctionImportMapping FunctionImportName="get_ACoA_Reports" FunctionName="ReportingSuiteModel.Store.get_ACoA_Reports">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportingSuiteModel.get_ACoA_Reports_Result">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="Report_Name" ColumnName="Report_Name" />
+                <ScalarProperty Name="Report_Title" ColumnName="Report_Title" />
+                <ScalarProperty Name="Entity_GroupID" ColumnName="Entity_GroupID" />
+                <ScalarProperty Name="Report_Description" ColumnName="Report_Description" />
+                <ScalarProperty Name="Report_SubTitle" ColumnName="Report_SubTitle" />
+                <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+                <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+                <ScalarProperty Name="Is_Dynamic" ColumnName="Is_Dynamic" />
+                <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Is_MulitpleEntities" ColumnName="Is_MulitpleEntities" />
+                <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+                <ScalarProperty Name="Line_itemName" ColumnName="Line_itemName" />
+                <ScalarProperty Name="Is_Main" ColumnName="Is_Main" />
+                <ScalarProperty Name="Is_Title" ColumnName="Is_Title" />
+                <ScalarProperty Name="LineItemValue" ColumnName="LineItemValue" />
+                <ScalarProperty Name="Sort_Order2" ColumnName="Sort_Order2" />
+                <ScalarProperty Name="Sort_Order3" ColumnName="Sort_Order3" />
+                <ScalarProperty Name="Sort_Order4" ColumnName="Sort_Order4" />
+                <ScalarProperty Name="EntityGroupName" ColumnName="EntityGroupName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+                <ScalarProperty Name="Entity_Name" ColumnName="Entity Name" />
+                <ScalarProperty Name="License_Number" ColumnName="License Number" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Is_Admin" ColumnName="Is_Admin" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateBIViews" FunctionName="ReportingSuiteModel.Store.UpdateBIViews" />
+          <EntitySetMapping Name="ReportParameters">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ReportParameter">
+              <MappingFragment StoreEntitySet="ReportParameters">
+                <ScalarProperty Name="QuarterTo" ColumnName="QuarterTo" />
+                <ScalarProperty Name="QuarterFrom" ColumnName="QuarterFrom" />
+                <ScalarProperty Name="YearTo" ColumnName="YearTo" />
+                <ScalarProperty Name="YearFrom" ColumnName="YearFrom" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="ReportParameterID" ColumnName="ReportParameterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSchemaDatabaseColumnByFieldName" FunctionName="ReportingSuiteModel.Store.GetSchemaDatabaseColumnByFieldName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSchemaDatabaseColumnByFieldName_Result">
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="dependency" ColumnName="dependency" />
+                <ScalarProperty Name="calculated_value" ColumnName="calculated_value" />
+                <ScalarProperty Name="column_name" ColumnName="column_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSchemaGroupByPath" FunctionName="ReportingSuiteModel.Store.GetSchemaGroupByPath">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSchemaGroupByPath_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="dependency" ColumnName="dependency" />
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CalculatedBies">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.CalculatedBy">
+              <MappingFragment StoreEntitySet="CalculatedBy">
+                <ScalarProperty Name="CalculatedBy1" ColumnName="CalculatedBy" />
+                <ScalarProperty Name="CalculatedByID" ColumnName="CalculatedByID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.ProcessType">
+              <MappingFragment StoreEntitySet="ProcessTypes">
+                <ScalarProperty Name="ProcessTypeName" ColumnName="ProcessTypeName" />
+                <ScalarProperty Name="ProcessTypeID" ColumnName="ProcessTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PF_Fund_Submissions">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.PF_Fund_Submissions">
+              <MappingFragment StoreEntitySet="PF_Fund_Submissions">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="NextDue" ColumnName="NextDue" />
+                <ScalarProperty Name="LastSubmitted" ColumnName="LastSubmitted" />
+                <ScalarProperty Name="ReportingDate" ColumnName="ReportingDate" />
+                <ScalarProperty Name="PF_SubmissionTypeID" ColumnName="PF_SubmissionTypeID" />
+                <ScalarProperty Name="FundID" ColumnName="FundID" />
+                <ScalarProperty Name="PF_Fund_SubmissionID" ColumnName="PF_Fund_SubmissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PF_Funds">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.PF_Funds">
+              <MappingFragment StoreEntitySet="PF_Funds">
+                <ScalarProperty Name="schema_instance_id" ColumnName="schema_instance_id" />
+                <ScalarProperty Name="entity_group_id" ColumnName="entity_group_id" />
+                <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+                <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+                <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+                <ScalarProperty Name="LastDateReviewed" ColumnName="LastDateReviewed" />
+                <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+                <ScalarProperty Name="FinYearEnd" ColumnName="FinYearEnd" />
+                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+                <ScalarProperty Name="PrincipalOfficer" ColumnName="PrincipalOfficer" />
+                <ScalarProperty Name="FundName" ColumnName="FundName" />
+                <ScalarProperty Name="FundID" ColumnName="FundID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PF_InterimAllocationTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.PF_InterimAllocationTypes">
+              <MappingFragment StoreEntitySet="PF_InterimAllocationTypes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InterimAllocation" ColumnName="InterimAllocation" />
+                <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PF_PortfolioTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.PF_PortfolioTypes">
+              <MappingFragment StoreEntitySet="PF_PortfolioTypes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+                <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PF_SubmissionTypes">
+            <EntityTypeMapping TypeName="ReportingSuiteModel.PF_SubmissionTypes">
+              <MappingFragment StoreEntitySet="PF_SubmissionTypes">
+                <ScalarProperty Name="formset_id" ColumnName="formset_id" />
+                <ScalarProperty Name="PF_SubmissionType" ColumnName="PF_SubmissionType" />
+                <ScalarProperty Name="PF_SubmissionTypeID" ColumnName="PF_SubmissionTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

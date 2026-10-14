@@ -1,0 +1,188 @@
+<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="ReportingSuite.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title><%: GetPageTitle() %> - NAMFISA Reporting Suite</title>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Exact Limitless layout_1/default/full stylesheet stack. -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css" />
+    <link href="Content/Template/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Template/layout_1/LTR/default/full/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Template/layout_1/LTR/default/full/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Template/layout_1/LTR/default/full/assets/css/layout.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Template/layout_1/LTR/default/full/assets/css/components.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Template/layout_1/LTR/default/full/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Existing pages still render Font Awesome icons; retain the icon font only. -->
+    <link href="Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="Content/reporting-suite-limitless.css?v=20260916.6" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+
+    <script src="Content/Template/global_assets/js/main/jquery.min.js"></script>
+    <script src="Content/Template/global_assets/js/main/bootstrap.bundle.min.js"></script>
+    <script src="Content/Template/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <script src="Content/Template/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="Content/Template/layout_1/LTR/default/full/assets/js/app.js"></script>
+</head>
+<body class="reporting-app-shell">
+    <form id="MainForm" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+
+        <!-- Main navbar -->
+        <div class="navbar navbar-expand-md navbar-dark fixed-top reporting-topbar">
+            <div class="navbar-brand">
+                <a href="Default.aspx" class="d-inline-flex align-items-center reporting-brand-link" aria-label="Reporting Suite home">
+                    <img src="images/namfisa-logo-min.png" alt="NAMFISA" />
+                    <span>Reporting Suite</span>
+                </a>
+            </div>
+            <div class="d-md-none">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile" aria-label="Toggle header"><i class="icon-tree5"></i></button>
+                <button class="navbar-toggler sidebar-mobile-main-toggle" type="button" aria-label="Toggle navigation"><i class="icon-paragraph-justify3"></i></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-mobile">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block" aria-label="Collapse navigation"><i class="icon-paragraph-justify3"></i></a></li>
+                    <li class="nav-item d-none d-md-flex align-items-center reporting-topbar-context"><span>Reporting workspace</span></li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item d-none d-md-flex align-items-center"><span id="reporting-clock" class="navbar-text reporting-clock" aria-label="Current time"></span></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown"><span class="reporting-avatar" aria-hidden="true"><%: UserInitials %></span><span class="ml-2"><%: UserDisplayName %></span></a>
+                        <div class="dropdown-menu dropdown-menu-right"><div class="dropdown-item-text"><strong class="d-block"><%: UserDisplayName %></strong><small class="text-muted"><i class="icon-windows8 mr-1"></i>Windows authenticated</small></div></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /main navbar -->
+
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md reporting-sidebar" aria-label="Primary navigation">
+                <div class="sidebar-mobile-toggler text-center">
+                    <a href="#" class="sidebar-mobile-main-toggle"><i class="icon-arrow-left8"></i></a>
+                    Navigation
+                    <a href="#" class="sidebar-mobile-expand"><i class="icon-screen-full"></i><i class="icon-screen-normal"></i></a>
+                </div>
+                <div id="reporting-navigation-scroll" class="sidebar-content" tabindex="0" aria-label="Scrollable primary navigation">
+                    <div class="sidebar-user">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="mr-3"><span class="reporting-avatar reporting-avatar-lg" aria-hidden="true"><%: UserInitials %></span></div>
+                                <div class="media-body"><div class="media-title font-weight-semibold"><%: UserDisplayName %></div><div class="font-size-xs opacity-50"><i class="icon-windows8 font-size-sm"></i>&nbsp; Windows authenticated</div></div>
+                                <div class="ml-3 align-self-center"><i class="icon-shield-check text-white" aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-sidebar-mobile">
+                        <ul class="nav nav-sidebar" data-nav-type="accordion">
+                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Workspace</div><i class="icon-menu" title="Workspace"></i></li>
+                            <li class="nav-item"><a href="Default.aspx" class="nav-link"><i class="icon-home4"></i><span>Dashboard</span></a></li>
+                            <li class="nav-item"><a href="AdhocReport.aspx" class="nav-link"><i class="icon-table2"></i><span>Adhoc reports</span></a></li>
+                            <li class="nav-item"><a href="ReportRender.aspx" class="nav-link"><i class="icon-stats-dots"></i><span>ACoA Report Renderer</span></a></li>
+
+                            <li class="nav-item nav-item-submenu">
+                                <a href="#" class="nav-link"><i class="icon-stats-bars2"></i><span>Chart of Accounts</span></a>
+                                <ul class="nav nav-group-sub" data-submenu-title="Chart of Accounts">
+                                    <li class="nav-item nav-item-submenu">
+                                        <a href="#" class="nav-link"><i class="icon-calendar3"></i>Quarterly Reports</a>
+                                        <ul class="nav nav-group-sub">
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns">Aggregated report</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Per_Entity">Entity level (vertical)</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Extra">Entity level (horizontal)</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_ExtraAdditional">Additional information</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_By_Entity">Single entity</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities">Cross-entity aggregated</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities_Per_Entity">Cross-entity detail</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item nav-item-submenu">
+                                        <a href="#" class="nav-link"><i class="icon-calendar"></i>Monthly Reports</a>
+                                        <ul class="nav nav-group-sub"><li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Monthly_Returns_Per_Entity">Monthly return by entity group</a></li></ul>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Divisions</div><i class="icon-menu" title="Divisions"></i></li>
+                            <% For Each section In NavigationSections %>
+                            <li class="nav-item nav-item-submenu">
+                                <a href="#" class="nav-link"><i class="icon-folder"></i><span><%: section.SectionName %></span></a>
+                                <ul class="nav nav-group-sub" data-submenu-title="<%: section.SectionName %>">
+                                    <% For Each report In section.Reports.Where(Function(item) item.Is_Deleted = False).OrderBy(Function(item) item.Sort_Order) %>
+                                    <li class="nav-item"><a class="nav-link" href="<%: GetReportUrl(report) %>"><%: report.Report_Name %><% If IsAdhocReport(report) Then %><span class="badge badge-info ml-auto">Adhoc</span><% End If %></a></li>
+                                    <% Next %>
+                                </ul>
+                            </li>
+                            <% Next %>
+
+                            <% If IsAdmin Then %>
+                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Administration</div><i class="icon-menu" title="Administration"></i></li>
+                            <li class="nav-item"><a href="Builder.aspx" class="nav-link"><i class="icon-wrench3"></i><span>Report Builder</span></a></li>
+                            <li class="nav-item"><a href="Parameters.aspx" class="nav-link"><i class="icon-equalizer2"></i><span>BI Report Parameters</span></a></li>
+                            <li class="nav-item"><a href="ReportWarehouse.aspx" class="nav-link"><i class="icon-database-add"></i><span>ACoA Data Warehouse</span></a></li>
+                            <% End If %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /main sidebar -->
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <div class="page-header page-header-light reporting-page-header">
+                    <div class="page-header-content header-elements-md-inline">
+                        <div class="page-title d-flex">
+                            <h4><i class="icon-arrow-left52 mr-2"></i><span class="font-weight-semibold"><%: GetPageTitle() %></span></h4>
+                            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                        </div>
+                        <div class="header-elements d-none"><span class="badge badge-light border-left-primary border-left-3 px-3 py-2"><i class="icon-shield-check text-primary mr-1"></i>Internal reporting</span></div>
+                    </div>
+                    <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+                        <div class="d-flex">
+                            <div class="breadcrumb"><a href="Default.aspx" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Home</a><span class="breadcrumb-item active"><%: GetPageTitle() %></span></div>
+                            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content reporting-content"><asp:ContentPlaceHolder ID="MainContent" runat="server" /></div>
+                <div class="navbar navbar-expand-lg navbar-light reporting-footer">
+                    <div class="text-center d-lg-none w-100"><button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer"><i class="icon-unfold mr-2"></i>Footer</button></div>
+                    <div class="navbar-collapse collapse" id="navbar-footer"><span class="navbar-text">&copy; <%: DateTime.Now.Year %> NAMFISA Reporting Suite &middot; ICT Division</span><span class="navbar-text ml-lg-auto text-muted">Limitless interface &middot; Windows authentication</span></div>
+                </div>
+            </div>
+            <!-- /main content -->
+        </div>
+        <!-- /page content -->
+    </form>
+
+    <!-- Existing ReportingSuite page-level dependencies retained for functional compatibility. -->
+    <script src="Content/vendor/nprogress/nprogress.js"></script>
+    <script src="Content/vendor/moment/min/moment.min.js"></script>
+    <script src="Content/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="Content/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="Content/vendor/switchery/dist/switchery.min.js"></script>
+    <script src="Content/vendor/parsleyjs/dist/parsley.min.js"></script>
+    <script src="Content/vendor/autosize/dist/autosize.min.js"></script>
+    <script src="Content/vendor/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <script src="Content/vendor/starrr/dist/starrr.js"></script>
+    <script src="Content/vendor/jszip/dist/jszip.min.js"></script>
+    <script src="Content/vendor/pdfmake/build/pdfmake.min.js"></script>
+    <script src="Content/vendor/pdfmake/build/vfs_fonts.js"></script>
+    <script src="Content/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="Content/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="Content/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="Content/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="Content/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="Content/vendor/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="Scripts/reporting-suite-limitless.js?v=20260916.2"></script>
+    <asp:ContentPlaceHolder ID="PageScripts" runat="server" />
+</body>
+</html>

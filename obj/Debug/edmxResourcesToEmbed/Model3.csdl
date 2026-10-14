@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReportingSuiteModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ReportingSuiteEntities2" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetPFDashboardCompanies" ReturnType="Collection(ReportingSuiteModel2.GetPFDashboardCompanies_Result)" />
+  </EntityContainer>
+  <ComplexType Name="GetPFDashboardCompanies_Result">
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="License_Number" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="entity_instance_id" Nullable="false" />
+    <Property Type="Int32" Name="owner_schema_instance_id" Nullable="true" />
+    <Property Type="String" Name="item_poname" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="item_email" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="item_telephone" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="Company_Status" Nullable="true" MaxLength="12" />
+    <Property Type="DateTime" Name="Registration_Date" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="De_Registration_Date" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Financial_Year_End" Nullable="true" MaxLength="61" />
+    <Property Type="String" Name="Physical_Address_1" Nullable="false" MaxLength="4000" />
+    <Property Type="String" Name="Physical_Address_2" Nullable="false" MaxLength="4000" />
+  </ComplexType>
+</Schema>

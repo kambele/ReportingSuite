@@ -1,0 +1,501 @@
+Report Column,Report Item,LineItemColumnID,Schema Name,Database Table
+Total,Gross written premiums,35047,,group_incomerevenueparta3
+Total,Gross written premiums w/o ART,35072,,group_incomerevenueparta3
+Total,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35097,,group_incomerevenueparta3
+Total,Reinsurance outward premium,35122,,group_incomerevenueparta3
+Total,Reinsurance Outward Premium / Namibia (excluding NamibRe),35147,,group_incomerevenueparta3
+Total,Reinsurance Outward Premium / Namibia / NamibRe only,35172,,group_incomerevenueparta3
+Total,Reinsurance Outward Premium / Outside Namibia,35197,,group_incomerevenueparta3
+Total,Net premiums written,35222,,group_incomerevenueparta3
+Total,Change in unearned premiums reserve,35247,,group_incomerevenueparta3
+Total,Net premiums earned,35272,,group_incomerevenueparta3
+Total,Claims paid and loss adjustment expenses,35297,,group_incomerevenueparta3
+Total,Change in IBNR and outstanding claims reserve,35322,,group_incomerevenueparta3
+Total,Change in gross claims Incurred But Not Reported (IBNR),35347,,group_incomerevenueparta3
+Total,Change in outstanding claims reserve,35372,,group_incomerevenueparta3
+Total,Claims paid and loss adjustment expenses recovered from reinsurers,35397,,group_incomerevenueparta3
+Total,Net claims incurred,35422,,group_incomerevenueparta3
+Total,Commission paid,35447,,group_incomerevenueparta3
+Total,Commission earned,35472,,group_incomerevenueparta3
+Total,Net commission incurred,35497,,group_incomerevenueparta3
+Total,Underwriting Result,35522,,group_incomerevenueparta3
+Accident,Gross written premiums,35048,,group_incomerevenueparta3
+Accident,Gross written premiums w/o ART,35073,[AccidentGross written premiums:Renewals:]+[AccidentGross written premiums:New:],group_incomerevenueparta3
+Accident,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35098,AccidentCCBART,group_incomerevenueparta3
+Accident,Reinsurance outward premium,35123,,group_incomerevenueparta3
+Accident,Reinsurance Outward Premium / Namibia (excluding NamibRe),35148,AccidentReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Accident,Reinsurance Outward Premium / Namibia / NamibRe only,35173,AccidentReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Accident,Reinsurance Outward Premium / Outside Namibia,35198,AccidentReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Accident,Net premiums written,35223,,group_incomerevenueparta3
+Accident,Change in unearned premiums reserve,35248,Accident ChangeUnearnedPremium,group_incomerevenueparta3
+Accident,Net premiums earned,35273,,group_incomerevenueparta3
+Accident,Claims paid and loss adjustment expenses,35298,AccidentClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Accident,Change in IBNR and outstanding claims reserve,35323,,group_incomerevenueparta3
+Accident,Change in gross claims Incurred But Not Reported (IBNR),35348,Accident15,group_incomerevenueparta3
+Accident,Change in outstanding claims reserve,35373,AccidentCOClaimsReserve,group_incomerevenueparta3
+Accident,Claims paid and loss adjustment expenses recovered from reinsurers,35398,AccidentClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Accident,Net claims incurred,35423,,group_incomerevenueparta3
+Accident,Commission paid,35448,AccidentCommission paid,group_incomerevenueparta3
+Accident,Commission earned,35473,Accident ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Accident,Net commission incurred,35498,,group_incomerevenueparta3
+Accident,Underwriting Result,35523,,group_incomerevenueparta3
+Aviation,Gross written premiums,35049,,group_incomerevenueparta3
+Aviation,Gross written premiums w/o ART,35074,[AviationGross written premiums:Renewals:]+[AviationGross written premiums:New:],group_incomerevenueparta3
+Aviation,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35099,AviationCCBART,group_incomerevenueparta3
+Aviation,Reinsurance outward premium,35124,,group_incomerevenueparta3
+Aviation,Reinsurance Outward Premium / Namibia (excluding NamibRe),35149,AviationReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Aviation,Reinsurance Outward Premium / Namibia / NamibRe only,35174,AviationReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Aviation,Reinsurance Outward Premium / Outside Namibia,35199,AviationReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Aviation,Net premiums written,35224,,group_incomerevenueparta3
+Aviation,Change in unearned premiums reserve,35249,Aviation ChangeUnearnedPremium,group_incomerevenueparta3
+Aviation,Net premiums earned,35274,,group_incomerevenueparta3
+Aviation,Claims paid and loss adjustment expenses,35299,AviationClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Aviation,Change in IBNR and outstanding claims reserve,35324,,group_incomerevenueparta3
+Aviation,Change in gross claims Incurred But Not Reported (IBNR),35349,Aviation15,group_incomerevenueparta3
+Aviation,Change in outstanding claims reserve,35374,AviationCOClaimsReserve,group_incomerevenueparta3
+Aviation,Claims paid and loss adjustment expenses recovered from reinsurers,35399,AviationClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Aviation,Net claims incurred,35424,,group_incomerevenueparta3
+Aviation,Commission paid,35449,AviationCommission paid,group_incomerevenueparta3
+Aviation,Commission earned,35474,Aviation ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Aviation,Net commission incurred,35499,,group_incomerevenueparta3
+Aviation,Underwriting Result,35524,,group_incomerevenueparta3
+Credit,Gross written premiums,35050,,group_incomerevenueparta3
+Credit,Gross written premiums w/o ART,35075,[CreditGross written premiums:Renewals:]+[CreditGross written premiums:New:],group_incomerevenueparta3
+Credit,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35100,CreditCCBART,group_incomerevenueparta3
+Credit,Reinsurance outward premium,35125,,group_incomerevenueparta3
+Credit,Reinsurance Outward Premium / Namibia (excluding NamibRe),35150,CreditReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Credit,Reinsurance Outward Premium / Namibia / NamibRe only,35175,CreditReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Credit,Reinsurance Outward Premium / Outside Namibia,35200,CreditReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Credit,Net premiums written,35225,,group_incomerevenueparta3
+Credit,Change in unearned premiums reserve,35250,Credit ChangeUnearnedPremium,group_incomerevenueparta3
+Credit,Net premiums earned,35275,,group_incomerevenueparta3
+Credit,Claims paid and loss adjustment expenses,35300,CreditClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Credit,Change in IBNR and outstanding claims reserve,35325,,group_incomerevenueparta3
+Credit,Change in gross claims Incurred But Not Reported (IBNR),35350,Credit15,group_incomerevenueparta3
+Credit,Change in outstanding claims reserve,35375,CreditCOClaimsReserve,group_incomerevenueparta3
+Credit,Claims paid and loss adjustment expenses recovered from reinsurers,35400,CreditClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Credit,Net claims incurred,35425,,group_incomerevenueparta3
+Credit,Commission paid,35450,CreditCommission paid,group_incomerevenueparta3
+Credit,Commission earned,35475,Credit ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Credit,Net commission incurred,35500,,group_incomerevenueparta3
+Credit,Underwriting Result,35525,,group_incomerevenueparta3
+Crop,Gross written premiums,35051,,group_incomerevenueparta3
+Crop,Gross written premiums w/o ART,35076,[CropGross written premiums:Renewals:]+[CropGross written premiums:New:],group_incomerevenueparta3
+Crop,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35101,CropCCBART,group_incomerevenueparta3
+Crop,Reinsurance outward premium,35126,,group_incomerevenueparta3
+Crop,Reinsurance Outward Premium / Namibia (excluding NamibRe),35151,CropReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Crop,Reinsurance Outward Premium / Namibia / NamibRe only,35176,CropReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Crop,Reinsurance Outward Premium / Outside Namibia,35201,CropReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Crop,Net premiums written,35226,,group_incomerevenueparta3
+Crop,Change in unearned premiums reserve,35251,Crop ChangeUnearnedPremium,group_incomerevenueparta3
+Crop,Net premiums earned,35276,,group_incomerevenueparta3
+Crop,Claims paid and loss adjustment expenses,35301,CropClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Crop,Change in IBNR and outstanding claims reserve,35326,,group_incomerevenueparta3
+Crop,Change in gross claims Incurred But Not Reported (IBNR),35351,Crop15,group_incomerevenueparta3
+Crop,Change in outstanding claims reserve,35376,CropCOClaimsReserve,group_incomerevenueparta3
+Crop,Claims paid and loss adjustment expenses recovered from reinsurers,35401,CropClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Crop,Net claims incurred,35426,,group_incomerevenueparta3
+Crop,Commission paid,35451,CropCommission paid,group_incomerevenueparta3
+Crop,Commission earned,35476,Crop ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Crop,Net commission incurred,35501,,group_incomerevenueparta3
+Crop,Underwriting Result,35526,,group_incomerevenueparta3
+Engineering,Gross written premiums,35052,,group_incomerevenueparta3
+Engineering,Gross written premiums w/o ART,35077,[EngineeringGross written premiums:Renewals:]+[EngineeringGross written premiums:New:],group_incomerevenueparta3
+Engineering,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35102,EngineeringCCBART,group_incomerevenueparta3
+Engineering,Reinsurance outward premium,35127,,group_incomerevenueparta3
+Engineering,Reinsurance Outward Premium / Namibia (excluding NamibRe),35152,EngineeringReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Engineering,Reinsurance Outward Premium / Namibia / NamibRe only,35177,EngineeringReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Engineering,Reinsurance Outward Premium / Outside Namibia,35202,EngineeringReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Engineering,Net premiums written,35227,,group_incomerevenueparta3
+Engineering,Change in unearned premiums reserve,35252,Engineering ChangeUnearnedPremium,group_incomerevenueparta3
+Engineering,Net premiums earned,35277,,group_incomerevenueparta3
+Engineering,Claims paid and loss adjustment expenses,35302,EngineeringClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Engineering,Change in IBNR and outstanding claims reserve,35327,,group_incomerevenueparta3
+Engineering,Change in gross claims Incurred But Not Reported (IBNR),35352,Engineering15,group_incomerevenueparta3
+Engineering,Change in outstanding claims reserve,35377,EngineeringCOClaimsReserve,group_incomerevenueparta3
+Engineering,Claims paid and loss adjustment expenses recovered from reinsurers,35402,EngineeringClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Engineering,Net claims incurred,35427,,group_incomerevenueparta3
+Engineering,Commission paid,35452,EngineeringCommission paid,group_incomerevenueparta3
+Engineering,Commission earned,35477,Engineering ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Engineering,Net commission incurred,35502,,group_incomerevenueparta3
+Engineering,Underwriting Result,35527,,group_incomerevenueparta3
+Equine,Gross written premiums,35053,,group_incomerevenueparta3
+Equine,Gross written premiums w/o ART,35078,[EquineGross written premiums:Renewals:]+[EquineGross written premiums:New:],group_incomerevenueparta3
+Equine,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35103,EquineCCBART,group_incomerevenueparta3
+Equine,Reinsurance outward premium,35128,,group_incomerevenueparta3
+Equine,Reinsurance Outward Premium / Namibia (excluding NamibRe),35153,EquineReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Equine,Reinsurance Outward Premium / Namibia / NamibRe only,35178,EquineReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Equine,Reinsurance Outward Premium / Outside Namibia,35203,EquineReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Equine,Net premiums written,35228,,group_incomerevenueparta3
+Equine,Change in unearned premiums reserve,35253,Equine ChangeUnearnedPremium,group_incomerevenueparta3
+Equine,Net premiums earned,35278,,group_incomerevenueparta3
+Equine,Claims paid and loss adjustment expenses,35303,EquineClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Equine,Change in IBNR and outstanding claims reserve,35328,,group_incomerevenueparta3
+Equine,Change in gross claims Incurred But Not Reported (IBNR),35353,Equine15,group_incomerevenueparta3
+Equine,Change in outstanding claims reserve,35378,EquineCOClaimsReserve,group_incomerevenueparta3
+Equine,Claims paid and loss adjustment expenses recovered from reinsurers,35403,EquineClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Equine,Net claims incurred,35428,,group_incomerevenueparta3
+Equine,Commission paid,35453,EquineCommission paid,group_incomerevenueparta3
+Equine,Commission earned,35478,Equine ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Equine,Net commission incurred,35503,,group_incomerevenueparta3
+Equine,Underwriting Result,35528,,group_incomerevenueparta3
+General Liability,Gross written premiums,35054,,group_incomerevenueparta3
+General Liability,Gross written premiums w/o ART,35079,[General LiabilityGross written premiums:Renewals:]+[General LiabilityGross written premiums:New:],group_incomerevenueparta3
+General Liability,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35104,General LiabilityCCBART,group_incomerevenueparta3
+General Liability,Reinsurance outward premium,35129,,group_incomerevenueparta3
+General Liability,Reinsurance Outward Premium / Namibia (excluding NamibRe),35154,General LiabilityReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+General Liability,Reinsurance Outward Premium / Namibia / NamibRe only,35179,General LiabilityReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+General Liability,Reinsurance Outward Premium / Outside Namibia,35204,General LiabilityReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+General Liability,Net premiums written,35229,,group_incomerevenueparta3
+General Liability,Change in unearned premiums reserve,35254,General Liability ChangeUnearnedPremium,group_incomerevenueparta3
+General Liability,Net premiums earned,35279,,group_incomerevenueparta3
+General Liability,Claims paid and loss adjustment expenses,35304,General LiabilityClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+General Liability,Change in IBNR and outstanding claims reserve,35329,,group_incomerevenueparta3
+General Liability,Change in gross claims Incurred But Not Reported (IBNR),35354,General Liability15,group_incomerevenueparta3
+General Liability,Change in outstanding claims reserve,35379,General LiabilityCOClaimsReserve,group_incomerevenueparta3
+General Liability,Claims paid and loss adjustment expenses recovered from reinsurers,35404,General LiabilityClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+General Liability,Net claims incurred,35429,,group_incomerevenueparta3
+General Liability,Commission paid,35454,General LiabilityCommission paid,group_incomerevenueparta3
+General Liability,Commission earned,35479,General Liability ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+General Liability,Net commission incurred,35504,,group_incomerevenueparta3
+General Liability,Underwriting Result,35529,,group_incomerevenueparta3
+General Liability - Non-Proportional,Gross written premiums,35055,,group_incomerevenueparta3
+General Liability - Non-Proportional,Gross written premiums w/o ART,35080,[General Liability - Non-ProportionalGross written premiums:Renewals:]+[General Liability - Non-ProportionalGross written premiums:New:],group_incomerevenueparta3
+General Liability - Non-Proportional,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35105,General Liability - Non-ProportionalCCBART,group_incomerevenueparta3
+General Liability - Non-Proportional,Reinsurance outward premium,35130,,group_incomerevenueparta3
+General Liability - Non-Proportional,Reinsurance Outward Premium / Namibia (excluding NamibRe),35155,General Liability - Non-ProportionalReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+General Liability - Non-Proportional,Reinsurance Outward Premium / Namibia / NamibRe only,35180,General Liability - Non-ProportionalReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+General Liability - Non-Proportional,Reinsurance Outward Premium / Outside Namibia,35205,General Liability - Non-ProportionalReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+General Liability - Non-Proportional,Net premiums written,35230,,group_incomerevenueparta3
+General Liability - Non-Proportional,Change in unearned premiums reserve,35255,General Liability - Non-Proportional ChangeUnearnedPremium,group_incomerevenueparta3
+General Liability - Non-Proportional,Net premiums earned,35280,,group_incomerevenueparta3
+General Liability - Non-Proportional,Claims paid and loss adjustment expenses,35305,General Liability - Non-ProportionalClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+General Liability - Non-Proportional,Change in IBNR and outstanding claims reserve,35330,,group_incomerevenueparta3
+General Liability - Non-Proportional,Change in gross claims Incurred But Not Reported (IBNR),35355,General Liability - Non-Proportional15,group_incomerevenueparta3
+General Liability - Non-Proportional,Change in outstanding claims reserve,35380,General Liability - Non-ProportionalCOClaimsReserve,group_incomerevenueparta3
+General Liability - Non-Proportional,Claims paid and loss adjustment expenses recovered from reinsurers,35405,General Liability - Non-ProportionalClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+General Liability - Non-Proportional,Net claims incurred,35430,,group_incomerevenueparta3
+General Liability - Non-Proportional,Commission paid,35455,General Liability - Non-ProportionalCommission paid,group_incomerevenueparta3
+General Liability - Non-Proportional,Commission earned,35480,General Liability - Non-Proportional ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+General Liability - Non-Proportional,Net commission incurred,35505,,group_incomerevenueparta3
+General Liability - Non-Proportional,Underwriting Result,35530,,group_incomerevenueparta3
+Health & Sickness,Gross written premiums,35056,,group_incomerevenueparta3
+Health & Sickness,Gross written premiums w/o ART,35081,[Health & SicknessGross written premiums:Renewals:]+[Health & SicknessGross written premiums:New:],group_incomerevenueparta3
+Health & Sickness,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35106,HealthSicknessCCBART,group_incomerevenueparta3
+Health & Sickness,Reinsurance outward premium,35131,,group_incomerevenueparta3
+Health & Sickness,Reinsurance Outward Premium / Namibia (excluding NamibRe),35156,HealthSicknessReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Health & Sickness,Reinsurance Outward Premium / Namibia / NamibRe only,35181,HealthSicknessReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Health & Sickness,Reinsurance Outward Premium / Outside Namibia,35206,HealthSicknessReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Health & Sickness,Net premiums written,35231,,group_incomerevenueparta3
+Health & Sickness,Change in unearned premiums reserve,35256,HealthSickness ChangeUnearnedPremium,group_incomerevenueparta3
+Health & Sickness,Net premiums earned,35281,,group_incomerevenueparta3
+Health & Sickness,Claims paid and loss adjustment expenses,35306,HealthSicknessClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Health & Sickness,Change in IBNR and outstanding claims reserve,35331,,group_incomerevenueparta3
+Health & Sickness,Change in gross claims Incurred But Not Reported (IBNR),35356,HealthSickness15,group_incomerevenueparta3
+Health & Sickness,Change in outstanding claims reserve,35381,HealthSicknessCOClaimsReserve,group_incomerevenueparta3
+Health & Sickness,Claims paid and loss adjustment expenses recovered from reinsurers,35406,HealthSicknessClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Health & Sickness,Net claims incurred,35431,,group_incomerevenueparta3
+Health & Sickness,Commission paid,35456,HealthSicknessCommission paid,group_incomerevenueparta3
+Health & Sickness,Commission earned,35481,HealthSickness ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Health & Sickness,Net commission incurred,35506,,group_incomerevenueparta3
+Health & Sickness,Underwriting Result,35531,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Gross written premiums,35057,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Gross written premiums w/o ART,35082,[Health & Sickness - Non-ProportionalGross written premiums:Renewals:]+[Health & Sickness - Non-ProportionalGross written premiums:New:],group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35107,HealthSicknessNon-ProportionalCCBART,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Reinsurance outward premium,35132,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Reinsurance Outward Premium / Namibia (excluding NamibRe),35157,HealthSicknessNon-ProportionalReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Reinsurance Outward Premium / Namibia / NamibRe only,35182,HealthSicknessNon-ProportionalReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Reinsurance Outward Premium / Outside Namibia,35207,HealthSicknessNon-ProportionalReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Net premiums written,35232,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Change in unearned premiums reserve,35257,HealthSicknessNon-Proportional ChangeUnearnedPremium,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Net premiums earned,35282,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Claims paid and loss adjustment expenses,35307,HealthSicknessNon-ProportionalClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Change in IBNR and outstanding claims reserve,35332,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Change in gross claims Incurred But Not Reported (IBNR),35357,HealthSicknessNon-Proportional15,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Change in outstanding claims reserve,35382,HealthSicknessNon-ProportionalCOClaimsReserve,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Claims paid and loss adjustment expenses recovered from reinsurers,35407,HealthSicknessNon-ProportionalClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Net claims incurred,35432,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Commission paid,35457,HealthSicknessNon-ProportionalCommission paid,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Commission earned,35482,HealthSicknessNon-Proportional ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Net commission incurred,35507,,group_incomerevenueparta3
+Health & Sickness - Non-Proportional,Underwriting Result,35532,,group_incomerevenueparta3
+Legal Expenses,Gross written premiums,35058,,group_incomerevenueparta3
+Legal Expenses,Gross written premiums w/o ART,35083,[Legal ExpensesGross written premiums:Renewals:]+[Legal ExpensesGross written premiums:New:],group_incomerevenueparta3
+Legal Expenses,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35108,Legal ExpensesCCBART,group_incomerevenueparta3
+Legal Expenses,Reinsurance outward premium,35133,,group_incomerevenueparta3
+Legal Expenses,Reinsurance Outward Premium / Namibia (excluding NamibRe),35158,Legal ExpensesReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Legal Expenses,Reinsurance Outward Premium / Namibia / NamibRe only,35183,Legal ExpensesReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Legal Expenses,Reinsurance Outward Premium / Outside Namibia,35208,Legal ExpensesReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Legal Expenses,Net premiums written,35233,,group_incomerevenueparta3
+Legal Expenses,Change in unearned premiums reserve,35258,Legal Expenses ChangeUnearnedPremium,group_incomerevenueparta3
+Legal Expenses,Net premiums earned,35283,,group_incomerevenueparta3
+Legal Expenses,Claims paid and loss adjustment expenses,35308,Legal ExpensesClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Legal Expenses,Change in IBNR and outstanding claims reserve,35333,,group_incomerevenueparta3
+Legal Expenses,Change in gross claims Incurred But Not Reported (IBNR),35358,Legal Expenses15,group_incomerevenueparta3
+Legal Expenses,Change in outstanding claims reserve,35383,Legal ExpensesCOClaimsReserve,group_incomerevenueparta3
+Legal Expenses,Claims paid and loss adjustment expenses recovered from reinsurers,35408,Legal ExpensesClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Legal Expenses,Net claims incurred,35433,,group_incomerevenueparta3
+Legal Expenses,Commission paid,35458,Legal ExpensesCommission paid,group_incomerevenueparta3
+Legal Expenses,Commission earned,35483,Legal Expenses ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Legal Expenses,Net commission incurred,35508,,group_incomerevenueparta3
+Legal Expenses,Underwriting Result,35533,,group_incomerevenueparta3
+Marine,Gross written premiums,35059,,group_incomerevenueparta3
+Marine,Gross written premiums w/o ART,35084,[MarineGross written premiums:Renewals:]+[MarineGross written premiums:New:],group_incomerevenueparta3
+Marine,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35109,MarineCCBART,group_incomerevenueparta3
+Marine,Reinsurance outward premium,35134,,group_incomerevenueparta3
+Marine,Reinsurance Outward Premium / Namibia (excluding NamibRe),35159,MarineReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Marine,Reinsurance Outward Premium / Namibia / NamibRe only,35184,MarineReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Marine,Reinsurance Outward Premium / Outside Namibia,35209,MarineReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Marine,Net premiums written,35234,,group_incomerevenueparta3
+Marine,Change in unearned premiums reserve,35259,Marine ChangeUnearnedPremium,group_incomerevenueparta3
+Marine,Net premiums earned,35284,,group_incomerevenueparta3
+Marine,Claims paid and loss adjustment expenses,35309,MarineClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Marine,Change in IBNR and outstanding claims reserve,35334,,group_incomerevenueparta3
+Marine,Change in gross claims Incurred But Not Reported (IBNR),35359,Marine15,group_incomerevenueparta3
+Marine,Change in outstanding claims reserve,35384,MarineCOClaimsReserve,group_incomerevenueparta3
+Marine,Claims paid and loss adjustment expenses recovered from reinsurers,35409,MarineClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Marine,Net claims incurred,35434,,group_incomerevenueparta3
+Marine,Commission paid,35459,MarineCommission paid,group_incomerevenueparta3
+Marine,Commission earned,35484,Marine ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Marine,Net commission incurred,35509,,group_incomerevenueparta3
+Marine,Underwriting Result,35534,,group_incomerevenueparta3
+MAT non-Proportional,Gross written premiums,35060,,group_incomerevenueparta3
+MAT non-Proportional,Gross written premiums w/o ART,35085,[MAT non-ProprtionalGross written premiums:Renewals:]+[MAT non-ProprtionalGross written premiums:New:],group_incomerevenueparta3
+MAT non-Proportional,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35110,MAT non-ProprtionalCCBART,group_incomerevenueparta3
+MAT non-Proportional,Reinsurance outward premium,35135,,group_incomerevenueparta3
+MAT non-Proportional,Reinsurance Outward Premium / Namibia (excluding NamibRe),35160,MAT non-ProprtionalReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+MAT non-Proportional,Reinsurance Outward Premium / Namibia / NamibRe only,35185,MAT non-ProprtionalReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+MAT non-Proportional,Reinsurance Outward Premium / Outside Namibia,35210,MAT non-ProprtionalReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+MAT non-Proportional,Net premiums written,35235,,group_incomerevenueparta3
+MAT non-Proportional,Change in unearned premiums reserve,35260,MAT non-Proprtional ChangeUnearnedPremium:GrossAmount1,group_incomerevenueparta3
+MAT non-Proportional,Net premiums earned,35285,,group_incomerevenueparta3
+MAT non-Proportional,Claims paid and loss adjustment expenses,35310,MAT non-ProprtionalClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+MAT non-Proportional,Change in IBNR and outstanding claims reserve,35335,,group_incomerevenueparta3
+MAT non-Proportional,Change in gross claims Incurred But Not Reported (IBNR),35360,MAT non-Proprtional15,group_incomerevenueparta3
+MAT non-Proportional,Change in outstanding claims reserve,35385,MAT non-ProprtionalCOClaimsReserve,group_incomerevenueparta3
+MAT non-Proportional,Claims paid and loss adjustment expenses recovered from reinsurers,35410,MAT non-ProprtionalClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+MAT non-Proportional,Net claims incurred,35435,,group_incomerevenueparta3
+MAT non-Proportional,Commission paid,35460,MAT non-ProprtionalCommission paid,group_incomerevenueparta3
+MAT non-Proportional,Commission earned,35485,MAT non-Proprtional ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+MAT non-Proportional,Net commission incurred,35510,,group_incomerevenueparta3
+MAT non-Proportional,Underwriting Result,35535,,group_incomerevenueparta3
+Motor Only Commercial,Gross written premiums,35061,,group_incomerevenueparta3
+Motor Only Commercial,Gross written premiums w/o ART,35086,[Motor Only CommercialGross written premiums:Renewals:]+[Motor Only CommercialGross written premiums:New:],group_incomerevenueparta3
+Motor Only Commercial,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35111,Motor Only CommercialCCBART,group_incomerevenueparta3
+Motor Only Commercial,Reinsurance outward premium,35136,,group_incomerevenueparta3
+Motor Only Commercial,Reinsurance Outward Premium / Namibia (excluding NamibRe),35161,Motor Only CommercialReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Motor Only Commercial,Reinsurance Outward Premium / Namibia / NamibRe only,35186,Motor Only CommercialReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Motor Only Commercial,Reinsurance Outward Premium / Outside Namibia,35211,Motor Only CommercialReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Motor Only Commercial,Net premiums written,35236,,group_incomerevenueparta3
+Motor Only Commercial,Change in unearned premiums reserve,35261,Motor Only Commercial ChangeUnearnedPremium:GrossAmount1,group_incomerevenueparta3
+Motor Only Commercial,Net premiums earned,35286,,group_incomerevenueparta3
+Motor Only Commercial,Claims paid and loss adjustment expenses,35311,Motor Only CommercialClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Motor Only Commercial,Change in IBNR and outstanding claims reserve,35336,,group_incomerevenueparta3
+Motor Only Commercial,Change in gross claims Incurred But Not Reported (IBNR),35361,Motor Only Commercial15,group_incomerevenueparta3
+Motor Only Commercial,Change in outstanding claims reserve,35386,Motor Only CommercialCOClaimsReserve,group_incomerevenueparta3
+Motor Only Commercial,Claims paid and loss adjustment expenses recovered from reinsurers,35411,Motor Only CommercialClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Motor Only Commercial,Net claims incurred,35436,,group_incomerevenueparta3
+Motor Only Commercial,Commission paid,35461,Motor Only CommercialCommission paid,group_incomerevenueparta3
+Motor Only Commercial,Commission earned,35486,Motor Only Commercial ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Motor Only Commercial,Net commission incurred,35511,,group_incomerevenueparta3
+Motor Only Commercial,Underwriting Result,35536,,group_incomerevenueparta3
+Motor Only Personal,Gross written premiums,35062,,group_incomerevenueparta3
+Motor Only Personal,Gross written premiums w/o ART,35087,[Motor Only PersonalGross written premiums:Renewals:]+[Motor Only PersonalGross written premiums:New:],group_incomerevenueparta3
+Motor Only Personal,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35112,Motor Only PersonalCCBART,group_incomerevenueparta3
+Motor Only Personal,Reinsurance outward premium,35137,,group_incomerevenueparta3
+Motor Only Personal,Reinsurance Outward Premium / Namibia (excluding NamibRe),35162,Motor Only PersonalReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Motor Only Personal,Reinsurance Outward Premium / Namibia / NamibRe only,35187,Motor Only PersonalReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Motor Only Personal,Reinsurance Outward Premium / Outside Namibia,35212,Motor Only PersonalReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Motor Only Personal,Net premiums written,35237,,group_incomerevenueparta3
+Motor Only Personal,Change in unearned premiums reserve,35262,Motor Only Personal ChangeUnearnedPremium:GrossAmount1,group_incomerevenueparta3
+Motor Only Personal,Net premiums earned,35287,,group_incomerevenueparta3
+Motor Only Personal,Claims paid and loss adjustment expenses,35312,Motor Only PersonalClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Motor Only Personal,Change in IBNR and outstanding claims reserve,35337,,group_incomerevenueparta3
+Motor Only Personal,Change in gross claims Incurred But Not Reported (IBNR),35362,Motor Only Personal15,group_incomerevenueparta3
+Motor Only Personal,Change in outstanding claims reserve,35387,Motor Only PersonalCOClaimsReserve,group_incomerevenueparta3
+Motor Only Personal,Claims paid and loss adjustment expenses recovered from reinsurers,35412,Motor Only PersonalClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Motor Only Personal,Net claims incurred,35437,,group_incomerevenueparta3
+Motor Only Personal,Commission paid,35462,Motor Only PersonalCommission paid,group_incomerevenueparta3
+Motor Only Personal,Commission earned,35487,Motor Only Personal ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Motor Only Personal,Net commission incurred,35512,,group_incomerevenueparta3
+Motor Only Personal,Underwriting Result,35537,,group_incomerevenueparta3
+Pet Insurance,Gross written premiums,35063,,group_incomerevenueparta3
+Pet Insurance,Gross written premiums w/o ART,35088,[Pet InsuranceGross written premiums:Renewals:]+[Pet InsuranceGross written premiums:New:],group_incomerevenueparta3
+Pet Insurance,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35113,Pet InsuranceCCBART,group_incomerevenueparta3
+Pet Insurance,Reinsurance outward premium,35138,,group_incomerevenueparta3
+Pet Insurance,Reinsurance Outward Premium / Namibia (excluding NamibRe),35163,Pet InsuranceReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Pet Insurance,Reinsurance Outward Premium / Namibia / NamibRe only,35188,Pet InsuranceReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Pet Insurance,Reinsurance Outward Premium / Outside Namibia,35213,Pet InsuranceReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Pet Insurance,Net premiums written,35238,,group_incomerevenueparta3
+Pet Insurance,Change in unearned premiums reserve,35263,Pet Insurance ChangeUnearnedPremium,group_incomerevenueparta3
+Pet Insurance,Net premiums earned,35288,,group_incomerevenueparta3
+Pet Insurance,Claims paid and loss adjustment expenses,35313,Pet InsuranceClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Pet Insurance,Change in IBNR and outstanding claims reserve,35338,,group_incomerevenueparta3
+Pet Insurance,Change in gross claims Incurred But Not Reported (IBNR),35363,Pet Insurance15,group_incomerevenueparta3
+Pet Insurance,Change in outstanding claims reserve,35388,Pet InsuranceCOClaimsReserve,group_incomerevenueparta3
+Pet Insurance,Claims paid and loss adjustment expenses recovered from reinsurers,35413,Pet InsuranceClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Pet Insurance,Net claims incurred,35438,,group_incomerevenueparta3
+Pet Insurance,Commission paid,35463,Pet InsuranceCommission paid,group_incomerevenueparta3
+Pet Insurance,Commission earned,35488,Pet Insurance ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Pet Insurance,Net commission incurred,35513,,group_incomerevenueparta3
+Pet Insurance,Underwriting Result,35538,,group_incomerevenueparta3
+Property Commercial,Gross written premiums,35064,,group_incomerevenueparta3
+Property Commercial,Gross written premiums w/o ART,35089,[Property CommercialGross written premiums:Renewals:]+[Property CommercialGross written premiums:New:],group_incomerevenueparta3
+Property Commercial,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35114,Property CommercialCCBART,group_incomerevenueparta3
+Property Commercial,Reinsurance outward premium,35139,,group_incomerevenueparta3
+Property Commercial,Reinsurance Outward Premium / Namibia (excluding NamibRe),35164,Property CommercialReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Property Commercial,Reinsurance Outward Premium / Namibia / NamibRe only,35189,Property CommercialReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Property Commercial,Reinsurance Outward Premium / Outside Namibia,35214,Property CommercialReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Property Commercial,Net premiums written,35239,,group_incomerevenueparta3
+Property Commercial,Change in unearned premiums reserve,35264,Property Commercial ChangeUnearnedPremium,group_incomerevenueparta3
+Property Commercial,Net premiums earned,35289,,group_incomerevenueparta3
+Property Commercial,Claims paid and loss adjustment expenses,35314,Property CommercialClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Property Commercial,Change in IBNR and outstanding claims reserve,35339,,group_incomerevenueparta3
+Property Commercial,Change in gross claims Incurred But Not Reported (IBNR),35364,Property Commercial15,group_incomerevenueparta3
+Property Commercial,Change in outstanding claims reserve,35389,Property CommercialCOClaimsReserve,group_incomerevenueparta3
+Property Commercial,Claims paid and loss adjustment expenses recovered from reinsurers,35414,Property CommercialClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Property Commercial,Net claims incurred,35439,,group_incomerevenueparta3
+Property Commercial,Commission paid,35464,Property CommercialCommission paid,group_incomerevenueparta3
+Property Commercial,Commission earned,35489,Property Commercial ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Property Commercial,Net commission incurred,35514,,group_incomerevenueparta3
+Property Commercial,Underwriting Result,35539,,group_incomerevenueparta3
+Property Personal,Gross written premiums,35065,,group_incomerevenueparta3
+Property Personal,Gross written premiums w/o ART,35090,[Property PersonalGross written premiums:Renewals:]+[Property PersonalGross written premiums:New:],group_incomerevenueparta3
+Property Personal,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35115,Property PersonalCCBART,group_incomerevenueparta3
+Property Personal,Reinsurance outward premium,35140,,group_incomerevenueparta3
+Property Personal,Reinsurance Outward Premium / Namibia (excluding NamibRe),35165,Property PersonalReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Property Personal,Reinsurance Outward Premium / Namibia / NamibRe only,35190,Property PersonalReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Property Personal,Reinsurance Outward Premium / Outside Namibia,35215,Property PersonalReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Property Personal,Net premiums written,35240,,group_incomerevenueparta3
+Property Personal,Change in unearned premiums reserve,35265,Property Personal ChangeUnearnedPremium,group_incomerevenueparta3
+Property Personal,Net premiums earned,35290,,group_incomerevenueparta3
+Property Personal,Claims paid and loss adjustment expenses,35315,Property PersonalClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Property Personal,Change in IBNR and outstanding claims reserve,35340,,group_incomerevenueparta3
+Property Personal,Change in gross claims Incurred But Not Reported (IBNR),35365,Property Personal15,group_incomerevenueparta3
+Property Personal,Change in outstanding claims reserve,35390,Property PersonalCOClaimsReserve,group_incomerevenueparta3
+Property Personal,Claims paid and loss adjustment expenses recovered from reinsurers,35415,Property PersonalClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Property Personal,Net claims incurred,35440,,group_incomerevenueparta3
+Property Personal,Commission paid,35465,Property PersonalCommission paid,group_incomerevenueparta3
+Property Personal,Commission earned,35490,Property Personal ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Property Personal,Net commission incurred,35515,,group_incomerevenueparta3
+Property Personal,Underwriting Result,35540,,group_incomerevenueparta3
+Property-Non-Proportional,Gross written premiums,35066,,group_incomerevenueparta3
+Property-Non-Proportional,Gross written premiums w/o ART,35091,[Property-Non-ProportionalGross written premiums:Renewals:]+[Property-Non-ProportionalGross written premiums:New:],group_incomerevenueparta3
+Property-Non-Proportional,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35116,Property-Non-ProportionalCCBART,group_incomerevenueparta3
+Property-Non-Proportional,Reinsurance outward premium,35141,,group_incomerevenueparta3
+Property-Non-Proportional,Reinsurance Outward Premium / Namibia (excluding NamibRe),35166,Property-Non-ProportionalReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Property-Non-Proportional,Reinsurance Outward Premium / Namibia / NamibRe only,35191,Property-Non-ProportionalReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Property-Non-Proportional,Reinsurance Outward Premium / Outside Namibia,35216,Property-Non-ProportionalReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Property-Non-Proportional,Net premiums written,35241,,group_incomerevenueparta3
+Property-Non-Proportional,Change in unearned premiums reserve,35266,Property-Non-Proportional ChangeUnearnedPremium,group_incomerevenueparta3
+Property-Non-Proportional,Net premiums earned,35291,,group_incomerevenueparta3
+Property-Non-Proportional,Claims paid and loss adjustment expenses,35316,Property-Non-ProportionalClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Property-Non-Proportional,Change in IBNR and outstanding claims reserve,35341,,group_incomerevenueparta3
+Property-Non-Proportional,Change in gross claims Incurred But Not Reported (IBNR),35366,Property-Non-Proportional15,group_incomerevenueparta3
+Property-Non-Proportional,Change in outstanding claims reserve,35391,Property-Non-ProportionalCOClaimsReserve,group_incomerevenueparta3
+Property-Non-Proportional,Claims paid and loss adjustment expenses recovered from reinsurers,35416,Property-Non-ProportionalClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Property-Non-Proportional,Net claims incurred,35441,,group_incomerevenueparta3
+Property-Non-Proportional,Commission paid,35466,Property-Non-ProportionalCommission paid,group_incomerevenueparta3
+Property-Non-Proportional,Commission earned,35491,Property-Non-Proportional ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Property-Non-Proportional,Net commission incurred,35516,,group_incomerevenueparta3
+Property-Non-Proportional,Underwriting Result,35541,,group_incomerevenueparta3
+Surety | Guarantees,Gross written premiums,35067,,group_incomerevenueparta3
+Surety | Guarantees,Gross written premiums w/o ART,35092,[Surety/GuaranteesGross written premiums:Renewals:]+[Surety/GuaranteesGross written premiums:New:],group_incomerevenueparta3
+Surety | Guarantees,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35117,SuretyGuaranteesCCBART,group_incomerevenueparta3
+Surety | Guarantees,Reinsurance outward premium,35142,,group_incomerevenueparta3
+Surety | Guarantees,Reinsurance Outward Premium / Namibia (excluding NamibRe),35167,SuretyGuaranteesReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Surety | Guarantees,Reinsurance Outward Premium / Namibia / NamibRe only,35192,SuretyGuaranteesReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Surety | Guarantees,Reinsurance Outward Premium / Outside Namibia,35217,SuretyGuaranteesReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Surety | Guarantees,Net premiums written,35242,,group_incomerevenueparta3
+Surety | Guarantees,Change in unearned premiums reserve,35267,SuretyGuarantees ChangeUnearnedPremium:GrossAmount,group_incomerevenueparta3
+Surety | Guarantees,Net premiums earned,35292,,group_incomerevenueparta3
+Surety | Guarantees,Claims paid and loss adjustment expenses,35317,SuretyGuaranteesClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Surety | Guarantees,Change in IBNR and outstanding claims reserve,35342,,group_incomerevenueparta3
+Surety | Guarantees,Change in gross claims Incurred But Not Reported (IBNR),35367,SuretyGuarantees15,group_incomerevenueparta3
+Surety | Guarantees,Change in outstanding claims reserve,35392,SuretyGuaranteesCOClaimsReserve,group_incomerevenueparta3
+Surety | Guarantees,Claims paid and loss adjustment expenses recovered from reinsurers,35417,SuretyGuaranteesClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Surety | Guarantees,Net claims incurred,35442,,group_incomerevenueparta3
+Surety | Guarantees,Commission paid,35467,SuretyGuaranteesCommission paid,group_incomerevenueparta3
+Surety | Guarantees,Commission earned,35492,SuretyGuarantees ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Surety | Guarantees,Net commission incurred,35517,,group_incomerevenueparta3
+Surety | Guarantees,Underwriting Result,35542,,group_incomerevenueparta3
+Travel,Gross written premiums,35068,,group_incomerevenueparta3
+Travel,Gross written premiums w/o ART,35093,[TravelGross written premiums:Renewals:]+[TravelGross written premiums:New:],group_incomerevenueparta3
+Travel,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35118,TravelCCBART,group_incomerevenueparta3
+Travel,Reinsurance outward premium,35143,,group_incomerevenueparta3
+Travel,Reinsurance Outward Premium / Namibia (excluding NamibRe),35168,TravelReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Travel,Reinsurance Outward Premium / Namibia / NamibRe only,35193,TravelReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Travel,Reinsurance Outward Premium / Outside Namibia,35218,TravelReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Travel,Net premiums written,35243,,group_incomerevenueparta3
+Travel,Change in unearned premiums reserve,35268,Travel ChangeUnearnedPremium,group_incomerevenueparta3
+Travel,Net premiums earned,35293,,group_incomerevenueparta3
+Travel,Claims paid and loss adjustment expenses,35318,TravelClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Travel,Change in IBNR and outstanding claims reserve,35343,,group_incomerevenueparta3
+Travel,Change in gross claims Incurred But Not Reported (IBNR),35368,Travel15,group_incomerevenueparta3
+Travel,Change in outstanding claims reserve,35393,TravelCOClaimsReserve,group_incomerevenueparta3
+Travel,Claims paid and loss adjustment expenses recovered from reinsurers,35418,TravelClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Travel,Net claims incurred,35443,,group_incomerevenueparta3
+Travel,Commission paid,35468,TravelCommission paid,group_incomerevenueparta3
+Travel,Commission earned,35493,Travel ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Travel,Net commission incurred,35518,,group_incomerevenueparta3
+Travel,Underwriting Result,35543,,group_incomerevenueparta3
+Riot&Strike,Gross written premiums,35069,,group_incomerevenueparta3
+Riot&Strike,Gross written premiums w/o ART,35094,[Riot&StrikeGross written premiums:Renewals:]+[RiotStrikeGross written premiums:New:],group_incomerevenueparta3
+Riot&Strike,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35119,RiotStrikeCCBART,group_incomerevenueparta3
+Riot&Strike,Reinsurance outward premium,35144,,group_incomerevenueparta3
+Riot&Strike,Reinsurance Outward Premium / Namibia (excluding NamibRe),35169,RiotStrikeReinsuranceOutwardPremium:NamibiaExclNamibRe,group_incomerevenueparta3
+Riot&Strike,Reinsurance Outward Premium / Namibia / NamibRe only,35194,RiotStrikeReinsuranceOutwardPremium:NamibRe,group_incomerevenueparta3
+Riot&Strike,Reinsurance Outward Premium / Outside Namibia,35219,RiotStrikeReinsuranceOutwardPremiumOutsideNamibia,group_incomerevenueparta3
+Riot&Strike,Net premiums written,35244,,group_incomerevenueparta3
+Riot&Strike,Change in unearned premiums reserve,35269,RiotStrike ChangeUnearnedPremium,group_incomerevenueparta3
+Riot&Strike,Net premiums earned,35294,,group_incomerevenueparta3
+Riot&Strike,Claims paid and loss adjustment expenses,35319,RiotStrikeClaimsPaidLossAdjustmentExpenses,group_incomerevenueparta3
+Riot&Strike,Change in IBNR and outstanding claims reserve,35344,,group_incomerevenueparta3
+Riot&Strike,Change in gross claims Incurred But Not Reported (IBNR),35369,RiotStrike15,group_incomerevenueparta3
+Riot&Strike,Change in outstanding claims reserve,35394,RiotStrikeCOClaimsReserve,group_incomerevenueparta3
+Riot&Strike,Claims paid and loss adjustment expenses recovered from reinsurers,35419,RiotStrikeClaimsPaidLossRecoveredReinsurers,group_incomerevenueparta3
+Riot&Strike,Net claims incurred,35444,,group_incomerevenueparta3
+Riot&Strike,Commission paid,35469,RiotStrikeCommission paid,group_incomerevenueparta3
+Riot&Strike,Commission earned,35494,RiotStrike ExpensesOperatingExpensesCommission earned,group_incomerevenueparta3
+Riot&Strike,Net commission incurred,35519,,
+Riot&Strike,Underwriting Result,35544,,
+Per SOCI,Gross written premiums,35070,,
+Per SOCI,Gross written premiums w/o ART,35095,,
+Per SOCI,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35120,,
+Per SOCI,Reinsurance outward premium,35145,,
+Per SOCI,Reinsurance Outward Premium / Namibia (excluding NamibRe),35170,,
+Per SOCI,Reinsurance Outward Premium / Namibia / NamibRe only,35195,,
+Per SOCI,Reinsurance Outward Premium / Outside Namibia,35220,,
+Per SOCI,Net premiums written,35245,,
+Per SOCI,Change in unearned premiums reserve,35270,,
+Per SOCI,Net premiums earned,35295,,
+Per SOCI,Claims paid and loss adjustment expenses,35320,,
+Per SOCI,Change in IBNR and outstanding claims reserve,35345,,
+Per SOCI,Change in gross claims Incurred But Not Reported (IBNR),35370,,
+Per SOCI,Change in outstanding claims reserve,35395,,
+Per SOCI,Claims paid and loss adjustment expenses recovered from reinsurers,35420,,
+Per SOCI,Net claims incurred,35445,,
+Per SOCI,Commission paid,35470,,
+Per SOCI,Commission earned,35495,,
+Per SOCI,Net commission incurred,35520,,
+Per SOCI,Underwriting Result,35545,,
+Check,Gross written premiums,35071,,
+Check,Gross written premiums w/o ART,35096,,
+Check,Gross written premiums / Cell Captive Business & Alternative Risk Transfer (ART),35121,,
+Check,Reinsurance outward premium,35146,,
+Check,Reinsurance Outward Premium / Namibia (excluding NamibRe),35171,,
+Check,Reinsurance Outward Premium / Namibia / NamibRe only,35196,,
+Check,Reinsurance Outward Premium / Outside Namibia,35221,,
+Check,Net premiums written,35246,,
+Check,Change in unearned premiums reserve,35271,,
+Check,Net premiums earned,35296,,
+Check,Claims paid and loss adjustment expenses,35321,,
+Check,Change in IBNR and outstanding claims reserve,35346,,
+Check,Change in gross claims Incurred But Not Reported (IBNR),35371,,
+Check,Change in outstanding claims reserve,35396,,
+Check,Claims paid and loss adjustment expenses recovered from reinsurers,35421,,
+Check,Net claims incurred,35446,,
+Check,Commission paid,35471,,
+Check,Commission earned,35496,,
+Check,Net commission incurred,35521,,
+Check,Underwriting Result,35546,,

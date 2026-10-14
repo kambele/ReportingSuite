@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VSABModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="schema_item_details">
+    <Key>
+      <PropertyRef Name="item_version_id" />
+    </Key>
+    <Property Name="item_version_id" Type="Guid" Nullable="false" />
+    <Property Name="item_id" Type="Guid" Nullable="false" />
+    <Property Name="version_number" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="owner_schema_id" Type="Guid" Nullable="false" />
+    <Property Name="parent_element_id" Type="Guid" Nullable="false" />
+    <Property Name="path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dependency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="initial_value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="calculated_value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="is_mandatory" Type="Boolean" Nullable="false" />
+    <Property Name="data_type_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="column_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="is_primary_key" Type="Boolean" Nullable="false" />
+    <Property Name="initial_Value_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="data_type_guid" Type="Guid" />
+    <Property Name="data_type_version_number" Type="Int32" />
+    <Property Name="is_searchable" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="VSABEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="schema_item_details" EntityType="Self.schema_item_details" />
+  </EntityContainer>
+</Schema>

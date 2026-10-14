@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReportingSuiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="GetAllSubmissionPacksDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="start" Type="date" Mode="In" />
+          <Parameter Name="end" Type="date" Mode="In" />
+          <Parameter Name="type" Type="varchar(max)" Mode="In" />
+          <Parameter Name="formset" Type="varchar(max)" Mode="In" />
+          <Parameter Name="status" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="ReportingSuiteModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReportingSuiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GetAllSubmissionPacksDates" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GetAllSubmissionPacksDates" ReturnType="Collection(ReportingSuiteModel.GetAllSubmissionPacksDates_Result)">
+            <Parameter Name="start" Mode="In" Type="DateTime" />
+            <Parameter Name="end" Mode="In" Type="DateTime" />
+            <Parameter Name="type" Mode="In" Type="String" />
+            <Parameter Name="formset" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetAllSubmissionPacksDates_Result">
+          <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="License_Number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Industry" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Submission_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="reference" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="submission_pack_name" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="end_date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="created_on" Nullable="true" Precision="23" />
+          <Property Type="String" Name="action_performed" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormStatusName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="entity_instance_id" Nullable="true" />
+          <Property Type="Int32" Name="submission_pack_instance_id" Nullable="false" />
+          <Property Type="Guid" Name="formset_version_id" Nullable="true" />
+          <Property Type="String" Name="FormName" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReportingSuiteModelStoreContainer" CdmEntityContainer="GetAllSubmissionPacksDates" >
+          <FunctionImportMapping FunctionImportName="GetAllSubmissionPacksDates" FunctionName="ReportingSuiteModel.Store.GetAllSubmissionPacksDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ReportingSuiteModel.GetAllSubmissionPacksDates_Result">
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="License_Number" ColumnName="License Number" />
+                <ScalarProperty Name="Industry" ColumnName="Industry" />
+                <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+                <ScalarProperty Name="reference" ColumnName="reference" />
+                <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+                <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+                <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+                <ScalarProperty Name="submission_pack_instance_id" ColumnName="submission_pack_instance_id" />
+                <ScalarProperty Name="formset_version_id" ColumnName="formset_version_id" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

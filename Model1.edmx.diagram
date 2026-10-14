@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aa98ddb4f2a74dd4bc5b663cce86fb79" Name="Diagram1">
+        <EntityTypeShape EntityType="ReportingSuiteModel.AggregationType" Width="1.5" PointX="13.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Copy_of_Pension_Funds_Data_Update__002_" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.EntityGroupLineItem_Columns" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.EntityGroup" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.FinUpdate" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.LineItem_Columns" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.LineItemType" Width="1.5" PointX="3.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Month" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Quarter" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Report_Columns" Width="1.5" PointX="10.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Report_LineItems" Width="1.5" PointX="13.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ReportDataCube" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ReportEntityGroup" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ReportRole" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Report" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ReportSection" Width="1.5" PointX="8.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ReportType" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.RoleType" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Schema" Width="1.5" PointX="11.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.SchemaGroup" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.SchemaResource" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Section" Width="1.5" PointX="3.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.StatusUpdate" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Year" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.Gap" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_LineItem_Columns_AggregationTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_LineItems_AggregationTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_EntityGroupLineItem_Columns_EntityGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_EntityGroupLineItem_Columns_LineItem_Columns" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_ReportEntityGroups_EntityGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Reports_EntityGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_LineItem_Columns_Report_Columns" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_LineItem_Columns_Report_LineItems" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_LineItem_Columns_Schema" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Reports_LineItemTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_Columns_Reports" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_Columns_ReportSections" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_LineItems_Reports" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_LineItems_ReportSections" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_LineItems_Schema" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_ReportEntityGroups_Reports" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_ReportRoles_Reports" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_ReportRoles_RoleTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Reports_ReportTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Reports_Sections" ManuallyRouted="false" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_ReportSections_Reports" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.User" Width="1.5" PointX="11.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ReportParameter" Width="1.5" PointX="8.25" PointY="12.125" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_ReportParameters_Reports" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.CalculatedBy" Width="1.5" PointX="13.375" PointY="6.875" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_Columns_CalculatedBy" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_Report_Columns_Report_Columns1" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_LineItem_Columns_LineItem_Columns" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.ProcessType" Width="1.5" PointX="15.375" PointY="0.875" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_LineItem_Columns_ProcessTypes" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.PF_Fund_Submissions" Width="1.5" PointX="19.875" PointY="4.75" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.PF_Funds" Width="1.5" PointX="17.625" PointY="4" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.PF_InterimAllocationTypes" Width="1.5" PointX="15.375" PointY="20.25" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.PF_PortfolioTypes" Width="1.5" PointX="15.375" PointY="5.25" />
+        <EntityTypeShape EntityType="ReportingSuiteModel.PF_SubmissionTypes" Width="1.5" PointX="17.625" PointY="1.375" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_Funds" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_PF_Fund_Submissions_PF_SubmissionTypes" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_PF_Funds_PF_InterimAllocationTypes" />
+        <AssociationConnector Association="ReportingSuiteModel.FK_PF_Funds_PF_PortfolioTypes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

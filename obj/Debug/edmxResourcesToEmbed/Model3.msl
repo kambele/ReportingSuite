@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReportingSuiteModel2StoreContainer" CdmEntityContainer="ReportingSuiteEntities2">
+    <FunctionImportMapping FunctionImportName="GetPFDashboardCompanies" FunctionName="ReportingSuiteModel2.Store.GetPFDashboardCompanies">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel2.GetPFDashboardCompanies_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="item_poname" ColumnName="item_poname" />
+          <ScalarProperty Name="item_email" ColumnName="item_email" />
+          <ScalarProperty Name="item_telephone" ColumnName="item_telephone" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="De_Registration_Date" ColumnName="De-Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

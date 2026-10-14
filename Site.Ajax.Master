@@ -1,0 +1,2 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Site.Ajax.Master.vb" Inherits="ReportingSuite.Site_Mobile" %>
+

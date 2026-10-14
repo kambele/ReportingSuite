@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReportingSuiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="GetAllSubmissionPacksDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start" Type="date" Mode="In" />
+    <Parameter Name="end" Type="date" Mode="In" />
+    <Parameter Name="type" Type="varchar(max)" Mode="In" />
+    <Parameter Name="formset" Type="varchar(max)" Mode="In" />
+    <Parameter Name="status" Type="varchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="ReportingSuiteModelStoreContainer" />
+</Schema>

@@ -1,0 +1,27 @@
+Item,IsMain,Show,SortOrder,Section
+Assets,1,1,1,100
+Non-current Assets,1,1,2,100
+"Property, Plant & Equipment",0,1,3,100
+Intangible assets,0,1,4,100
+Long term loans,0,1,5,100
+Long-term Investments,0,1,6,100
+Current Assets,1,1,7,100
+Short-term Investments,0,1,8,100
+Accounts receivable (Debtors),0,1,9,100
+Cash & Cash equivalents,0,1,10,100
+Other current assets,0,1,11,100
+TOTAL ASSETS,1,1,12,100
+Funds and Liabilities,0,1,13,100
+Member's Funds,1,1,14,100
+Accumulated funds,0,1,15,100
+Other reserves,0,1,16,100
+Non-current Liabilities,1,1,17,100
+Long-Term Loans (Borrowings),0,1,18,100
+Current Liabilities,1,1,19,100
+Accounts payable (Creditors),0,1,20,100
+Provision for outstanding claims / IBNR,0,1,21,100
+Bank Overdraft,0,1,22,100
+Roll-over benefit Liability,0,1,23,100
+Short-term loans payable,0,1,24,100
+TOTAL FUNDS & LIABILITIES,1,1,25,100
+Net Asset / Asset base,1,1,26,100

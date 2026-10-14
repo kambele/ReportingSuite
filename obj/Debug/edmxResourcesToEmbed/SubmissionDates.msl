@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReportingSuiteModelStoreContainer" CdmEntityContainer="SubmissionDates">
+    <FunctionImportMapping FunctionImportName="GetSubmissionPacksDates" FunctionName="ReportingSuiteModel.Store.GetSubmissionPacksDates">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSubmissionPacksDates_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

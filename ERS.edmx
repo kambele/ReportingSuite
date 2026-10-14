@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VSABModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="schema_item_details">
+          <Key>
+            <PropertyRef Name="item_version_id" />
+          </Key>
+          <Property Name="item_version_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="item_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="version_number" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="owner_schema_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="parent_element_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dependency" Type="nvarchar(max)" />
+          <Property Name="initial_value" Type="nvarchar(max)" />
+          <Property Name="calculated_value" Type="nvarchar(max)" />
+          <Property Name="is_mandatory" Type="bit" Nullable="false" />
+          <Property Name="data_type_name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="column_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="is_primary_key" Type="bit" Nullable="false" />
+          <Property Name="initial_Value_type" Type="nvarchar" MaxLength="100" />
+          <Property Name="data_type_guid" Type="uniqueidentifier" />
+          <Property Name="data_type_version_number" Type="int" />
+          <Property Name="is_searchable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="VSABModelStoreContainer">
+          <EntitySet Name="schema_item_details" EntityType="Self.schema_item_details" Schema="vsabuser" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VSABModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="schema_item_details">
+          <Key>
+            <PropertyRef Name="item_version_id" />
+          </Key>
+          <Property Name="item_version_id" Type="Guid" Nullable="false" />
+          <Property Name="item_id" Type="Guid" Nullable="false" />
+          <Property Name="version_number" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="owner_schema_id" Type="Guid" Nullable="false" />
+          <Property Name="parent_element_id" Type="Guid" Nullable="false" />
+          <Property Name="path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dependency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="initial_value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="calculated_value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="is_mandatory" Type="Boolean" Nullable="false" />
+          <Property Name="data_type_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="column_name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="is_primary_key" Type="Boolean" Nullable="false" />
+          <Property Name="initial_Value_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="data_type_guid" Type="Guid" />
+          <Property Name="data_type_version_number" Type="Int32" />
+          <Property Name="is_searchable" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="VSABEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="schema_item_details" EntityType="Self.schema_item_details" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VSABModelStoreContainer" CdmEntityContainer="VSABEntities">
+          <EntitySetMapping Name="schema_item_details">
+            <EntityTypeMapping TypeName="VSABModel.schema_item_details">
+              <MappingFragment StoreEntitySet="schema_item_details">
+                <ScalarProperty Name="item_version_id" ColumnName="item_version_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="version_number" ColumnName="version_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="owner_schema_id" ColumnName="owner_schema_id" />
+                <ScalarProperty Name="parent_element_id" ColumnName="parent_element_id" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="dependency" ColumnName="dependency" />
+                <ScalarProperty Name="initial_value" ColumnName="initial_value" />
+                <ScalarProperty Name="calculated_value" ColumnName="calculated_value" />
+                <ScalarProperty Name="is_mandatory" ColumnName="is_mandatory" />
+                <ScalarProperty Name="data_type_name" ColumnName="data_type_name" />
+                <ScalarProperty Name="column_name" ColumnName="column_name" />
+                <ScalarProperty Name="is_primary_key" ColumnName="is_primary_key" />
+                <ScalarProperty Name="initial_Value_type" ColumnName="initial_Value_type" />
+                <ScalarProperty Name="data_type_guid" ColumnName="data_type_guid" />
+                <ScalarProperty Name="data_type_version_number" ColumnName="data_type_version_number" />
+                <ScalarProperty Name="is_searchable" ColumnName="is_searchable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
