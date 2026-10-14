@@ -151,6 +151,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\reporting-suite-limitless.css" />
     <Content Include="Content\report-builder-workspace.css" />
+    <Content Include="Content\reporting-workspace.css" />
     <Content Include="Content\vendor\datatables.net-buttons\js\buttons.colVis.min.js" />
     <Content Include="Content\Template\global_assets\css\icons\icomoon\**\*.*" />
     <Content Include="Content\Template\global_assets\js\main\jquery.min.js" />

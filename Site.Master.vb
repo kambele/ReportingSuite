@@ -27,7 +27,7 @@ Public Class SiteMaster
         End Try
 
         Try
-            NavigationSections = db.Sections.Include("Reports").OrderBy(Function(section) section.SectionID).ToList()
+            NavigationSections = db.Sections.Include("Reports").OrderBy(Function(section) section.SectionName).ToList()
             Dim navigationReportIds As List(Of Long) = NavigationSections.
                 SelectMany(Function(section) section.Reports).
                 Where(Function(report) Not report.Is_Deleted).
@@ -40,6 +40,10 @@ Public Class SiteMaster
                     Where(Function(report) Not report.Is_Deleted AndAlso accessibleReportIds.Contains(report.ReportID)).
                     ToList()
             Next
+            NavigationSections = NavigationSections.
+                Where(Function(section) section.Reports IsNot Nothing AndAlso section.Reports.Count > 0).
+                OrderBy(Function(section) section.SectionName).
+                ToList()
         Catch
             NavigationSections = New List(Of Section)()
         End Try

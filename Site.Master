@@ -81,11 +81,12 @@
                     </div>
                     <div class="card card-sidebar-mobile">
                         <ul class="nav nav-sidebar" data-nav-type="accordion">
-                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Workspace</div><i class="icon-menu" title="Workspace"></i></li>
-                            <li class="nav-item"><a href="Default.aspx" class="nav-link"><i class="icon-home4"></i><span>Dashboard</span></a></li>
+                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Functional modules</div><i class="icon-menu" title="Functional modules"></i></li>
                             <li class="nav-item"><a href="AdhocReport.aspx" class="nav-link"><i class="icon-table2"></i><span>Adhoc reports</span></a></li>
                             <li class="nav-item"><a href="ReportRender.aspx" class="nav-link"><i class="icon-stats-dots"></i><span>ACoA Report Renderer</span></a></li>
+                            <li class="nav-item"><a href="PF_Dashboard.aspx" class="nav-link"><i class="icon-pie-chart6"></i><span>Pension Fund Dashboard</span></a></li>
 
+                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Report catalogue</div><i class="icon-menu" title="Report catalogue"></i></li>
                             <li class="nav-item nav-item-submenu">
                                 <a href="#" class="nav-link"><i class="icon-stats-bars2"></i><span>Chart of Accounts</span></a>
                                 <ul class="nav nav-group-sub" data-submenu-title="Chart of Accounts">
@@ -108,7 +109,6 @@
                                 </ul>
                             </li>
 
-                            <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Divisions</div><i class="icon-menu" title="Divisions"></i></li>
                             <% For Each section In NavigationSections %>
                             <li class="nav-item nav-item-submenu">
                                 <a href="#" class="nav-link"><i class="icon-folder"></i><span><%: section.SectionName %></span></a>
@@ -144,7 +144,13 @@
                     </div>
                     <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                         <div class="d-flex">
-                            <div class="breadcrumb"><a href="Default.aspx" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>Home</a><span class="breadcrumb-item active"><%: GetPageTitle() %></span></div>
+                            <div class="breadcrumb">
+                                <% If Request.AppRelativeCurrentExecutionFilePath.EndsWith("/Default.aspx", StringComparison.OrdinalIgnoreCase) Then %>
+                                <span class="breadcrumb-item active"><i class="icon-grid6 mr-2"></i>Workspace</span>
+                                <% Else %>
+                                <a href="Default.aspx" class="breadcrumb-item"><i class="icon-grid6 mr-2"></i>Workspace</a><span class="breadcrumb-item active"><%: GetPageTitle() %></span>
+                                <% End If %>
+                            </div>
                             <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                         </div>
                     </div>
