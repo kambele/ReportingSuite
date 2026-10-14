@@ -19,7 +19,7 @@
 
     <!-- Existing pages still render Font Awesome icons; retain the icon font only. -->
     <link href="Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="Content/reporting-suite-limitless.css?v=20260916.6" rel="stylesheet" type="text/css" />
+    <link href="Content/reporting-suite-limitless.css?v=20261014.1" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 
     <script src="Content/Template/global_assets/js/main/jquery.min.js"></script>
@@ -188,7 +188,7 @@
     <script src="Content/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
     <script src="Content/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="Content/vendor/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="Scripts/reporting-suite-limitless.js?v=20260916.2"></script>
+    <script src="Scripts/reporting-suite-limitless.js?v=20261014.1"></script>
     <asp:ContentPlaceHolder ID="PageScripts" runat="server" />
 </body>
 </html>

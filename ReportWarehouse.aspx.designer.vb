@@ -19,10 +19,8 @@ Partial Public Class ReportWarehousePage
     Protected WithEvents reportDropDown As Global.System.Web.UI.WebControls.DropDownList
     Protected WithEvents entityTypeDropDown As Global.System.Web.UI.WebControls.DropDownList
     Protected WithEvents statusDropDown As Global.System.Web.UI.WebControls.DropDownList
-    Protected WithEvents yearFromDropDown As Global.System.Web.UI.WebControls.DropDownList
-    Protected WithEvents yearToDropDown As Global.System.Web.UI.WebControls.DropDownList
-    Protected WithEvents quarterFromDropDown As Global.System.Web.UI.WebControls.DropDownList
-    Protected WithEvents quarterToDropDown As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents yearsListBox As Global.System.Web.UI.WebControls.ListBox
+    Protected WithEvents quartersListBox As Global.System.Web.UI.WebControls.ListBox
     Protected WithEvents entitiesListBox As Global.System.Web.UI.WebControls.ListBox
     Protected WithEvents reportColumnsListBox As Global.System.Web.UI.WebControls.ListBox
     Protected WithEvents previewButton As Global.System.Web.UI.WebControls.Button

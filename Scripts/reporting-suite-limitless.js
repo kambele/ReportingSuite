@@ -100,6 +100,58 @@
         });
     }
 
+    function checkboxSelectionSignature(select) {
+        return (select.val() || []).slice().sort().join('|');
+    }
+
+    function renderCheckboxOption(option) {
+        if (!option.id) {
+            return option.text;
+        }
+
+        var content = $('<span class="reporting-checkbox-option"><span class="reporting-checkbox-option-box" aria-hidden="true"></span><span class="reporting-checkbox-option-label"></span></span>');
+        content.find('.reporting-checkbox-option-label').text(option.text);
+        return content;
+    }
+
+    function updateCheckboxFilterStatus(select) {
+        var container = select.closest('.report-checkbox-filter');
+        var selectedCount = select.find('option:selected').filter(function () {
+            return this.value !== '';
+        }).length;
+        var totalCount = select.find('option').filter(function () {
+            return this.value !== '';
+        }).length;
+        var status = container.find('[data-multiselect-count]').first();
+        var label = select.attr('data-selection-label') || 'items';
+        var text;
+
+        if (selectedCount === 0) {
+            text = select.attr('data-empty-label') || 'None selected';
+        } else if (selectedCount === totalCount && totalCount > 0) {
+            text = 'All ' + totalCount + ' ' + label + ' selected';
+        } else {
+            text = selectedCount + ' of ' + totalCount + ' ' + label + ' selected';
+        }
+
+        status.text(text);
+        container.toggleClass('has-selection', selectedCount > 0);
+        container.toggleClass('has-all-selected', totalCount > 0 && selectedCount === totalCount);
+    }
+
+    function postBackCheckboxFilter(select) {
+        if (!select.is('[data-dependent-refresh="true"]') || select.data('reportingPostbackPending')) {
+            return;
+        }
+
+        select.data('reportingPostbackPending', true);
+        window.setTimeout(function () {
+            if (typeof window.__doPostBack === 'function') {
+                window.__doPostBack(select.attr('name'), '');
+            }
+        }, 0);
+    }
+
     function initializeSelects(context) {
         if (!$.fn.select2) {
             return;
@@ -112,11 +164,40 @@
             }
 
             var modal = select.closest('.modal');
-            select.select2({
+            var options = {
                 dropdownAutoWidth: true,
                 dropdownParent: modal.length ? modal : select.parent(),
                 width: '100%'
-            });
+            };
+
+            if (select.is('[data-checkbox-multiselect="true"]')) {
+                if (select.is('[data-dependent-refresh="true"]')) {
+                    select.removeAttr('onchange').prop('onchange', null);
+                }
+                options.closeOnSelect = false;
+                options.placeholder = select.attr('data-placeholder') || 'Tick one or more options';
+                options.templateResult = renderCheckboxOption;
+            }
+
+            select.select2(options);
+
+            if (select.is('[data-checkbox-multiselect="true"]')) {
+                select
+                    .off('.reportingCheckboxFilter')
+                    .on('change.reportingCheckboxFilter', function () {
+                        updateCheckboxFilterStatus(select);
+                    })
+                    .on('select2:open.reportingCheckboxFilter', function () {
+                        select.data('reportingOpenSelection', checkboxSelectionSignature(select));
+                    })
+                    .on('select2:close.reportingCheckboxFilter', function () {
+                        var openedWith = select.data('reportingOpenSelection');
+                        if (typeof openedWith !== 'undefined' && openedWith !== checkboxSelectionSignature(select)) {
+                            postBackCheckboxFilter(select);
+                        }
+                    });
+                updateCheckboxFilterStatus(select);
+            }
         });
     }
 
@@ -226,6 +307,30 @@
 
     function bindLegacyPanelActions() {
         $(document)
+            .off('click.reportingCheckboxFilter', '[data-multiselect-action]')
+            .on('click.reportingCheckboxFilter', '[data-multiselect-action]', function () {
+                var button = $(this);
+                var select = button.closest('.report-checkbox-filter').find('select[data-checkbox-multiselect="true"]').first();
+                if (!select.length || select.prop('disabled')) {
+                    return;
+                }
+
+                var before = checkboxSelectionSignature(select);
+                if (button.attr('data-multiselect-action') === 'select-all') {
+                    select.val(select.find('option').filter(function () {
+                        return this.value !== '';
+                    }).map(function () {
+                        return this.value;
+                    }).get());
+                } else {
+                    select.val(null);
+                }
+                select.trigger('change');
+
+                if (before !== checkboxSelectionSignature(select)) {
+                    postBackCheckboxFilter(select);
+                }
+            })
             .off('click.reportingCollapse', '.collapse-link')
             .on('click.reportingCollapse', '.collapse-link', function (event) {
                 event.preventDefault();

@@ -264,7 +264,7 @@ Public NotInheritable Class ACoAReportWarehouseService
             EnsureWarehouseSchema(connection)
             Using command As New SqlCommand(
                 "SELECT TOP (@MaximumRows) LoadBatchID, StartedAtUtc, CompletedAtUtc, LoadStatus, " &
-                "ReportID, YearFrom, YearTo, QuarterFrom, QuarterTo, [Status], " &
+                "ReportID, YearFrom, YearTo, YearSelection, QuarterFrom, QuarterTo, QuarterSelection, [Status], " &
                 "ExtractedRowCount, LoadedRowCount, SkippedNullValueRowCount, RequestedBy " &
                 "FROM [etl].[ACoAReportLoadBatch] ORDER BY LoadBatchID DESC", connection)
                 command.Parameters.Add("@MaximumRows", SqlDbType.Int).Value = Math.Max(1, Math.Min(maximumRows, 100))

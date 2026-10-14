@@ -105,10 +105,12 @@ Public Class ReportWarehousePage
     Private Sub PopulateParameterControls()
         Dim selectedGroup As String = entityTypeDropDown.SelectedValue
         Dim selectedReport As String = reportDropDown.SelectedValue
-        Dim selectedYearFrom As String = yearFromDropDown.SelectedValue
-        Dim selectedYearTo As String = yearToDropDown.SelectedValue
-        Dim selectedQuarterFrom As String = quarterFromDropDown.SelectedValue
-        Dim selectedQuarterTo As String = quarterToDropDown.SelectedValue
+        Dim selectedYears As List(Of String) = CaptureSelectedValues(yearsListBox)
+        Dim selectedQuarters As List(Of String) = CaptureSelectedValues(quartersListBox)
+        Dim requestedYearFrom As String = String.Empty
+        Dim requestedYearTo As String = String.Empty
+        Dim requestedQuarterFrom As String = String.Empty
+        Dim requestedQuarterTo As String = String.Empty
         Dim selectedStatus As String = statusDropDown.SelectedValue
         Dim selectedEntities As List(Of String) = CaptureSelectedValues(entitiesListBox)
         Dim selectedColumns As List(Of String) = CaptureSelectedValues(reportColumnsListBox)
@@ -116,10 +118,12 @@ Public Class ReportWarehousePage
         If Not IsPostBack Then
             selectedGroup = FirstQueryStringValue("entity_type")
             selectedReport = FirstQueryStringValue("Report_id", "report_id")
-            selectedYearFrom = FirstQueryStringValue("year_from")
-            selectedYearTo = FirstQueryStringValue("year_to")
-            selectedQuarterFrom = FirstQueryStringValue("quarter_from")
-            selectedQuarterTo = FirstQueryStringValue("quarter_to")
+            selectedYears = SplitCsv(FirstQueryStringValue("year", "years"))
+            selectedQuarters = SplitCsv(FirstQueryStringValue("quarter", "quarters"))
+            requestedYearFrom = FirstQueryStringValue("year_from")
+            requestedYearTo = FirstQueryStringValue("year_to")
+            requestedQuarterFrom = FirstQueryStringValue("quarter_from")
+            requestedQuarterTo = FirstQueryStringValue("quarter_to")
             selectedStatus = FirstQueryStringValue("status")
             selectedEntities = SplitCsv(FirstQueryStringValue("entities"))
             selectedColumns = SplitCsv(FirstQueryStringValue("ReportColumnID", "ReportColumns"))
@@ -150,31 +154,28 @@ Public Class ReportWarehousePage
         EnsureFirstNonEmptySelection(reportDropDown)
 
         Dim yearOptions As DataTable = ACoAReportWarehouseService.ExecuteSourceProcedure(YearsProcedure)
-        PopulateRangeDropDown(yearFromDropDown, yearOptions, "Year", "Year")
-        PopulateRangeDropDown(yearToDropDown, yearOptions, "Year", "Year")
-        If Not IsPostBack AndAlso String.IsNullOrWhiteSpace(selectedYearFrom) AndAlso
-           String.IsNullOrWhiteSpace(selectedYearTo) Then
-            selectedYearFrom = FindExtremeNumericValue(yearFromDropDown, True)
-            selectedYearTo = selectedYearFrom
+        yearsListBox.Items.Clear()
+        AddOptions(yearsListBox, yearOptions, New String() {"Year"}, New String() {"Year"})
+        ApplySelections(yearsListBox, selectedYears)
+        If Not IsPostBack AndAlso Not HasSelection(yearsListBox) Then
+            ApplyInclusiveRangeSelection(yearsListBox, requestedYearFrom, requestedYearTo)
         End If
-        SelectValue(yearFromDropDown, selectedYearFrom)
-        SelectValue(yearToDropDown, selectedYearTo)
-        EnsureFirstNonEmptySelection(yearFromDropDown)
-        EnsureFirstNonEmptySelection(yearToDropDown)
+        If Not IsPostBack AndAlso Not HasSelection(yearsListBox) Then
+            SelectExtremeNumericValue(yearsListBox, True)
+        End If
+        yearsListBox.Enabled = yearsListBox.Items.Count > 0
 
         Dim quarterOptions As DataTable = ACoAReportWarehouseService.ExecuteSourceProcedure(QuartersProcedure)
-        PopulateRangeDropDown(quarterFromDropDown, quarterOptions, "QuarterID", "Quarter")
-        PopulateRangeDropDown(quarterToDropDown, quarterOptions, "QuarterID", "Quarter")
-        If Not IsPostBack AndAlso String.IsNullOrWhiteSpace(selectedQuarterFrom) Then
-            selectedQuarterFrom = FindExtremeNumericValue(quarterFromDropDown, False)
+        quartersListBox.Items.Clear()
+        AddOptions(quartersListBox, quarterOptions, New String() {"QuarterID"}, New String() {"Quarter"})
+        ApplySelections(quartersListBox, selectedQuarters)
+        If Not IsPostBack AndAlso Not HasSelection(quartersListBox) Then
+            ApplyInclusiveRangeSelection(quartersListBox, requestedQuarterFrom, requestedQuarterTo)
         End If
-        If Not IsPostBack AndAlso String.IsNullOrWhiteSpace(selectedQuarterTo) Then
-            selectedQuarterTo = FindExtremeNumericValue(quarterToDropDown, True)
+        If Not IsPostBack AndAlso Not HasSelection(quartersListBox) Then
+            SelectAllValues(quartersListBox)
         End If
-        SelectValue(quarterFromDropDown, selectedQuarterFrom)
-        SelectValue(quarterToDropDown, selectedQuarterTo)
-        EnsureFirstNonEmptySelection(quarterFromDropDown)
-        EnsureFirstNonEmptySelection(quarterToDropDown)
+        quartersListBox.Enabled = quartersListBox.Items.Count > 0
 
         SelectValue(statusDropDown, selectedStatus)
         PopulateReportColumns(selectedColumns)
@@ -209,8 +210,8 @@ Public Class ReportWarehousePage
             Return
         End If
 
-        Dim years As String = BuildInclusiveRangeCsv(yearFromDropDown, yearToDropDown)
-        Dim quarters As String = BuildInclusiveRangeCsv(quarterFromDropDown, quarterToDropDown)
+        Dim years As String = BuildSelectedValuesCsv(yearsListBox, False)
+        Dim quarters As String = BuildSelectedValuesCsv(quartersListBox, False)
         If String.IsNullOrWhiteSpace(years) OrElse String.IsNullOrWhiteSpace(quarters) Then
             entitiesListBox.Enabled = False
             Return
@@ -243,16 +244,8 @@ Public Class ReportWarehousePage
 
     Private Function BuildRequest() As ACoAReportWarehouseRequest
         Dim reportId As Long = ParseRequiredLong(reportDropDown, "report")
-        Dim yearFrom As Integer = CInt(ParseRequiredLong(yearFromDropDown, "year from"))
-        Dim yearTo As Integer = CInt(ParseRequiredLong(yearToDropDown, "year to"))
-        Dim quarterFrom As Long = ParseRequiredLong(quarterFromDropDown, "quarter from")
-        Dim quarterTo As Long = ParseRequiredLong(quarterToDropDown, "quarter to")
-        If yearTo < yearFrom Then
-            Throw New InvalidOperationException("Year to must be greater than or equal to year from.")
-        End If
-        If quarterTo < quarterFrom Then
-            Throw New InvalidOperationException("Quarter to must be greater than or equal to quarter from.")
-        End If
+        Dim years As List(Of Long) = GetSelectedNumericValues(yearsListBox, "at least one year")
+        Dim quarters As List(Of Long) = GetSelectedNumericValues(quartersListBox, "at least one quarter")
         If String.IsNullOrWhiteSpace(entityTypeDropDown.SelectedValue) Then
             Throw New InvalidOperationException("Select an entity type.")
         End If
@@ -265,12 +258,12 @@ Public Class ReportWarehousePage
 
         Return New ACoAReportWarehouseRequest With {
             .ReportId = reportId,
-            .YearFrom = yearFrom,
-            .YearTo = yearTo,
-            .YearCsv = BuildInclusiveRangeCsv(yearFromDropDown, yearToDropDown),
-            .QuarterFrom = quarterFrom,
-            .QuarterTo = quarterTo,
-            .QuarterCsv = BuildInclusiveRangeCsv(quarterFromDropDown, quarterToDropDown),
+            .YearFrom = CInt(years.Min()),
+            .YearTo = CInt(years.Max()),
+            .YearCsv = String.Join(",", years.Select(Function(value) value.ToString(CultureInfo.InvariantCulture))),
+            .QuarterFrom = quarters.Min(),
+            .QuarterTo = quarters.Max(),
+            .QuarterCsv = String.Join(",", quarters.Select(Function(value) value.ToString(CultureInfo.InvariantCulture))),
             .EntityType = entityTypeDropDown.SelectedValue,
             .EntitiesCsv = BuildSelectedValuesCsv(entitiesListBox, False),
             .Status = status,
@@ -339,20 +332,14 @@ Public Class ReportWarehousePage
                                        "No report", reportDropDown.SelectedItem.Text)
         Return "<span class=""badge badge-light"">" & HttpUtility.HtmlEncode(reportLabel) & "</span> " &
                "<span class=""badge badge-light"">" &
-               HttpUtility.HtmlEncode(yearFromDropDown.SelectedValue & "–" & yearToDropDown.SelectedValue) & "</span> " &
+               HttpUtility.HtmlEncode(BuildSelectionLabel(yearsListBox, "No years")) & "</span> " &
+               "<span class=""badge badge-light"">" &
+               HttpUtility.HtmlEncode(BuildSelectionLabel(quartersListBox, "No quarters")) & "</span> " &
                "<span class=""badge badge-light"">" &
                If(entityCount = 0, "All entities", entityCount.ToString(CultureInfo.CurrentCulture) & " entities") & "</span> " &
                "<span class=""badge badge-light"">" &
                If(columnCount = 0, "All columns", columnCount.ToString(CultureInfo.CurrentCulture) & " columns") & "</span>"
     End Function
-
-    Private Shared Sub PopulateRangeDropDown(ByVal control As DropDownList,
-                                             ByVal options As DataTable,
-                                             ByVal valueColumnName As String,
-                                             ByVal labelColumnName As String)
-        control.Items.Clear()
-        AddOptions(control, options, New String() {valueColumnName}, New String() {labelColumnName})
-    End Sub
 
     Private Shared Sub AddOptions(ByVal control As ListControl,
                                   ByVal options As DataTable,
@@ -415,21 +402,23 @@ Public Class ReportWarehousePage
         Next
     End Sub
 
-    Private Shared Function FindExtremeNumericValue(ByVal control As ListControl, ByVal findHighest As Boolean) As String
+    Private Shared Sub SelectExtremeNumericValue(ByVal control As ListControl, ByVal findHighest As Boolean)
         Dim extreme As Decimal
-        Dim extremeValue As String = String.Empty
+        Dim extremeItem As ListItem = Nothing
         Dim hasValue As Boolean
         For Each item As ListItem In control.Items
             Dim number As Decimal
             If Decimal.TryParse(item.Value, NumberStyles.Number, CultureInfo.InvariantCulture, number) AndAlso
                (Not hasValue OrElse (findHighest AndAlso number > extreme) OrElse (Not findHighest AndAlso number < extreme)) Then
                 extreme = number
-                extremeValue = item.Value
+                extremeItem = item
                 hasValue = True
             End If
         Next
-        Return extremeValue
-    End Function
+        If extremeItem IsNot Nothing Then
+            extremeItem.Selected = True
+        End If
+    End Sub
 
     Private Shared Function CaptureSelectedValues(ByVal control As ListControl) As List(Of String)
         Return control.Items.Cast(Of ListItem)().
@@ -468,25 +457,75 @@ Public Class ReportWarehousePage
         Return String.Join(",", values)
     End Function
 
-    Private Shared Function BuildInclusiveRangeCsv(ByVal fromControl As ListControl,
-                                                   ByVal toControl As ListControl) As String
-        Dim fromNumber As Decimal
-        Dim toNumber As Decimal
-        If Not Decimal.TryParse(fromControl.SelectedValue, NumberStyles.Number,
-                                CultureInfo.InvariantCulture, fromNumber) OrElse
-           Not Decimal.TryParse(toControl.SelectedValue, NumberStyles.Number,
-                                CultureInfo.InvariantCulture, toNumber) Then
-            Return String.Empty
+    Private Shared Sub ApplyInclusiveRangeSelection(ByVal control As ListControl,
+                                                    ByVal fromValue As String,
+                                                    ByVal toValue As String)
+        If String.IsNullOrWhiteSpace(fromValue) AndAlso String.IsNullOrWhiteSpace(toValue) Then
+            Return
         End If
 
-        Return String.Join(",", fromControl.Items.Cast(Of ListItem)().
-            Where(Function(item)
-                      Dim number As Decimal
-                      Return Decimal.TryParse(item.Value, NumberStyles.Number,
-                                              CultureInfo.InvariantCulture, number) AndAlso
-                             number >= fromNumber AndAlso number <= toNumber
-                  End Function).
-            Select(Function(item) item.Value))
+        Dim fromNumber As Decimal
+        Dim toNumber As Decimal
+        If Not Decimal.TryParse(If(String.IsNullOrWhiteSpace(fromValue), toValue, fromValue),
+                                NumberStyles.Number, CultureInfo.InvariantCulture, fromNumber) OrElse
+           Not Decimal.TryParse(If(String.IsNullOrWhiteSpace(toValue), fromValue, toValue),
+                                NumberStyles.Number, CultureInfo.InvariantCulture, toNumber) Then
+            Return
+        End If
+
+        Dim lowerBound As Decimal = Math.Min(fromNumber, toNumber)
+        Dim upperBound As Decimal = Math.Max(fromNumber, toNumber)
+        For Each item As ListItem In control.Items
+            Dim number As Decimal
+            item.Selected = Decimal.TryParse(item.Value, NumberStyles.Number,
+                                             CultureInfo.InvariantCulture, number) AndAlso
+                            number >= lowerBound AndAlso number <= upperBound
+        Next
+    End Sub
+
+    Private Shared Sub SelectAllValues(ByVal control As ListControl)
+        For Each item As ListItem In control.Items
+            item.Selected = Not String.IsNullOrWhiteSpace(item.Value)
+        Next
+    End Sub
+
+    Private Shared Function HasSelection(ByVal control As ListControl) As Boolean
+        Return control.Items.Cast(Of ListItem)().Any(Function(item) item.Selected)
+    End Function
+
+    Private Shared Function GetSelectedNumericValues(ByVal control As ListControl,
+                                                     ByVal label As String) As List(Of Long)
+        Dim values As New List(Of Long)()
+        For Each item As ListItem In control.Items
+            If Not item.Selected Then
+                Continue For
+            End If
+
+            Dim value As Long
+            If Long.TryParse(item.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, value) Then
+                values.Add(value)
+            End If
+        Next
+
+        values = values.Distinct().OrderBy(Function(value) value).ToList()
+        If values.Count = 0 Then
+            Throw New InvalidOperationException("Select " & label & ".")
+        End If
+        Return values
+    End Function
+
+    Private Shared Function BuildSelectionLabel(ByVal control As ListControl,
+                                                ByVal emptyLabel As String) As String
+        Dim labels As List(Of String) = control.Items.Cast(Of ListItem)().
+            Where(Function(item) item.Selected).
+            Select(Function(item) item.Text).ToList()
+        If labels.Count = 0 Then
+            Return emptyLabel
+        End If
+        If labels.Count <= 4 Then
+            Return String.Join(", ", labels)
+        End If
+        Return labels.Count.ToString(CultureInfo.CurrentCulture) & " selected"
     End Function
 
     Private Shared Function ParseRequiredLong(ByVal control As ListControl, ByVal label As String) As Long

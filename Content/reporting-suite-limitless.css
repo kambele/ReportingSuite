@@ -1242,6 +1242,100 @@ textarea.input-validation-error,
     min-height: 5.3rem;
 }
 
+.report-checkbox-filter {
+    background: #fff;
+    border: 1px solid #d7dce5;
+    border-radius: 0.2rem;
+    overflow: visible;
+    padding: 0.4rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.report-checkbox-filter:focus-within {
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.12);
+}
+
+.report-checkbox-filter-toolbar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.4rem;
+}
+
+.report-checkbox-filter-toolbar .btn {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.45rem;
+}
+
+.report-checkbox-filter-count {
+    color: #6b778c;
+    font-size: 0.7rem;
+    margin-left: auto;
+    text-align: right;
+}
+
+.report-checkbox-filter.has-all-selected .report-checkbox-filter-count {
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.report-checkbox-filter > .select2-container {
+    display: block;
+    width: 100% !important;
+}
+
+.report-checkbox-filter .select2-selection--multiple {
+    border-color: #e1e5eb;
+    min-height: 2.65rem;
+}
+
+.report-parameter-entities .report-checkbox-filter .select2-selection--multiple {
+    min-height: 4.4rem;
+}
+
+.report-checkbox-filter .select2-dropdown {
+    min-width: 100%;
+}
+
+.reporting-checkbox-option {
+    align-items: flex-start;
+    display: flex;
+    gap: 0.55rem;
+    line-height: 1.35;
+}
+
+.reporting-checkbox-option-box {
+    align-items: center;
+    background: #fff;
+    border: 1px solid #aeb7c4;
+    border-radius: 0.15rem;
+    color: #fff;
+    display: inline-flex;
+    flex: 0 0 1rem;
+    height: 1rem;
+    justify-content: center;
+    margin-top: 0.05rem;
+    width: 1rem;
+}
+
+.select2-results__option[aria-selected="true"] .reporting-checkbox-option-box {
+    background: #2196f3;
+    border-color: #2196f3;
+}
+
+.select2-results__option[aria-selected="true"] .reporting-checkbox-option-box::after {
+    content: "\2713";
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.select2-results__option--highlighted .reporting-checkbox-option-box {
+    border-color: currentColor;
+}
+
 .report-parameter-actions {
     display: flex;
     gap: 0.5rem;

@@ -56,26 +56,47 @@
                         <asp:ListItem Text="Approved and pending approval" Value="3" />
                     </asp:DropDownList>
                 </div>
-                <div class="form-group">
-                    <label for="<%= yearFromDropDown.ClientID %>">Year from <span class="text-danger">*</span></label>
-                    <asp:DropDownList ID="yearFromDropDown" runat="server" CssClass="form-control" AutoPostBack="true" />
+                <div class="form-group report-parameter-period">
+                    <label for="<%= yearsListBox.ClientID %>">Years <span class="text-danger">*</span></label>
+                    <div class="report-checkbox-filter">
+                        <div class="report-checkbox-filter-toolbar" role="group" aria-label="Year selection actions">
+                            <button type="button" class="btn btn-light btn-sm" data-multiselect-action="select-all"><i class="icon-checkbox-checked2 mr-1" aria-hidden="true"></i>Select all</button>
+                            <button type="button" class="btn btn-light btn-sm" data-multiselect-action="clear-all"><i class="icon-checkbox-unchecked2 mr-1" aria-hidden="true"></i>Untick all</button>
+                            <span class="report-checkbox-filter-count" data-multiselect-count aria-live="polite"></span>
+                        </div>
+                        <asp:ListBox ID="yearsListBox" runat="server" CssClass="form-control" SelectionMode="Multiple" Rows="6" AutoPostBack="true"
+                            data-checkbox-multiselect="true" data-dependent-refresh="true" data-selection-label="years"
+                            data-empty-label="No years selected" data-placeholder="Tick one or more years" />
+                    </div>
+                    <small class="form-text text-muted">Tick one or more reporting years.</small>
                 </div>
-                <div class="form-group">
-                    <label for="<%= yearToDropDown.ClientID %>">Year to <span class="text-danger">*</span></label>
-                    <asp:DropDownList ID="yearToDropDown" runat="server" CssClass="form-control" AutoPostBack="true" />
-                </div>
-                <div class="form-group">
-                    <label for="<%= quarterFromDropDown.ClientID %>">Quarter from <span class="text-danger">*</span></label>
-                    <asp:DropDownList ID="quarterFromDropDown" runat="server" CssClass="form-control" AutoPostBack="true" />
-                </div>
-                <div class="form-group">
-                    <label for="<%= quarterToDropDown.ClientID %>">Quarter to <span class="text-danger">*</span></label>
-                    <asp:DropDownList ID="quarterToDropDown" runat="server" CssClass="form-control" AutoPostBack="true" />
+                <div class="form-group report-parameter-period">
+                    <label for="<%= quartersListBox.ClientID %>">Quarters <span class="text-danger">*</span></label>
+                    <div class="report-checkbox-filter">
+                        <div class="report-checkbox-filter-toolbar" role="group" aria-label="Quarter selection actions">
+                            <button type="button" class="btn btn-light btn-sm" data-multiselect-action="select-all"><i class="icon-checkbox-checked2 mr-1" aria-hidden="true"></i>Select all</button>
+                            <button type="button" class="btn btn-light btn-sm" data-multiselect-action="clear-all"><i class="icon-checkbox-unchecked2 mr-1" aria-hidden="true"></i>Untick all</button>
+                            <span class="report-checkbox-filter-count" data-multiselect-count aria-live="polite"></span>
+                        </div>
+                        <asp:ListBox ID="quartersListBox" runat="server" CssClass="form-control" SelectionMode="Multiple" Rows="4" AutoPostBack="true"
+                            data-checkbox-multiselect="true" data-dependent-refresh="true" data-selection-label="quarters"
+                            data-empty-label="No quarters selected" data-placeholder="Tick one or more quarters" />
+                    </div>
+                    <small class="form-text text-muted">Tick any combination of quarters.</small>
                 </div>
                 <div class="form-group report-parameter-entities">
                     <label for="<%= entitiesListBox.ClientID %>">Entities</label>
-                    <asp:ListBox ID="entitiesListBox" runat="server" CssClass="form-control" SelectionMode="Multiple" Rows="6" />
-                    <small class="form-text text-muted">Leave empty to warehouse all eligible entities in the selected entity type and period.</small>
+                    <div class="report-checkbox-filter">
+                        <div class="report-checkbox-filter-toolbar" role="group" aria-label="Entity selection actions">
+                            <button type="button" class="btn btn-light btn-sm" data-multiselect-action="select-all"><i class="icon-checkbox-checked2 mr-1" aria-hidden="true"></i>Select all</button>
+                            <button type="button" class="btn btn-light btn-sm" data-multiselect-action="clear-all"><i class="icon-checkbox-unchecked2 mr-1" aria-hidden="true"></i>Untick all</button>
+                            <span class="report-checkbox-filter-count" data-multiselect-count aria-live="polite"></span>
+                        </div>
+                        <asp:ListBox ID="entitiesListBox" runat="server" CssClass="form-control" SelectionMode="Multiple" Rows="6"
+                            data-checkbox-multiselect="true" data-selection-label="entities"
+                            data-empty-label="All eligible entities" data-placeholder="Tick entities or leave empty for all" />
+                    </div>
+                    <small class="form-text text-muted">No entities ticked means all eligible entities in the selected type and period.</small>
                 </div>
                 <div class="form-group report-parameter-columns">
                     <label for="<%= reportColumnsListBox.ClientID %>">Report columns</label>
@@ -107,10 +128,8 @@
                             <asp:BoundField DataField="StartedAtUtc" HeaderText="Started" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}" />
                             <asp:BoundField DataField="LoadStatus" HeaderText="Status" />
                             <asp:BoundField DataField="ReportID" HeaderText="Report" />
-                            <asp:BoundField DataField="YearFrom" HeaderText="Year from" />
-                            <asp:BoundField DataField="YearTo" HeaderText="Year to" />
-                            <asp:BoundField DataField="QuarterFrom" HeaderText="Q from" />
-                            <asp:BoundField DataField="QuarterTo" HeaderText="Q to" />
+                            <asp:BoundField DataField="YearSelection" HeaderText="Years" />
+                            <asp:BoundField DataField="QuarterSelection" HeaderText="Quarters" />
                             <asp:BoundField DataField="ExtractedRowCount" HeaderText="Extracted" DataFormatString="{0:N0}" />
                             <asp:BoundField DataField="LoadedRowCount" HeaderText="Loaded" DataFormatString="{0:N0}" />
                             <asp:BoundField DataField="SkippedNullValueRowCount" HeaderText="Skipped null" DataFormatString="{0:N0}" />
