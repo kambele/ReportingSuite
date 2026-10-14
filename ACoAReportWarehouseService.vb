@@ -213,6 +213,7 @@ Public NotInheritable Class ACoAReportWarehouseService
                     "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'ExtractedRowCount') IS NOT NULL " &
                     "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'LoadedRowCount') IS NOT NULL " &
                     "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'SkippedNullValueRowCount') IS NOT NULL " &
+                    "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'RowCount') IS NOT NULL " &
                     "THEN 1 ELSE 0 END", connection)
                     health.IsSchemaReady = Convert.ToInt32(command.ExecuteScalar(), CultureInfo.InvariantCulture) = 1
                 End Using
@@ -358,6 +359,7 @@ Public NotInheritable Class ACoAReportWarehouseService
             "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'ExtractedRowCount') IS NOT NULL " &
             "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'LoadedRowCount') IS NOT NULL " &
             "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'SkippedNullValueRowCount') IS NOT NULL " &
+            "AND COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'RowCount') IS NOT NULL " &
             "THEN 1 ELSE 0 END", connection)
             If Convert.ToInt32(command.ExecuteScalar(), CultureInfo.InvariantCulture) <> 1 Then
                 Throw New InvalidOperationException(
@@ -433,11 +435,11 @@ Public NotInheritable Class ACoAReportWarehouseService
                                          ByVal completedAtUtc As DateTime,
                                          ByVal durationMilliseconds As Long)
         Using command As New SqlCommand(
-            "UPDATE [etl].[ACoAReportLoadBatch] SET LoadStatus = 'Completed', CompletedAtUtc = @CompletedAtUtc, " &
-            "ExtractedRowCount = @ExtractedRowCount, LoadedRowCount = @LoadedRowCount, " &
-            "SkippedNullValueRowCount = @SkippedNullValueRowCount, RowCount = @LoadedRowCount, " &
-            "DurationMilliseconds = @DurationMilliseconds, ErrorMessage = NULL " &
-            "WHERE LoadBatchID = @LoadBatchID", connection, transaction)
+            "UPDATE [etl].[ACoAReportLoadBatch] SET [LoadStatus] = 'Completed', [CompletedAtUtc] = @CompletedAtUtc, " &
+            "[ExtractedRowCount] = @ExtractedRowCount, [LoadedRowCount] = @LoadedRowCount, " &
+            "[SkippedNullValueRowCount] = @SkippedNullValueRowCount, [RowCount] = @LoadedRowCount, " &
+            "[DurationMilliseconds] = @DurationMilliseconds, [ErrorMessage] = NULL " &
+            "WHERE [LoadBatchID] = @LoadBatchID", connection, transaction)
             command.Parameters.Add("@CompletedAtUtc", SqlDbType.DateTime2).Value = completedAtUtc
             command.Parameters.Add("@ExtractedRowCount", SqlDbType.Int).Value = extractedRowCount
             command.Parameters.Add("@LoadedRowCount", SqlDbType.Int).Value = loadedRowCount

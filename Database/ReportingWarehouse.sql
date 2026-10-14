@@ -63,6 +63,8 @@ IF COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'LoadedRowCount') IS NULL
     ALTER TABLE [etl].[ACoAReportLoadBatch] ADD [LoadedRowCount] int NULL;
 IF COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'SkippedNullValueRowCount') IS NULL
     ALTER TABLE [etl].[ACoAReportLoadBatch] ADD [SkippedNullValueRowCount] int NULL;
+IF COL_LENGTH(N'[etl].[ACoAReportLoadBatch]', N'RowCount') IS NULL
+    ALTER TABLE [etl].[ACoAReportLoadBatch] ADD [RowCount] int NULL;
 GO
 
 IF OBJECT_ID(N'[dw].[FactACoAReportSnapshot]', N'U') IS NULL
