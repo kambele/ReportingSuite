@@ -81,14 +81,19 @@
             Return
         End If
 
-        ConfigureNativeReportLink(openNativeSsrsLink1, reportServerUrl1, report)
-        ConfigureNativeReportLink(openNativeSsrsLink2, reportServerUrl2, report)
+        Dim nativeReportUrl1 As String = Nothing
+        Dim nativeReportUrl2 As String = Nothing
 
-        If Not String.IsNullOrWhiteSpace(reportServerUrl1) Then
-            Dim nativeReportUrl As String = BuildNativeReportUrl(reportServerUrl1, report)
-            nativeSsrsFrameLiteral.Text = "<iframe class=""report-native-frame"" title=""Native SSRS Report"" src=""" & System.Web.HttpUtility.HtmlAttributeEncode(nativeReportUrl) & """></iframe>"
+        ConfigureNativeReportLink(openNativeSsrsLink1, reportServerUrl1, report, nativeReportUrl1)
+        ConfigureNativeReportLink(openNativeSsrsLink2, reportServerUrl2, report, nativeReportUrl2)
+
+        Dim embeddedReportUrl As String = SelectEmbeddedReportUrl(nativeReportUrl1, nativeReportUrl2)
+        If Not String.IsNullOrWhiteSpace(embeddedReportUrl) Then
+            nativeSsrsFrameLiteral.Text = BuildNativeReportFrame(embeddedReportUrl)
+        ElseIf IsMixedContentUrl(nativeReportUrl1) OrElse IsMixedContentUrl(nativeReportUrl2) Then
+            ShowEmbeddingMessage("The report cannot be embedded because Reporting Suite is using HTTPS while the configured SSRS endpoint is using HTTP. Open the report in Native SSRS, or configure the SSRS URL with HTTPS.")
         Else
-            nativeSsrsFrameLiteral.Visible = False
+            ShowEmbeddingMessage("No valid SSRS report server URL is configured. Review ReportServer1 and ReportServer2 in Web.config.")
         End If
     End Sub
 
@@ -106,28 +111,110 @@
         Return System.Configuration.ConfigurationManager.AppSettings(key)
     End Function
 
-    Private Sub ConfigureNativeReportLink(ByVal link As System.Web.UI.WebControls.HyperLink, ByVal reportServerUrl As String, ByVal reportPath As String)
-        If String.IsNullOrWhiteSpace(reportServerUrl) Then
+    Private Sub ConfigureNativeReportLink(ByVal link As System.Web.UI.WebControls.HyperLink,
+                                          ByVal reportServerUrl As String,
+                                          ByVal reportPath As String,
+                                          ByRef nativeReportUrl As String)
+        If Not TryBuildNativeReportUrl(reportServerUrl, reportPath, nativeReportUrl) Then
             link.Visible = False
             Return
         End If
 
-        link.NavigateUrl = BuildNativeReportUrl(reportServerUrl, reportPath)
+        link.NavigateUrl = nativeReportUrl
         link.Attributes("rel") = "noopener"
     End Sub
 
-    Private Shared Function BuildNativeReportUrl(ByVal reportServerUrl As String, ByVal reportPath As String) As String
-        Dim cleanReportPath As String = reportPath.Trim().TrimStart("/"c)
+    Private Shared Function TryBuildNativeReportUrl(ByVal reportServerUrl As String,
+                                                    ByVal reportPath As String,
+                                                    ByRef nativeReportUrl As String) As Boolean
+        nativeReportUrl = Nothing
+
+        Dim reportServerUri As Uri = Nothing
+        If String.IsNullOrWhiteSpace(reportServerUrl) OrElse
+           Not Uri.TryCreate(reportServerUrl.Trim(), UriKind.Absolute, reportServerUri) OrElse
+           (Not reportServerUri.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) AndAlso
+            Not reportServerUri.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)) Then
+            Return False
+        End If
+
+        Dim cleanReportPath As String = Convert.ToString(reportPath).Trim().TrimStart("/"c)
+        If String.IsNullOrWhiteSpace(cleanReportPath) Then
+            Return False
+        End If
+
         Dim encodedSegments As New List(Of String)
 
         For Each segment As String In cleanReportPath.Split("/"c)
             If Not String.IsNullOrWhiteSpace(segment) Then
-                encodedSegments.Add(System.Web.HttpUtility.UrlEncode(segment))
+                encodedSegments.Add(System.Web.HttpUtility.UrlEncode(segment).Replace("+", "%20"))
             End If
         Next
 
-        Return reportServerUrl.TrimEnd("/"c) & "/Pages/ReportViewer.aspx?%2f" & String.Join("%2f", encodedSegments) & "&rs:Command=Render"
+        If encodedSegments.Count = 0 Then
+            Return False
+        End If
+
+        ' SSRS URL access executes reports directly from the ReportServer endpoint.
+        ' /Pages/ReportViewer.aspx belongs to the web portal and is not below /ReportServer.
+        Dim reportServerEndpoint As String = reportServerUri.GetLeftPart(UriPartial.Path).TrimEnd("/"c)
+        nativeReportUrl = reportServerEndpoint & "?%2F" & String.Join("%2F", encodedSegments) &
+                          "&rs:Command=Render&rs:Embed=true&rc:Toolbar=true"
+        Return True
     End Function
+
+    Private Function SelectEmbeddedReportUrl(ByVal primaryUrl As String, ByVal secondaryUrl As String) As String
+        If Not String.IsNullOrWhiteSpace(primaryUrl) AndAlso Not IsMixedContentUrl(primaryUrl) Then
+            Return primaryUrl
+        End If
+
+        If Not String.IsNullOrWhiteSpace(secondaryUrl) AndAlso Not IsMixedContentUrl(secondaryUrl) Then
+            Return secondaryUrl
+        End If
+
+        Return Nothing
+    End Function
+
+    Private Function IsMixedContentUrl(ByVal value As String) As Boolean
+        If String.IsNullOrWhiteSpace(value) OrElse Not IsSecurePageRequest() Then
+            Return False
+        End If
+
+        Dim targetUri As Uri = Nothing
+        Return Uri.TryCreate(value, UriKind.Absolute, targetUri) AndAlso
+               targetUri.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    Private Function IsSecurePageRequest() As Boolean
+        If Request.IsSecureConnection Then
+            Return True
+        End If
+
+        Dim forwardedProtocol As String = Convert.ToString(Request.Headers("X-Forwarded-Proto"))
+        If String.IsNullOrWhiteSpace(forwardedProtocol) Then
+            Return False
+        End If
+
+        Return forwardedProtocol.Split(","c)(0).Trim().Equals("https", StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    Private Shared Function BuildNativeReportFrame(ByVal nativeReportUrl As String) As String
+        Dim encodedUrl As String = System.Web.HttpUtility.HtmlAttributeEncode(nativeReportUrl)
+        Return "<div class=""report-native-frame-host"" data-ssrs-frame-host>" &
+               "<div class=""report-native-loading"" data-ssrs-loading role=""status"" aria-live=""polite"">" &
+               "<i class=""icon-spinner2 spinner mr-2"" aria-hidden=""true""></i>" &
+               "<span data-ssrs-loading-text>Connecting to SSRS and loading the report...</span></div>" &
+               "<iframe id=""native-ssrs-frame"" class=""report-native-frame"" title=""Native SSRS report"" src=""" & encodedUrl & """ onload=""this.parentNode.classList.add('is-loaded');"" allowfullscreen></iframe>" &
+               "<div class=""alert alert-warning report-native-frame-warning"" data-ssrs-warning role=""alert"" hidden>" &
+               "<i class=""icon-warning22 mr-2"" aria-hidden=""true""></i>" &
+               "SSRS did not finish loading in this window. Use a Native SSRS button above; if the native page works, check SSRS iframe policy, Windows authentication, and HTTPS configuration." &
+               "</div></div>"
+    End Function
+
+    Private Sub ShowEmbeddingMessage(ByVal message As String)
+        nativeReportMessage.Visible = True
+        reportStatusMessage.Text = Server.HtmlEncode(message)
+        nativeSsrsFrameLiteral.Visible = False
+    End Sub
 
     Private Sub ShowReportMessage(ByVal message As String)
         nativeReportMessage.Visible = True

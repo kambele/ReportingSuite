@@ -20,3 +20,45 @@
         <asp:Literal ID="nativeSsrsFrameLiteral" runat="server" />
     </section>
 </asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="PageScripts" runat="server">
+    <script type="text/javascript">
+        (function () {
+            var host = document.querySelector('[data-ssrs-frame-host]');
+            if (!host) {
+                return;
+            }
+
+            var frame = host.querySelector('.report-native-frame');
+            var loadingText = host.querySelector('[data-ssrs-loading-text]');
+            var warning = host.querySelector('[data-ssrs-warning]');
+            var loadCompleted = false;
+
+            function finishLoading() {
+                loadCompleted = true;
+                host.classList.add('is-loaded');
+            }
+
+            function showLoadWarning() {
+                if (loadCompleted || host.classList.contains('is-loaded')) {
+                    return;
+                }
+
+                host.classList.add('is-waiting');
+                if (loadingText) {
+                    loadingText.textContent = 'SSRS is taking longer than expected to respond...';
+                }
+                if (warning) {
+                    warning.hidden = false;
+                }
+            }
+
+            if (frame) {
+                frame.addEventListener('load', finishLoading);
+                frame.addEventListener('error', showLoadWarning);
+            }
+
+            window.setTimeout(showLoadWarning, 30000);
+        }());
+    </script>
+</asp:Content>

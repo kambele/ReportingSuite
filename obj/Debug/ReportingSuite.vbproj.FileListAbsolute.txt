@@ -333,7 +333,6 @@ D:\Development\ReportingSuite\bin\SqlServerTypes\x64\msvcr120.dll
 D:\Development\ReportingSuite\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
 D:\Development\ReportingSuite\bin\SqlServerTypes\x86\msvcr120.dll
 D:\Development\ReportingSuite\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
-D:\Development\ReportingSuite\bin\ReportingSuite.dll.config
 D:\Development\ReportingSuite\bin\ReportingSuite.dll
 D:\Development\ReportingSuite\bin\ReportingSuite.pdb
 D:\Development\ReportingSuite\bin\WebForms_Basic.xml
@@ -405,11 +404,9 @@ D:\Development\ReportingSuite\bin\Newtonsoft.Json.xml
 D:\Development\ReportingSuite\bin\Antlr3.Runtime.pdb
 D:\Development\ReportingSuite\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\Development\ReportingSuite\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbproj.AssemblyReference.cache
 D:\Development\ReportingSuite\obj\Debug\ReportingSuite.Resources.resources
 D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbproj.GenerateResource.cache
-D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbproj.CoreCompileInputs.cache
 D:\Development\ReportingSuite\obj\Debug\ReportingSuite.dll
 D:\Development\ReportingSuite\obj\Debug\WebForms_Basic.xml
 D:\Development\ReportingSuite\obj\Debug\ReportingSuite.pdb
-D:\Development\ReportingSuite\obj\Debug\Reportin.FF40866D.Up2Date
+D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbprojResolveAssemblyReference.cache

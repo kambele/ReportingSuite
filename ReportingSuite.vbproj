@@ -224,6 +224,7 @@
     <Content Include="Database\ACoA-Warehouse-Architecture.md" />
     <Content Include="Database\ReportingWarehouse.sql" />
     <Content Include="Database\ReportSecurity.sql" />
+    <Content Include="Database\GetAllCompanies.Revised.sql" />
     <Content Include="Database\Report-Security-Architecture.md" />
     <Content Include="Database\VSAB-DataTransfer-Archive-Tables.sql" />
     <Content Include="Database\VSAB-DataTransfer-Archive.sql" />

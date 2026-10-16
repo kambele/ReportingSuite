@@ -19,7 +19,7 @@
 
     <!-- Existing pages still render Font Awesome icons; retain the icon font only. -->
     <link href="Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="Content/reporting-suite-limitless.css?v=20261014.1" rel="stylesheet" type="text/css" />
+    <link href="Content/reporting-suite-limitless.css?v=20261016.1" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 
     <script src="Content/Template/global_assets/js/main/jquery.min.js"></script>

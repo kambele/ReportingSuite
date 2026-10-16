@@ -637,8 +637,59 @@ textarea.input-validation-error,
 }
 
 .report-native-frame {
+    border: 0;
+    min-height: 40rem;
+}
+
+.report-native-frame-host {
+    background: #fff;
     border: 1px solid var(--reporting-border);
     min-height: 40rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.report-native-loading {
+    align-items: center;
+    background: #f7f9fc;
+    color: #52606d;
+    display: flex;
+    font-size: 0.875rem;
+    inset: 0;
+    justify-content: center;
+    min-height: 40rem;
+    position: absolute;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 2;
+}
+
+.report-native-frame-host.is-loaded .report-native-loading {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.report-native-frame-warning {
+    bottom: 1rem;
+    left: 50%;
+    margin: 0;
+    max-width: 58rem;
+    position: absolute;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    z-index: 3;
+}
+
+.report-native-frame-host.is-waiting .report-native-loading {
+    align-items: flex-start;
+    padding-top: 4rem;
+}
+
+@media (max-width: 767.98px) {
+    .report-native-frame,
+    .report-native-frame-host,
+    .report-native-loading {
+        min-height: 32rem;
+    }
 }
 
 .reporting-info-card {
