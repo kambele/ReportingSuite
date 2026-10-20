@@ -60,6 +60,17 @@ Public Class SiteMaster
                     ToList()
             Next
 
+            NavigationSections = NavigationSections.
+                Where(Function(section) section.Reports IsNot Nothing AndAlso
+                                        section.Reports.Count > 0).
+                OrderBy(Function(section) section.SectionName).
+                ToList()
+        Catch ex As Exception
+            Trace.Warn("Navigation", "Unable to load or authorize the report catalogue.", ex)
+            NavigationSections = New List(Of Section)()
+        End Try
+
+        Try
             RegisteredReportUrls.Clear()
             For Each report As Report In NavigationSections.SelectMany(Function(section) section.Reports)
                 Dim normalizedPath As String = NormalizeCatalogueReportPath(report.ReportURL)
@@ -74,21 +85,24 @@ Public Class SiteMaster
                 MonthlyChartOfAccountsReportPaths.Any(Function(path) HasRegisteredReport(path))
             HasChartOfAccountsReports =
                 HasQuarterlyChartOfAccountsReports OrElse HasMonthlyChartOfAccountsReports
-
-            NavigationSections = NavigationSections.
-                Where(Function(section) section.Reports IsNot Nothing AndAlso
-                                        section.Reports.Count > 0 AndAlso
-                                        Not Convert.ToString(section.SectionName).
-                                            Trim().Equals("Chart of Accounts", StringComparison.OrdinalIgnoreCase)).
-                OrderBy(Function(section) section.SectionName).
-                ToList()
-        Catch
-            NavigationSections = New List(Of Section)()
-            RegisteredReportUrls.Clear()
-            HasChartOfAccountsReports = False
-            HasQuarterlyChartOfAccountsReports = False
-            HasMonthlyChartOfAccountsReports = False
+        Catch ex As Exception
+            Trace.Warn("Navigation", "Unable to build the grouped Chart of Accounts navigation.", ex)
+            ResetChartOfAccountsNavigation()
         End Try
+
+        If HasChartOfAccountsReports Then
+            NavigationSections = NavigationSections.
+                Where(Function(section) Not If(section.SectionName, String.Empty).
+                    Trim().Equals("Chart of Accounts", StringComparison.OrdinalIgnoreCase)).
+                ToList()
+        End If
+    End Sub
+
+    Private Sub ResetChartOfAccountsNavigation()
+        RegisteredReportUrls.Clear()
+        HasChartOfAccountsReports = False
+        HasQuarterlyChartOfAccountsReports = False
+        HasMonthlyChartOfAccountsReports = False
     End Sub
 
     Public Function HasRegisteredReport(ByVal reportPath As String) As Boolean
@@ -149,7 +163,11 @@ Public Class SiteMaster
     End Function
 
     Private Shared Function NormalizeCatalogueReportPath(ByVal value As String) As String
-        Return Convert.ToString(value).Trim().Replace("\", "/").TrimStart("/"c)
+        If String.IsNullOrWhiteSpace(value) Then
+            Return String.Empty
+        End If
+
+        Return value.Trim().Replace("\", "/").TrimStart("/"c)
     End Function
 
     Private Function GetWindowsUserName() As String
