@@ -409,4 +409,7 @@ D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbproj.GenerateResource.c
 D:\Development\ReportingSuite\obj\Debug\ReportingSuite.dll
 D:\Development\ReportingSuite\obj\Debug\WebForms_Basic.xml
 D:\Development\ReportingSuite\obj\Debug\ReportingSuite.pdb
-D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbprojResolveAssemblyReference.cache
+D:\Development\ReportingSuite\bin\ReportingSuite.dll.config
+D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbproj.AssemblyReference.cache
+D:\Development\ReportingSuite\obj\Debug\ReportingSuite.vbproj.CoreCompileInputs.cache
+D:\Development\ReportingSuite\obj\Debug\Reportin.FF40866D.Up2Date

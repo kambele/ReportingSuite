@@ -87,27 +87,33 @@
                             <li class="nav-item"><a href="PF_Dashboard.aspx" class="nav-link"><i class="icon-pie-chart6"></i><span>Pension Fund Dashboard</span></a></li>
 
                             <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Report catalogue</div><i class="icon-menu" title="Report catalogue"></i></li>
+                            <% If HasChartOfAccountsReports Then %>
                             <li class="nav-item nav-item-submenu">
                                 <a href="#" class="nav-link"><i class="icon-stats-bars2"></i><span>Chart of Accounts</span></a>
                                 <ul class="nav nav-group-sub" data-submenu-title="Chart of Accounts">
+                                    <% If HasQuarterlyChartOfAccountsReports Then %>
                                     <li class="nav-item nav-item-submenu">
                                         <a href="#" class="nav-link"><i class="icon-calendar3"></i>Quarterly Reports</a>
                                         <ul class="nav nav-group-sub">
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns">Aggregated report</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Per_Entity">Entity level (vertical)</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Extra">Entity level (horizontal)</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_ExtraAdditional">Additional information</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_By_Entity">Single entity</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities">Cross-entity aggregated</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities_Per_Entity">Cross-entity detail</a></li>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns") %>">Aggregated report</a></li><% End If %>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns_Per_Entity") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns_Per_Entity") %>">Entity level (vertical)</a></li><% End If %>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns_Extra") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns_Extra") %>">Entity level (horizontal)</a></li><% End If %>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns_ExtraAdditional") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns_ExtraAdditional") %>">Additional information</a></li><% End If %>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns_By_Entity") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns_By_Entity") %>">Single entity</a></li><% End If %>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities") %>">Cross-entity aggregated</a></li><% End If %>
+                                            <% If HasRegisteredReport("ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities_Per_Entity") Then %><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities_Per_Entity") %>">Cross-entity detail</a></li><% End If %>
                                         </ul>
                                     </li>
+                                    <% End If %>
+                                    <% If HasMonthlyChartOfAccountsReports Then %>
                                     <li class="nav-item nav-item-submenu">
                                         <a href="#" class="nav-link"><i class="icon-calendar"></i>Monthly Reports</a>
-                                        <ul class="nav nav-group-sub"><li class="nav-item"><a class="nav-link" href="Report?report=ERS-Reports/OCoA_Monthly_Returns_Per_Entity">Monthly return by entity group</a></li></ul>
+                                        <ul class="nav nav-group-sub"><li class="nav-item"><a class="nav-link" href="<%: GetRegisteredReportUrl("ERS-Reports/OCoA_Monthly_Returns_Per_Entity") %>">Monthly return by entity group</a></li></ul>
                                     </li>
+                                    <% End If %>
                                 </ul>
                             </li>
+                            <% End If %>
 
                             <% For Each section In NavigationSections %>
                             <li class="nav-item nav-item-submenu">

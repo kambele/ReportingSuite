@@ -13,6 +13,25 @@ Public Class SiteMaster
     Public UserDisplayName As String = "Authenticated user"
     Public UserInitials As String = "AU"
     Public NavigationSections As New List(Of Section)
+    Public HasChartOfAccountsReports As Boolean
+    Public HasQuarterlyChartOfAccountsReports As Boolean
+    Public HasMonthlyChartOfAccountsReports As Boolean
+
+    Private ReadOnly RegisteredReportUrls As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
+
+    Private Shared ReadOnly QuarterlyChartOfAccountsReportPaths As String() = {
+        "ERS-Reports/OCoA_Quarterly_Returns",
+        "ERS-Reports/OCoA_Quarterly_Returns_Per_Entity",
+        "ERS-Reports/OCoA_Quarterly_Returns_Extra",
+        "ERS-Reports/OCoA_Quarterly_Returns_ExtraAdditional",
+        "ERS-Reports/OCoA_Quarterly_Returns_By_Entity",
+        "ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities",
+        "ERS-Reports/OCoA_Quarterly_Returns_Multipe_Entities_Per_Entity"
+    }
+
+    Private Shared ReadOnly MonthlyChartOfAccountsReportPaths As String() = {
+        "ERS-Reports/OCoA_Monthly_Returns_Per_Entity"
+    }
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         userName = GetWindowsUserName()
@@ -40,14 +59,50 @@ Public Class SiteMaster
                     Where(Function(report) Not report.Is_Deleted AndAlso accessibleReportIds.Contains(report.ReportID)).
                     ToList()
             Next
+
+            RegisteredReportUrls.Clear()
+            For Each report As Report In NavigationSections.SelectMany(Function(section) section.Reports)
+                Dim normalizedPath As String = NormalizeCatalogueReportPath(report.ReportURL)
+                If normalizedPath.Length > 0 AndAlso Not RegisteredReportUrls.ContainsKey(normalizedPath) Then
+                    RegisteredReportUrls(normalizedPath) = GetReportUrl(report)
+                End If
+            Next
+
+            HasQuarterlyChartOfAccountsReports =
+                QuarterlyChartOfAccountsReportPaths.Any(Function(path) HasRegisteredReport(path))
+            HasMonthlyChartOfAccountsReports =
+                MonthlyChartOfAccountsReportPaths.Any(Function(path) HasRegisteredReport(path))
+            HasChartOfAccountsReports =
+                HasQuarterlyChartOfAccountsReports OrElse HasMonthlyChartOfAccountsReports
+
             NavigationSections = NavigationSections.
-                Where(Function(section) section.Reports IsNot Nothing AndAlso section.Reports.Count > 0).
+                Where(Function(section) section.Reports IsNot Nothing AndAlso
+                                        section.Reports.Count > 0 AndAlso
+                                        Not Convert.ToString(section.SectionName).
+                                            Trim().Equals("Chart of Accounts", StringComparison.OrdinalIgnoreCase)).
                 OrderBy(Function(section) section.SectionName).
                 ToList()
         Catch
             NavigationSections = New List(Of Section)()
+            RegisteredReportUrls.Clear()
+            HasChartOfAccountsReports = False
+            HasQuarterlyChartOfAccountsReports = False
+            HasMonthlyChartOfAccountsReports = False
         End Try
     End Sub
+
+    Public Function HasRegisteredReport(ByVal reportPath As String) As Boolean
+        Return RegisteredReportUrls.ContainsKey(NormalizeCatalogueReportPath(reportPath))
+    End Function
+
+    Public Function GetRegisteredReportUrl(ByVal reportPath As String) As String
+        Dim targetUrl As String = Nothing
+        If RegisteredReportUrls.TryGetValue(NormalizeCatalogueReportPath(reportPath), targetUrl) Then
+            Return targetUrl
+        End If
+
+        Return "#"
+    End Function
 
     Public Function GetPageTitle() As String
         Dim configuredTitle = Convert.ToString(Page.Title).Trim()
@@ -91,6 +146,10 @@ Public Class SiteMaster
 
         Return "Report?report=" & HttpUtility.UrlEncode(Convert.ToString(report.ReportURL)) &
                "&reportId=" & report.ReportID.ToString(CultureInfo.InvariantCulture)
+    End Function
+
+    Private Shared Function NormalizeCatalogueReportPath(ByVal value As String) As String
+        Return Convert.ToString(value).Trim().Replace("\", "/").TrimStart("/"c)
     End Function
 
     Private Function GetWindowsUserName() As String
