@@ -8,6 +8,7 @@
     var storageKey = 'ReportingSuite.PersonalWorkspace.v2';
     var state = { modules: [], reports: [], recent: [] };
     var activeKind = 'all';
+    var dynamicPreviewCache = {};
 
     function loadState() {
         try {
@@ -109,7 +110,11 @@
             }
             availableIds.push(String(reportId));
             var data = currentReportData(item);
-            var link = $('<a class="workspace-saved-report js-workspace-report-link"></a>').attr({ href: data.url, 'data-report-id': data.id });
+            var isDynamic = data.kind.split(/\s+/).indexOf('dynamic') >= 0;
+            var link = $('<a class="workspace-saved-report js-workspace-report-link"></a>').attr({ href: isDynamic ? '#' : data.url, 'data-report-id': data.id });
+            if (isDynamic) {
+                link.addClass('js-dynamic-report-preview');
+            }
             link.append('<i class="fa fa-star" aria-hidden="true"></i>');
             $('<span></span>').append($('<strong></strong>').text(data.title)).append($('<small></small>').text(data.section)).appendTo(link);
             container.append(link);
@@ -141,7 +146,11 @@
             var data = currentReportData(item);
             data.opened = saved.opened;
             valid.push(data);
-            var link = $('<a class="workspace-recent-report js-workspace-report-link"></a>').attr({ href: data.url, 'data-report-id': data.id });
+            var isDynamic = data.kind.split(/\s+/).indexOf('dynamic') >= 0;
+            var link = $('<a class="workspace-recent-report js-workspace-report-link"></a>').attr({ href: isDynamic ? '#' : data.url, 'data-report-id': data.id });
+            if (isDynamic) {
+                link.addClass('js-dynamic-report-preview');
+            }
             link.append('<i class="icon-file-eye" aria-hidden="true"></i>');
             $('<span></span>').append($('<strong></strong>').text(data.title)).append($('<small></small>').text(data.section)).appendTo(link);
             link.append('<i class="icon-arrow-up-right2 text-muted" aria-hidden="true"></i>');
@@ -196,7 +205,8 @@
             panel.find('.workspace-report-item').each(function () {
                 var item = $(this);
                 var matchesText = !query || String(item.attr('data-search') || '').indexOf(query) !== -1;
-                var matchesKind = activeKind === 'all' || item.attr('data-kind') === activeKind;
+                var kinds = String(item.attr('data-kind') || '').split(/\s+/);
+                var matchesKind = activeKind === 'all' || kinds.indexOf(activeKind) >= 0;
                 var visible = matchesText && matchesKind;
                 item.toggle(visible);
                 if (visible) {
@@ -205,6 +215,9 @@
                 }
             });
             panel.find('.workspace-section-empty').toggleClass('d-none', visibleInSection !== 0);
+            panel.find('.workspace-dynamic-group').each(function () {
+                $(this).toggle($(this).find('.workspace-report-item:visible').length > 0);
+            });
             $('[data-section-tab="' + panel.attr('data-section-panel') + '"]').toggleClass('is-filtered-out', visibleInSection === 0);
         });
 
@@ -214,7 +227,8 @@
     }
 
     function activateFilter(kind, shouldScroll) {
-        activeKind = kind === 'adhoc' || kind === 'standard' ? kind : 'all';
+        var supportedKinds = ['custom', 'dynamic', 'adhoc'];
+        activeKind = supportedKinds.indexOf(kind) >= 0 ? kind : 'all';
         $('.js-catalogue-filter').each(function () {
             var button = $(this);
             var active = button.attr('data-kind') === activeKind;
@@ -243,6 +257,130 @@
         $('.js-workspace-greeting').text(greeting);
     }
 
+    function previewBadge(label, cssClass) {
+        return $('<span class="dynamic-report-preview-badge"></span>').addClass(cssClass || '').text(label);
+    }
+
+    function renderDynamicReportPreview(preview) {
+        var modal = $('#dynamic-report-preview-modal');
+        var columns = Array.isArray(preview.Columns) ? preview.Columns : [];
+        var lineItems = Array.isArray(preview.LineItems) ? preview.LineItems : [];
+        var displayColumns = columns.length ? columns : [{ ColumnId: 0, Name: 'Report value', DataType: 'Value', Visible: true }];
+        var columnList = modal.find('.js-dynamic-preview-columns').empty();
+        var tableHead = modal.find('.js-dynamic-preview-table-head').empty();
+        var tableBody = modal.find('.js-dynamic-preview-table-body').empty();
+
+        modal.find('.js-dynamic-preview-title').text(preview.Name || 'Dynamic report template');
+        modal.find('.js-dynamic-preview-description').text(preview.Description || 'Configured report structure.');
+        modal.find('.js-dynamic-preview-summary').empty()
+            .append(previewBadge(preview.EntityGroup || 'Other dynamic reports', 'is-group'))
+            .append(previewBadge(lineItems.length + ' line item' + (lineItems.length === 1 ? '' : 's'), 'is-count'))
+            .append(previewBadge(columns.length + ' column' + (columns.length === 1 ? '' : 's'), 'is-count'));
+
+        displayColumns.forEach(function (column) {
+            var chip = $('<div class="dynamic-report-column-chip"></div>');
+            $('<i class="icon-columns" aria-hidden="true"></i>').appendTo(chip);
+            $('<span></span>').append($('<strong></strong>').text(column.Name || 'Report value'))
+                .append($('<small></small>').text(column.DataType || 'Value')).appendTo(chip);
+            if (column.Calculated) { chip.append(previewBadge('Calculated', 'is-calculated')); }
+            if (column.StaticValue) { chip.append(previewBadge('Static', 'is-static')); }
+            if (column.Visible === false) { chip.append(previewBadge('Hidden', 'is-hidden')); }
+            columnList.append(chip);
+        });
+
+        var headingRow = $('<tr></tr>').append('<th scope="col" class="dynamic-report-line-heading">Report line item</th>');
+        displayColumns.forEach(function (column) {
+            $('<th scope="col"></th>').append($('<strong></strong>').text(column.Name || 'Report value'))
+                .append($('<small></small>').text(column.DataType || 'Value')).appendTo(headingRow);
+        });
+        tableHead.append(headingRow);
+
+        var currentSection = null;
+        lineItems.forEach(function (lineItem) {
+            var sectionName = lineItem.SectionName || 'General';
+            if (sectionName !== currentSection) {
+                currentSection = sectionName;
+                $('<tr class="dynamic-report-section-row"></tr>')
+                    .append($('<th scope="rowgroup"></th>').attr('colspan', displayColumns.length + 1).text(sectionName))
+                    .appendTo(tableBody);
+            }
+
+            var row = $('<tr class="dynamic-report-line-row"></tr>')
+                .attr('data-line-search', String(lineItem.Name || '').toLowerCase());
+            var label = $('<td class="dynamic-report-line-label"></td>')
+                .append($('<strong></strong>').text(lineItem.Name || 'Unnamed line item'));
+            var flags = $('<span class="dynamic-report-line-flags"></span>');
+            if (lineItem.Main) { flags.append(previewBadge('Main', 'is-main')); }
+            if (lineItem.Title) { flags.append(previewBadge('Title', 'is-title')); }
+            if (lineItem.Calculated) { flags.append(previewBadge('Calculated', 'is-calculated')); }
+            if (lineItem.StaticValue) { flags.append(previewBadge('Static', 'is-static')); }
+            if (lineItem.Visible === false) { flags.append(previewBadge('Hidden', 'is-hidden')); }
+            label.append(flags);
+            row.append(label);
+            var mappedColumnIds = Array.isArray(lineItem.MappedColumnIds) ? lineItem.MappedColumnIds.map(String) : [];
+            displayColumns.forEach(function (column) {
+                var mapped = mappedColumnIds.indexOf(String(column.ColumnId || 0)) >= 0;
+                var cell = $('<td class="dynamic-report-template-cell"></td>').toggleClass('is-mapped', mapped);
+                if (mapped) {
+                    cell.append('<span><i class="icon-checkmark3" aria-hidden="true"></i>Mapped</span>');
+                } else {
+                    cell.append('<span></span>');
+                }
+                row.append(cell);
+            });
+            tableBody.append(row);
+        });
+
+        modal.find('.js-dynamic-line-search').val('');
+        modal.find('.js-dynamic-preview-empty').toggleClass('d-none', lineItems.length !== 0);
+        modal.find('.dynamic-report-template-table-wrap').toggleClass('d-none', lineItems.length === 0);
+        modal.find('.js-dynamic-preview-loading, .js-dynamic-preview-error').addClass('d-none');
+        modal.find('.js-dynamic-preview-content').removeClass('d-none');
+    }
+
+    function showDynamicPreviewError() {
+        var modal = $('#dynamic-report-preview-modal');
+        modal.find('.js-dynamic-preview-loading, .js-dynamic-preview-content').addClass('d-none');
+        modal.find('.js-dynamic-preview-error').removeClass('d-none');
+    }
+
+    function openDynamicReportPreview(trigger) {
+        var reportId = String(trigger.attr('data-report-id') || trigger.closest('[data-report-id]').attr('data-report-id') || '');
+        var reportItem = reportElement(reportId);
+        var modal = $('#dynamic-report-preview-modal');
+        if (!reportId || !reportItem.length) {
+            return;
+        }
+
+        recordRecent(reportId);
+        renderRecentReports();
+        modal.find('.js-dynamic-preview-title').text(reportItem.attr('data-title') || 'Dynamic report template');
+        modal.find('.js-dynamic-preview-description').text('Loading the configured report structure.');
+        modal.find('.js-dynamic-preview-loading').removeClass('d-none');
+        modal.find('.js-dynamic-preview-error, .js-dynamic-preview-content').addClass('d-none');
+        modal.modal('show');
+
+        if (dynamicPreviewCache[reportId]) {
+            renderDynamicReportPreview(dynamicPreviewCache[reportId]);
+            return;
+        }
+
+        $.ajax({
+            url: 'DynamicReportPreviewData.ashx',
+            method: 'GET',
+            dataType: 'json',
+            data: { reportId: parseInt(reportId, 10) }
+        }).done(function (response) {
+            var preview = response;
+            if (!preview) {
+                showDynamicPreviewError();
+                return;
+            }
+            dynamicPreviewCache[reportId] = preview;
+            renderDynamicReportPreview(preview);
+        }).fail(showDynamicPreviewError);
+    }
+
     $(function () {
         storageKey += '.' + String($('.reporting-home').attr('data-workspace-key') || 'anonymous');
         loadState();
@@ -265,6 +403,22 @@
             announce(pinned ? 'Report pinned to your workspace' : 'Report removed from pinned reports');
         }).on('click', '.js-workspace-report-link', function () {
             recordRecent($(this).attr('data-report-id') || $(this).closest('[data-report-id]').attr('data-report-id'));
+        }).on('click', '.js-dynamic-report-preview', function (event) {
+            event.preventDefault();
+            openDynamicReportPreview($(this));
+        });
+
+        $('.js-dynamic-line-search').on('input', function () {
+            var query = $.trim($(this).val() || '').toLowerCase();
+            var body = $('.js-dynamic-preview-table-body');
+            body.find('.dynamic-report-line-row').each(function () {
+                var row = $(this);
+                row.toggle(!query || String(row.attr('data-line-search') || '').indexOf(query) >= 0);
+            });
+            body.find('.dynamic-report-section-row').each(function () {
+                var sectionRow = $(this);
+                sectionRow.toggle(sectionRow.nextUntil('.dynamic-report-section-row', '.dynamic-report-line-row:visible').length > 0);
+            });
         });
 
         $('.js-reset-workspace').on('click', function () {
@@ -309,7 +463,7 @@
             if (moduleLink.length) {
                 window.location.href = moduleLink.attr('href');
             } else if (reportLink.length) {
-                window.location.href = reportLink.attr('href');
+                reportLink.trigger('click');
             }
         });
 
@@ -328,7 +482,7 @@
         });
 
         var requestedTab = window.location.hash;
-        if (requestedTab && /^#division-\d+$/.test(requestedTab)) {
+        if (requestedTab && /^#division-(?:\d+|dynamic)$/.test(requestedTab)) {
             $('.workspace-division-tabs a[href="' + requestedTab + '"]').tab('show');
         }
         filterReports();

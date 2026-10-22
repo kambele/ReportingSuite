@@ -16,6 +16,8 @@ Public Class SiteMaster
     Public HasChartOfAccountsReports As Boolean
     Public HasQuarterlyChartOfAccountsReports As Boolean
     Public HasMonthlyChartOfAccountsReports As Boolean
+    Public HasDynamicReports As Boolean
+    Public DynamicReportCount As Integer
 
     Private ReadOnly RegisteredReportUrls As New Dictionary(Of String, String)(StringComparer.OrdinalIgnoreCase)
 
@@ -52,13 +54,24 @@ Public Class SiteMaster
                 Where(Function(report) Not report.Is_Deleted).
                 Select(Function(report) report.ReportID).
                 ToList()
+            Dim dynamicReportIds As List(Of Long) = db.Reports.
+                Where(Function(report) Not report.Is_Deleted AndAlso report.Is_Dynamic).
+                Select(Function(report) report.ReportID).
+                ToList()
             Dim accessibleReportIds As HashSet(Of Long) =
-                ReportAccessService.GetAccessibleReportIds(Context, navigationReportIds)
+                ReportAccessService.GetAccessibleReportIds(Context, navigationReportIds.Concat(dynamicReportIds))
             For Each section As Section In NavigationSections
                 section.Reports = section.Reports.
-                    Where(Function(report) Not report.Is_Deleted AndAlso accessibleReportIds.Contains(report.ReportID)).
+                    Where(Function(report) Not report.Is_Deleted AndAlso
+                                           Not report.Is_Dynamic AndAlso
+                                           accessibleReportIds.Contains(report.ReportID)).
                     ToList()
             Next
+
+            DynamicReportCount = dynamicReportIds.
+                Where(Function(reportId) accessibleReportIds.Contains(reportId)).
+                Count()
+            HasDynamicReports = DynamicReportCount > 0
 
             NavigationSections = NavigationSections.
                 Where(Function(section) section.Reports IsNot Nothing AndAlso
@@ -68,6 +81,8 @@ Public Class SiteMaster
         Catch ex As Exception
             Trace.Warn("Navigation", "Unable to load or authorize the report catalogue.", ex)
             NavigationSections = New List(Of Section)()
+            DynamicReportCount = 0
+            HasDynamicReports = False
         End Try
 
         Try

@@ -184,6 +184,7 @@
       <LastGenOutput>Data.vb</LastGenOutput>
     </Content>
     <Content Include="Default.aspx" />
+    <Content Include="DynamicReportPreviewData.ashx" />
     <Content Include="AdhocReport.aspx" />
     <Content Include="AdhocReportData.ashx" />
     <Content Include="Download.aspx" />
@@ -583,6 +584,9 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DynamicReportPreviewData.ashx.vb">
+      <DependentUpon>DynamicReportPreviewData.ashx</DependentUpon>
     </Compile>
     <Compile Include="Download.aspx.designer.vb">
       <DependentUpon>Download.aspx</DependentUpon>

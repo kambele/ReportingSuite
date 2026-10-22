@@ -17,7 +17,7 @@
                 <h1 class="card-title mb-1">ACoA data warehouse</h1>
                 <p class="text-muted mb-0">Create traceable analytical snapshots from <code>[dbo].[get_ACoA_Reports_Advance_v2]</code> without querying database views.</p>
             </div>
-            <span class="badge badge-primary badge-pill">Administrator</span>
+            <span class="badge badge-primary badge-pill"><i class="icon-user-check mr-1" aria-hidden="true"></i>Authenticated reporting user</span>
         </div>
 
         <asp:Panel ID="warehouseHealthPanel" runat="server" CssClass="alert alert-info m-3 mb-0" role="status">
@@ -143,7 +143,7 @@
                 <div class="card-header bg-white"><h2 class="card-title"><i class="icon-calendar3 mr-2" aria-hidden="true"></i>Scheduling guidance</h2></div>
                 <div class="card-body">
                     <p>Use one canonical schedule per report, entity type, year and quarter. Load all entities and report columns in scheduled runs so analytical snapshots remain comparable.</p>
-                    <p class="mb-0 text-muted">Run the reusable warehouse service from a protected background job. Do not schedule the administrator web page itself.</p>
+                    <p class="mb-0 text-muted">Run the reusable warehouse service from a protected background job. Do not schedule the interactive web page itself.</p>
                 </div>
             </div>
         </div>

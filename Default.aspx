@@ -2,7 +2,7 @@
 
 <asp:Content ID="Head" ContentPlaceHolderID="HeadContent" runat="server">
     <meta name="description" content="Personalised NAMFISA Reporting Suite workspace, insights, dashboards, and report catalogue" />
-    <link href="Content/reporting-workspace.css?v=20261014.1" rel="stylesheet" type="text/css" />
+    <link href="Content/reporting-workspace.css?v=20261022.1" rel="stylesheet" type="text/css" />
 </asp:Content>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -58,14 +58,14 @@
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Report catalogue" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
                     <a href="#report-catalogue" class="workspace-module-link"><span class="workspace-module-icon is-green"><i class="icon-stack-text"></i></span><span class="workspace-module-copy"><strong>Report catalogue</strong><small>Browse <%: TotalReports %> reports available to your account.</small></span><i class="icon-arrow-down8 workspace-module-arrow" aria-hidden="true"></i></a>
                 </article>
+                <article class="workspace-module-card" data-module-id="warehouse">
+                    <button type="button" class="workspace-pin js-module-pin" aria-label="Pin ACoA Data Warehouse" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                    <a href="ReportWarehouse.aspx" class="workspace-module-link"><span class="workspace-module-icon is-red"><i class="icon-database-add"></i></span><span class="workspace-module-copy"><strong>ACoA Data Warehouse</strong><small>Validate and load analytical snapshots for downstream tools.</small></span><i class="icon-arrow-up-right2 workspace-module-arrow" aria-hidden="true"></i></a>
+                </article>
                 <% If IsWorkspaceAdministrator Then %>
                 <article class="workspace-module-card" data-module-id="builder">
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Report Builder" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
                     <a href="Builder.aspx" class="workspace-module-link"><span class="workspace-module-icon is-navy"><i class="icon-wrench3"></i></span><span class="workspace-module-copy"><strong>Report Builder</strong><small>Configure reports, mappings, formulas, and report security.</small></span><span class="workspace-module-badge">Admin</span><i class="icon-arrow-up-right2 workspace-module-arrow" aria-hidden="true"></i></a>
-                </article>
-                <article class="workspace-module-card" data-module-id="warehouse">
-                    <button type="button" class="workspace-pin js-module-pin" aria-label="Pin ACoA Data Warehouse" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
-                    <a href="ReportWarehouse.aspx" class="workspace-module-link"><span class="workspace-module-icon is-red"><i class="icon-database-add"></i></span><span class="workspace-module-copy"><strong>ACoA Data Warehouse</strong><small>Validate and load analytical snapshots for downstream tools.</small></span><span class="workspace-module-badge">Admin</span><i class="icon-arrow-up-right2 workspace-module-arrow" aria-hidden="true"></i></a>
                 </article>
                 <article class="workspace-module-card" data-module-id="parameters">
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Report Parameters" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
@@ -85,8 +85,8 @@
             <div class="workspace-insight-grid">
                 <button type="button" class="workspace-insight-card is-primary js-workspace-filter" data-kind="all"><span class="workspace-insight-icon"><i class="icon-stack-text"></i></span><span><strong><%: TotalReports %></strong><small>Available reports</small></span><i class="icon-arrow-right8"></i></button>
                 <button type="button" class="workspace-insight-card is-info js-workspace-filter" data-kind="division"><span class="workspace-insight-icon"><i class="icon-office"></i></span><span><strong><%: DashboardSections.Count %></strong><small>Accessible divisions</small></span><i class="icon-arrow-right8"></i></button>
-                <button type="button" class="workspace-insight-card is-success js-workspace-filter" data-kind="adhoc"><span class="workspace-insight-icon"><i class="icon-table2"></i></span><span><strong><%: AdhocReportCount %></strong><small>Adhoc reports</small></span><i class="icon-arrow-right8"></i></button>
-                <button type="button" class="workspace-insight-card is-gold js-workspace-filter" data-kind="standard"><span class="workspace-insight-icon"><i class="icon-file-text2"></i></span><span><strong><%: StandardReportCount %></strong><small>Standard reports</small></span><i class="icon-arrow-right8"></i></button>
+                <button type="button" class="workspace-insight-card is-success js-workspace-filter" data-kind="custom"><span class="workspace-insight-icon"><i class="icon-file-text2"></i></span><span><strong><%: CustomReportCount %></strong><small>Custom reports</small></span><i class="icon-arrow-right8"></i></button>
+                <button type="button" class="workspace-insight-card is-gold js-workspace-filter" data-kind="dynamic"><span class="workspace-insight-icon"><i class="icon-insert-template"></i></span><span><strong><%: DynamicReportCount %></strong><small>Dynamic templates</small></span><i class="icon-arrow-right8"></i></button>
             </div>
         </section>
 
@@ -96,10 +96,10 @@
                 <article class="workspace-dashboard-panel">
                     <header><div><h3>Report mix</h3><p>Distribution of your accessible catalogue.</p></div><span class="workspace-panel-icon"><i class="icon-pie-chart6"></i></span></header>
                     <div class="workspace-mix">
-                        <div class="workspace-mix-ring" style="--workspace-value:<%: GetPercentage(AdhocReportCount, TotalReports) %>"><strong><%: TotalReports %></strong><span>Total</span></div>
+                        <div class="workspace-mix-ring" style="--workspace-value:<%: GetPercentage(DynamicReportCount, TotalReports) %>"><strong><%: TotalReports %></strong><span>Total</span></div>
                         <div class="workspace-mix-legend">
-                            <button type="button" class="js-workspace-filter" data-kind="standard"><span class="is-standard"></span><strong>Standard</strong><em><%: StandardReportCount %></em></button>
-                            <button type="button" class="js-workspace-filter" data-kind="adhoc"><span class="is-adhoc"></span><strong>Adhoc</strong><em><%: AdhocReportCount %></em></button>
+                            <button type="button" class="js-workspace-filter" data-kind="custom"><span class="is-custom"></span><strong>Custom</strong><em><%: CustomReportCount %></em></button>
+                            <button type="button" class="js-workspace-filter" data-kind="dynamic"><span class="is-dynamic"></span><strong>Dynamic</strong><em><%: DynamicReportCount %></em></button>
                         </div>
                     </div>
                 </article>
@@ -125,17 +125,21 @@
             </header>
             <div class="workspace-filter-row" aria-label="Report type filters">
                 <button type="button" class="workspace-filter is-active js-catalogue-filter" data-kind="all" aria-pressed="true">All reports <span><%: TotalReports %></span></button>
-                <button type="button" class="workspace-filter js-catalogue-filter" data-kind="standard" aria-pressed="false">Standard <span><%: StandardReportCount %></span></button>
-                <button type="button" class="workspace-filter js-catalogue-filter" data-kind="adhoc" aria-pressed="false">Adhoc <span><%: AdhocReportCount %></span></button>
+                <button type="button" class="workspace-filter js-catalogue-filter" data-kind="custom" aria-pressed="false">Custom reports <span><%: CustomReportCount %></span></button>
+                <button type="button" class="workspace-filter js-catalogue-filter" data-kind="dynamic" aria-pressed="false">Dynamic templates <span><%: DynamicReportCount %></span></button>
+                <button type="button" class="workspace-filter js-catalogue-filter" data-kind="adhoc" aria-pressed="false">Custom queries <span><%: AdhocReportCount %></span></button>
                 <span class="workspace-result-summary js-workspace-result-summary"><%: TotalReports %> reports</span>
             </div>
 
-            <% If DashboardSections.Count > 0 Then %>
+            <% If DashboardSections.Count > 0 OrElse DynamicReports.Count > 0 Then %>
             <div class="workspace-division-tabs" role="navigation" aria-label="Report divisions">
                 <ul class="nav nav-tabs nav-tabs-highlight mb-0" role="tablist">
                     <% For Each section In DashboardSections %>
                     <li class="nav-item" data-section-tab="<%: section.SectionID %>"><a href="#division-<%: section.SectionID %>" class="nav-link <%=If(section.SectionID = DefaultSectionId, "active", "") %>" data-toggle="tab" role="tab"><i class="icon-folder mr-2"></i><%: section.SectionName %><span class="badge badge-light badge-pill ml-2"><%: GetActiveReports(section).Count %></span></a></li>
                     <% Next %>
+                    <% If DynamicReports.Count > 0 Then %>
+                    <li class="nav-item" data-section-tab="dynamic"><a href="#division-dynamic" class="nav-link <%=If(DashboardSections.Count = 0, "active", "") %>" data-toggle="tab" role="tab"><i class="icon-insert-template mr-2"></i>Dynamic templates<span class="badge badge-light badge-pill ml-2"><%: DynamicReportCount %></span></a></li>
+                    <% End If %>
                 </ul>
             </div>
             <div class="tab-content workspace-report-tabs">
@@ -146,13 +150,33 @@
                         <% For Each report In GetActiveReports(section) %>
                         <article class="workspace-report-item" data-report-id="<%: report.ReportID %>" data-kind="<%: GetReportKind(report) %>" data-search="<%: GetSearchText(report) %>" data-title="<%: GetReportName(report) %>" data-url="<%: GetReportUrl(report) %>" data-section="<%: section.SectionName %>">
                             <button type="button" class="workspace-report-pin js-report-pin" aria-label="Pin <%: GetReportName(report) %>" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
-                            <a class="workspace-report-link js-workspace-report-link" href="<%: GetReportUrl(report) %>"><span class="workspace-report-icon <%=If(IsAdhocReport(report), "is-adhoc", "is-standard") %>"><i class="<%=If(IsAdhocReport(report), "icon-table2", "icon-file-text2") %>"></i></span><span class="workspace-report-copy"><strong><%: GetReportName(report) %></strong><small><%: GetReportDescription(report) %></small><em><%: GetReportTypeLabel(report) %></em></span><i class="icon-arrow-up-right2 workspace-report-arrow" aria-hidden="true"></i></a>
+                            <a class="workspace-report-link js-workspace-report-link" href="<%: GetReportUrl(report) %>"><span class="workspace-report-icon <%: GetReportIconCssClass(report) %>"><i class="<%: GetReportIcon(report) %>"></i></span><span class="workspace-report-copy"><strong><%: GetReportName(report) %></strong><small><%: GetReportDescription(report) %></small><em><%: GetReportTypeLabel(report) %></em></span><i class="icon-arrow-up-right2 workspace-report-arrow" aria-hidden="true"></i></a>
                         </article>
                         <% Next %>
                     </div>
                     <div class="workspace-section-empty d-none"><i class="icon-search4"></i><strong>No reports match your filters</strong><span>Try another search term or report type.</span></div>
                 </div>
                 <% Next %>
+
+                <% If DynamicReports.Count > 0 Then %>
+                <div class="tab-pane fade <%=If(DashboardSections.Count = 0, "show active", "") %>" id="division-dynamic" role="tabpanel" data-section-panel="dynamic">
+                    <div class="workspace-division-heading"><div><h3>Dynamic report templates</h3><p>Select a report to preview its configured line items and columns.</p></div><span class="badge badge-warning"><%: DynamicReportCount %> templates</span></div>
+                    <% For Each dynamicGroup In DynamicReportGroups %>
+                    <section class="workspace-dynamic-group" data-dynamic-group="<%: dynamicGroup.GroupKey %>">
+                        <header class="workspace-dynamic-group-heading"><div><i class="icon-office mr-2" aria-hidden="true"></i><strong><%: dynamicGroup.GroupName %></strong></div><span><%: dynamicGroup.Reports.Count %> templates</span></header>
+                        <div class="workspace-report-grid">
+                            <% For Each report In dynamicGroup.Reports %>
+                            <article class="workspace-report-item" data-report-id="<%: report.ReportID %>" data-kind="<%: GetReportKind(report) %>" data-search="<%: GetSearchText(report) %>" data-title="<%: GetReportName(report) %>" data-url="#" data-section="<%: dynamicGroup.GroupName %>">
+                                <button type="button" class="workspace-report-pin js-report-pin" aria-label="Pin <%: GetReportName(report) %>" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                                <button type="button" class="workspace-report-link js-workspace-report-link js-dynamic-report-preview" data-report-id="<%: report.ReportID %>" aria-label="Preview <%: GetReportName(report) %>"><span class="workspace-report-icon is-dynamic"><i class="icon-insert-template"></i></span><span class="workspace-report-copy"><strong><%: GetReportName(report) %></strong><small><%: GetReportDescription(report) %></small><em>Dynamic template</em></span><i class="icon-eye8 workspace-report-arrow" aria-hidden="true"></i></button>
+                            </article>
+                            <% Next %>
+                        </div>
+                    </section>
+                    <% Next %>
+                    <div class="workspace-section-empty d-none"><i class="icon-search4"></i><strong>No dynamic templates match your filters</strong><span>Try another search term or select all reports.</span></div>
+                </div>
+                <% End If %>
             </div>
             <div class="workspace-catalogue-empty d-none"><i class="icon-search4"></i><strong>No matching reports</strong><span>Clear the search or select another report type.</span></div>
             <% Else %>
@@ -160,8 +184,38 @@
             <% End If %>
         </section>
     </main>
+
+    <div id="dynamic-report-preview-modal" class="modal fade dynamic-report-preview-modal" tabindex="-1" role="dialog" aria-labelledby="dynamic-report-preview-title" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header dynamic-report-preview-header">
+                    <div><span class="dynamic-report-preview-kicker"><i class="icon-insert-template mr-2" aria-hidden="true"></i>Dynamic report template</span><h2 id="dynamic-report-preview-title" class="modal-title js-dynamic-preview-title">Report structure</h2><p class="js-dynamic-preview-description mb-0"></p></div>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="dynamic-report-preview-loading js-dynamic-preview-loading"><span class="spinner-border text-primary" role="status" aria-hidden="true"></span><strong>Loading report template…</strong><small>Retrieving configured line items and columns.</small></div>
+                    <div class="alert alert-danger m-3 d-none js-dynamic-preview-error" role="alert"><i class="icon-warning22 mr-2" aria-hidden="true"></i><span>The report template could not be loaded.</span></div>
+                    <div class="dynamic-report-preview-content d-none js-dynamic-preview-content">
+                        <div class="dynamic-report-preview-toolbar">
+                            <div class="dynamic-report-preview-summary js-dynamic-preview-summary"></div>
+                            <label class="dynamic-report-preview-search"><i class="icon-search4" aria-hidden="true"></i><input type="search" class="form-control js-dynamic-line-search" placeholder="Filter line items" aria-label="Filter report line items" /></label>
+                        </div>
+                        <div class="dynamic-report-column-list js-dynamic-preview-columns" aria-label="Report columns"></div>
+                        <div class="table-responsive dynamic-report-template-table-wrap">
+                            <table class="table table-hover table-sm dynamic-report-template-table mb-0">
+                                <thead class="js-dynamic-preview-table-head"></thead>
+                                <tbody class="js-dynamic-preview-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="dynamic-report-preview-empty d-none js-dynamic-preview-empty"><i class="icon-insert-template"></i><strong>No report line items are configured</strong><span>The template exists, but its layout has not yet been defined in Report Builder.</span></div>
+                    </div>
+                </div>
+                <div class="modal-footer"><span class="text-muted mr-auto"><i class="icon-info22 mr-1" aria-hidden="true"></i>This preview shows structure only; it does not execute report data.</span><button type="button" class="btn btn-light" data-dismiss="modal">Close</button></div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Scripts" ContentPlaceHolderID="PageScripts" runat="server">
-    <script src="Scripts/reporting-dashboard.js?v=20261014.2"></script>
+    <script src="Scripts/reporting-dashboard.js?v=20261022.1"></script>
 </asp:Content>

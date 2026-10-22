@@ -85,8 +85,12 @@
                             <li class="nav-item"><a href="AdhocReport.aspx" class="nav-link"><i class="icon-table2"></i><span>Adhoc reports</span></a></li>
                             <li class="nav-item"><a href="ReportRender.aspx" class="nav-link"><i class="icon-stats-dots"></i><span>ACoA Report Renderer</span></a></li>
                             <li class="nav-item"><a href="PF_Dashboard.aspx" class="nav-link"><i class="icon-pie-chart6"></i><span>Pension Fund Dashboard</span></a></li>
+                            <li class="nav-item"><a href="ReportWarehouse.aspx" class="nav-link"><i class="icon-database-add"></i><span>ACoA Data Warehouse</span></a></li>
 
                             <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Report catalogue</div><i class="icon-menu" title="Report catalogue"></i></li>
+                            <% If HasDynamicReports Then %>
+                            <li class="nav-item"><a href="Default.aspx#division-dynamic" class="nav-link"><i class="icon-insert-template"></i><span>Dynamic report templates</span><span class="badge badge-light badge-pill ml-auto"><%: DynamicReportCount %></span></a></li>
+                            <% End If %>
                             <% If HasChartOfAccountsReports Then %>
                             <li class="nav-item nav-item-submenu">
                                 <a href="#" class="nav-link"><i class="icon-stats-bars2"></i><span>Chart of Accounts</span></a>
@@ -130,7 +134,6 @@
                             <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Administration</div><i class="icon-menu" title="Administration"></i></li>
                             <li class="nav-item"><a href="Builder.aspx" class="nav-link"><i class="icon-wrench3"></i><span>Report Builder</span></a></li>
                             <li class="nav-item"><a href="Parameters.aspx" class="nav-link"><i class="icon-equalizer2"></i><span>BI Report Parameters</span></a></li>
-                            <li class="nav-item"><a href="ReportWarehouse.aspx" class="nav-link"><i class="icon-database-add"></i><span>ACoA Data Warehouse</span></a></li>
                             <% End If %>
                         </ul>
                     </div>

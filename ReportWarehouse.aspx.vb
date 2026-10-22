@@ -16,8 +16,8 @@ Public Class ReportWarehousePage
     Private Const YearsProcedure As String = "[dbo].[getYears]"
     Private Const QuartersProcedure As String = "[dbo].[getQuarters]"
 
-    Private ReadOnly _db As New ReportingSuiteEntities3()
     Private _warehouseReady As Boolean
+    Private _isAuthorized As Boolean
 
     Protected Overrides Sub OnInit(ByVal e As EventArgs)
         MyBase.OnInit(e)
@@ -39,7 +39,8 @@ Public Class ReportWarehousePage
 
         Dim authorizationMessage As String = Nothing
         Dim authorizationStatus As Integer = 403
-        If Not TryAuthorizeAdministrator(authorizationMessage, authorizationStatus) Then
+        _isAuthorized = TryAuthorizeAuthenticatedUser(authorizationMessage, authorizationStatus)
+        If Not _isAuthorized Then
             ShowPageMessage(authorizationMessage, authorizationStatus)
             Return
         End If
@@ -56,6 +57,10 @@ Public Class ReportWarehousePage
     End Sub
 
     Private Sub previewButton_Click(ByVal sender As Object, ByVal e As EventArgs) Handles previewButton.Click
+        If Not _isAuthorized Then
+            Return
+        End If
+
         Try
             Dim request As ACoAReportWarehouseRequest = BuildRequest()
             Dim extract As DataTable = ACoAReportWarehouseService.ExtractFromConfiguredSource(request)
@@ -76,6 +81,10 @@ Public Class ReportWarehousePage
     End Sub
 
     Private Sub loadWarehouseButton_Click(ByVal sender As Object, ByVal e As EventArgs) Handles loadWarehouseButton.Click
+        If Not _isAuthorized Then
+            Return
+        End If
+
         Try
             If Not _warehouseReady Then
                 Throw New InvalidOperationException(
@@ -547,27 +556,13 @@ Public Class ReportWarehousePage
         Return String.Empty
     End Function
 
-    Private Function TryAuthorizeAdministrator(ByRef message As String, ByRef statusCode As Integer) As Boolean
+    Private Function TryAuthorizeAuthenticatedUser(ByRef message As String, ByRef statusCode As Integer) As Boolean
         Dim accountName As String = GetWindowsUserName()
         If String.IsNullOrWhiteSpace(accountName) Then
             message = "Your Windows account could not be identified."
             statusCode = 401
             Return False
         End If
-
-        Try
-            Dim currentUser As User = _db.Users.SingleOrDefault(Function(item) item.Username = accountName)
-            If currentUser Is Nothing OrElse Not currentUser.Is_Admin Then
-                message = "ACoA warehouse loading is available to ReportingSuite administrators only."
-                statusCode = 403
-                Return False
-            End If
-        Catch ex As Exception
-            Trace.Warn("ReportWarehouse", "Unable to validate the current administrator.", ex)
-            message = "Your access could not be validated because ReportingSuite is unavailable."
-            statusCode = 503
-            Return False
-        End Try
         Return True
     End Function
 
@@ -638,8 +633,4 @@ Public Class ReportWarehousePage
         Return "The operation failed. No warehouse data was committed. Review the server log for the captured exception."
     End Function
 
-    Protected Overrides Sub OnUnload(ByVal e As EventArgs)
-        _db.Dispose()
-        MyBase.OnUnload(e)
-    End Sub
 End Class
