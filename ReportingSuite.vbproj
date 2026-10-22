@@ -186,6 +186,7 @@
     <Content Include="Default.aspx" />
     <Content Include="DynamicReportPreviewData.ashx" />
     <Content Include="AdhocReport.aspx" />
+    <Content Include="AdhocReportWarehouse.aspx" />
     <Content Include="AdhocReportData.ashx" />
     <Content Include="Download.aspx" />
     <Content Include="ERS.Context.tt">
@@ -223,6 +224,7 @@
     <Content Include="ReportRender.aspx" />
     <Content Include="ReportWarehouse.aspx" />
     <Content Include="Database\ACoA-Warehouse-Architecture.md" />
+    <Content Include="Database\Adhoc-Warehouse-Architecture.md" />
     <Content Include="Database\ReportingWarehouse.sql" />
     <Content Include="Database\RegisterChartOfAccountsReports.sql" />
     <Content Include="Database\ReportSecurity.sql" />
@@ -676,12 +678,20 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ACoAReportWarehouseService.vb" />
+    <Compile Include="AdhocReportWarehouseService.vb" />
     <Compile Include="ReportHealthService.vb" />
     <Compile Include="ReportWarehouse.aspx.designer.vb">
       <DependentUpon>ReportWarehouse.aspx</DependentUpon>
     </Compile>
     <Compile Include="ReportWarehouse.aspx.vb">
       <DependentUpon>ReportWarehouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdhocReportWarehouse.aspx.designer.vb">
+      <DependentUpon>AdhocReportWarehouse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdhocReportWarehouse.aspx.vb">
+      <DependentUpon>AdhocReportWarehouse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Builder.aspx.designer.vb">

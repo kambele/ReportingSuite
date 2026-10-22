@@ -139,6 +139,139 @@ BEGIN
 END;
 GO
 
+/*
+    Shared Adhoc report warehouse
+
+    Every source row is stored as one JSON document so reports with unrelated
+    result schemas can share a single physical fact table. Column metadata is
+    versioned separately and load batches provide traceability.
+*/
+IF OBJECT_ID(N'[etl].[AdhocReportLoadBatch]', N'U') IS NULL
+BEGIN
+    CREATE TABLE [etl].[AdhocReportLoadBatch]
+    (
+        [LoadBatchID] bigint IDENTITY(1,1) NOT NULL
+            CONSTRAINT [PK_AdhocReportLoadBatch] PRIMARY KEY,
+        [LoadRunID] uniqueidentifier NOT NULL
+            CONSTRAINT [UQ_AdhocReportLoadBatch_LoadRunID] UNIQUE,
+        [StartedAtUtc] datetime2(3) NOT NULL,
+        [CompletedAtUtc] datetime2(3) NULL,
+        [LoadStatus] varchar(20) NOT NULL,
+        [RequestedBy] nvarchar(256) NULL,
+        [ReportID] bigint NOT NULL,
+        [ReportName] nvarchar(512) NOT NULL,
+        [SourceView] nvarchar(776) NOT NULL,
+        [SchemaVersion] int NULL,
+        [SourceColumnCount] int NULL,
+        [ExtractedRowCount] int NULL,
+        [LoadedRowCount] int NULL,
+        [DurationMilliseconds] bigint NULL,
+        [ErrorMessage] nvarchar(4000) NULL,
+        CONSTRAINT [CK_AdhocReportLoadBatch_LoadStatus]
+            CHECK ([LoadStatus] IN ('Running', 'Completed', 'Failed'))
+    );
+
+    CREATE INDEX [IX_AdhocReportLoadBatch_Report]
+        ON [etl].[AdhocReportLoadBatch]([ReportID], [LoadBatchID] DESC);
+END;
+GO
+
+IF OBJECT_ID(N'[etl].[AdhocReportSchema]', N'U') IS NULL
+BEGIN
+    CREATE TABLE [etl].[AdhocReportSchema]
+    (
+        [ReportID] bigint NOT NULL,
+        [SchemaVersion] int NOT NULL,
+        [SchemaHash] varbinary(32) NOT NULL,
+        [SchemaDefinition] nvarchar(max) NOT NULL,
+        [FirstSeenAtUtc] datetime2(3) NOT NULL,
+        [LastSeenAtUtc] datetime2(3) NOT NULL,
+        [IsCurrent] bit NOT NULL,
+        CONSTRAINT [PK_AdhocReportSchema]
+            PRIMARY KEY ([ReportID], [SchemaVersion]),
+        CONSTRAINT [UQ_AdhocReportSchema_Hash]
+            UNIQUE ([ReportID], [SchemaHash]),
+        CONSTRAINT [CK_AdhocReportSchema_Definition]
+            CHECK (ISJSON([SchemaDefinition]) = 1)
+    );
+
+    CREATE UNIQUE INDEX [UX_AdhocReportSchema_Current]
+        ON [etl].[AdhocReportSchema]([ReportID])
+        WHERE [IsCurrent] = 1;
+END;
+GO
+
+IF OBJECT_ID(N'[dw].[AdhocReport]', N'U') IS NULL
+BEGIN
+    CREATE TABLE [dw].[AdhocReport]
+    (
+        [WarehouseRowID] bigint IDENTITY(1,1) NOT NULL
+            CONSTRAINT [PK_AdhocReport] PRIMARY KEY,
+        [LoadBatchID] bigint NOT NULL,
+        [ReportID] bigint NOT NULL,
+        [SchemaVersion] int NOT NULL,
+        [SourceRowNumber] bigint NOT NULL,
+        [BusinessKey] nvarchar(450) NULL,
+        [RowPayload] nvarchar(max) NOT NULL,
+        [RowHash] varbinary(32) NULL,
+        [SnapshotAtUtc] datetime2(3) NOT NULL,
+        CONSTRAINT [FK_AdhocReport_LoadBatch]
+            FOREIGN KEY ([LoadBatchID]) REFERENCES [etl].[AdhocReportLoadBatch]([LoadBatchID]),
+        CONSTRAINT [FK_AdhocReport_Schema]
+            FOREIGN KEY ([ReportID], [SchemaVersion])
+            REFERENCES [etl].[AdhocReportSchema]([ReportID], [SchemaVersion]),
+        CONSTRAINT [CK_AdhocReport_RowPayload]
+            CHECK (ISJSON([RowPayload]) = 1)
+    );
+
+    CREATE INDEX [IX_AdhocReport_ReportBatch]
+        ON [dw].[AdhocReport]([ReportID], [LoadBatchID], [SourceRowNumber]);
+
+    CREATE INDEX [IX_AdhocReport_BusinessKey]
+        ON [dw].[AdhocReport]([ReportID], [BusinessKey], [LoadBatchID]);
+END;
+GO
+
+CREATE OR ALTER VIEW [analytics].[vw_AdhocReportSnapshots]
+AS
+    SELECT
+        snapshot.[WarehouseRowID],
+        snapshot.[LoadBatchID],
+        snapshot.[ReportID],
+        batch.[ReportName],
+        batch.[SourceView],
+        snapshot.[SchemaVersion],
+        snapshot.[SourceRowNumber],
+        snapshot.[BusinessKey],
+        snapshot.[RowPayload],
+        snapshot.[RowHash],
+        snapshot.[SnapshotAtUtc],
+        batch.[LoadRunID],
+        batch.[StartedAtUtc] AS [LoadStartedAtUtc],
+        batch.[CompletedAtUtc] AS [LoadCompletedAtUtc],
+        batch.[RequestedBy]
+    FROM [dw].[AdhocReport] AS snapshot
+    INNER JOIN [etl].[AdhocReportLoadBatch] AS batch
+        ON batch.[LoadBatchID] = snapshot.[LoadBatchID]
+    WHERE batch.[LoadStatus] = 'Completed';
+GO
+
+CREATE OR ALTER VIEW [analytics].[vw_AdhocReportCurrent]
+AS
+    WITH LatestCompletedBatch AS
+    (
+        SELECT [ReportID], MAX([LoadBatchID]) AS [LoadBatchID]
+        FROM [etl].[AdhocReportLoadBatch]
+        WHERE [LoadStatus] = 'Completed'
+        GROUP BY [ReportID]
+    )
+    SELECT snapshots.*
+    FROM [analytics].[vw_AdhocReportSnapshots] AS snapshots
+    INNER JOIN LatestCompletedBatch AS latest
+        ON latest.[ReportID] = snapshots.[ReportID]
+       AND latest.[LoadBatchID] = snapshots.[LoadBatchID];
+GO
+
 CREATE OR ALTER VIEW [analytics].[vw_ACoAReportSnapshots]
 AS
     SELECT
@@ -213,6 +346,9 @@ GO
 
 GRANT SELECT, INSERT, UPDATE ON [etl].[ACoAReportLoadBatch] TO [ReportingWarehouseLoader];
 GRANT INSERT ON [dw].[FactACoAReportSnapshot] TO [ReportingWarehouseLoader];
+GRANT SELECT, INSERT, UPDATE ON [etl].[AdhocReportLoadBatch] TO [ReportingWarehouseLoader];
+GRANT SELECT, INSERT, UPDATE ON [etl].[AdhocReportSchema] TO [ReportingWarehouseLoader];
+GRANT INSERT ON [dw].[AdhocReport] TO [ReportingWarehouseLoader];
 GRANT SELECT ON SCHEMA::[analytics] TO [ReportingWarehouseReader];
 GO
 

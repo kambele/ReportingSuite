@@ -86,6 +86,7 @@
                             <li class="nav-item"><a href="ReportRender.aspx" class="nav-link"><i class="icon-stats-dots"></i><span>ACoA Report Renderer</span></a></li>
                             <li class="nav-item"><a href="PF_Dashboard.aspx" class="nav-link"><i class="icon-pie-chart6"></i><span>Pension Fund Dashboard</span></a></li>
                             <li class="nav-item"><a href="ReportWarehouse.aspx" class="nav-link"><i class="icon-database-add"></i><span>ACoA Data Warehouse</span></a></li>
+                            <li class="nav-item"><a href="AdhocReportWarehouse.aspx" class="nav-link"><i class="icon-database-upload"></i><span>Adhoc Data Warehouse</span></a></li>
 
                             <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Report catalogue</div><i class="icon-menu" title="Report catalogue"></i></li>
                             <% If HasDynamicReports Then %>

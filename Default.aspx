@@ -66,6 +66,10 @@
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin ACoA Data Warehouse" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
                     <a href="ReportWarehouse.aspx" class="workspace-module-link"><span class="workspace-module-icon is-red"><i class="icon-database-add"></i></span><span class="workspace-module-copy"><strong>ACoA Data Warehouse</strong><small>Validate and load analytical snapshots for downstream tools.</small></span><i class="icon-arrow-up-right2 workspace-module-arrow" aria-hidden="true"></i></a>
                 </article>
+                <article class="workspace-module-card" data-module-id="adhoc-warehouse">
+                    <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Adhoc Data Warehouse" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                    <a href="AdhocReportWarehouse.aspx" class="workspace-module-link"><span class="workspace-module-icon is-blue"><i class="icon-database-upload"></i></span><span class="workspace-module-copy"><strong>Adhoc Data Warehouse</strong><small>Store all Adhoc report snapshots in one JSON-backed warehouse table.</small></span><i class="icon-arrow-up-right2 workspace-module-arrow" aria-hidden="true"></i></a>
+                </article>
                 <% If IsWorkspaceAdministrator Then %>
                 <article class="workspace-module-card" data-module-id="builder">
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Report Builder" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
