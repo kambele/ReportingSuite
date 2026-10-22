@@ -749,15 +749,34 @@ Public NotInheritable Class AdhocReportService
                 settingsCommand.ExecuteNonQuery()
             End Using
 
+            ' CREATE OR ALTER is unavailable on older SQL Server releases. Determine
+            ' the required DDL verb first, then keep CREATE/ALTER VIEW as the first
+            ' statement in its own command batch.
+            Dim viewExists As Boolean
+            Using existenceCommand = CreateCommand(connection,
+                "SELECT CASE WHEN OBJECT_ID(@viewName, N'V') IS NULL THEN 0 ELSE 1 END")
+                existenceCommand.Transaction = transaction
+                existenceCommand.Parameters.Add("@viewName", SqlDbType.NVarChar, 776).Value = viewName
+                viewExists = Convert.ToInt32(existenceCommand.ExecuteScalar(), CultureInfo.InvariantCulture) = 1
+            End Using
+
+            Dim viewCommandText = If(viewExists, "ALTER VIEW ", "CREATE VIEW ") &
+                                  quotedViewName & " AS" & Environment.NewLine & query
             Using viewCommand = CreateCommand(connection,
-                "CREATE OR ALTER VIEW " & quotedViewName & " AS" & Environment.NewLine & query)
+                viewCommandText)
                 viewCommand.Transaction = transaction
                 viewCommand.ExecuteNonQuery()
             End Using
         Catch ex As SqlException
+            Dim sqlMessage = Regex.Replace(Convert.ToString(ex.Message), "\s+", " ").Trim()
+            Dim permissionHint = String.Empty
+            If ex.Number = 229 OrElse ex.Number = 262 OrElse ex.Number = 15151 Then
+                permissionHint = " Grant CREATE VIEW at database level and ALTER on schema dbo to the Reporting Suite database principal."
+            End If
             Throw New ConfigurationErrorsException(
                 "The report could not be saved because Power BI view " & viewName &
-                " could not be created. Ensure the query is valid in a SQL view and the application identity has CREATE VIEW and ALTER permission on schema dbo.",
+                " could not be created. SQL Server error " & ex.Number.ToString(CultureInfo.InvariantCulture) &
+                ": " & sqlMessage & "." & permissionHint,
                 ex)
         End Try
     End Sub
