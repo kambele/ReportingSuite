@@ -208,7 +208,7 @@
                 var kinds = String(item.attr('data-kind') || '').split(/\s+/);
                 var matchesKind = activeKind === 'all' || kinds.indexOf(activeKind) >= 0;
                 var visible = matchesText && matchesKind;
-                item.toggle(visible);
+                item.toggleClass('is-filtered-out', !visible).toggle(visible);
                 if (visible) {
                     visibleInSection += 1;
                     visibleTotal += 1;
@@ -216,7 +216,7 @@
             });
             panel.find('.workspace-section-empty').toggleClass('d-none', visibleInSection !== 0);
             panel.find('.workspace-dynamic-group').each(function () {
-                $(this).toggle($(this).find('.workspace-report-item:visible').length > 0);
+                $(this).toggle($(this).find('.workspace-report-item:not(.is-filtered-out)').length > 0);
             });
             $('[data-section-tab="' + panel.attr('data-section-panel') + '"]').toggleClass('is-filtered-out', visibleInSection === 0);
         });

@@ -217,5 +217,5 @@
 </asp:Content>
 
 <asp:Content ID="Scripts" ContentPlaceHolderID="PageScripts" runat="server">
-    <script src="Scripts/reporting-dashboard.js?v=20261022.1"></script>
+    <script src="Scripts/reporting-dashboard.js?v=20261022.2"></script>
 </asp:Content>
