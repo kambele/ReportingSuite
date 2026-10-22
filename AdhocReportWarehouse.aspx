@@ -49,12 +49,44 @@
                     <div class="form-control bg-light"><code>dw.AdhocReport</code></div>
                     <small class="form-text text-muted">The report ID and schema version identify each JSON dataset.</small>
                 </div>
+                <div class="form-group">
+                    <label for="<%= filterColumnDropDown.ClientID %>">Filter column</label>
+                    <asp:DropDownList ID="filterColumnDropDown" runat="server" CssClass="form-control" />
+                    <small class="form-text text-muted">Optional. Leave blank to load the complete report.</small>
+                </div>
+                <div class="form-group">
+                    <label for="<%= filterOperatorDropDown.ClientID %>">Condition</label>
+                    <asp:DropDownList ID="filterOperatorDropDown" runat="server" CssClass="form-control">
+                        <asp:ListItem Text="Select a condition" Value="" />
+                        <asp:ListItem Text="Between (inclusive)" Value="between" />
+                        <asp:ListItem Text="Equal to" Value="equals" />
+                        <asp:ListItem Text="On or after / greater than or equal" Value="gte" />
+                        <asp:ListItem Text="On or before / less than or equal" Value="lte" />
+                        <asp:ListItem Text="Contains" Value="contains" />
+                        <asp:ListItem Text="Starts with" Value="starts_with" />
+                        <asp:ListItem Text="Is blank / null" Value="is_null" />
+                        <asp:ListItem Text="Is not blank / null" Value="is_not_null" />
+                    </asp:DropDownList>
+                    <small class="form-text text-muted">Date, number, and text columns are supported.</small>
+                </div>
+                <div class="form-group" id="adhocWarehouseFilterFromGroup">
+                    <label id="adhocWarehouseFilterFromLabel" for="<%= filterValueFromTextBox.ClientID %>">From / value</label>
+                    <asp:TextBox ID="filterValueFromTextBox" runat="server" CssClass="form-control" MaxLength="4000"
+                        placeholder="Start date, number, or text" />
+                    <small class="form-text text-muted">Dates may use <code>yyyy-MM-dd</code> or include a time.</small>
+                </div>
+                <div class="form-group" id="adhocWarehouseFilterToGroup">
+                    <label for="<%= filterValueToTextBox.ClientID %>">To</label>
+                    <asp:TextBox ID="filterValueToTextBox" runat="server" CssClass="form-control" MaxLength="4000"
+                        placeholder="End date or number" />
+                    <small class="form-text text-muted">Required only for an inclusive range.</small>
+                </div>
             </div>
 
             <div class="report-parameter-actions">
                 <asp:Button ID="previewButton" runat="server" CssClass="btn btn-light" Text="Validate extraction" CausesValidation="false" />
                 <asp:Button ID="loadWarehouseButton" runat="server" CssClass="btn btn-primary" Text="Load warehouse snapshot" CausesValidation="false"
-                    OnClientClick="return window.confirm('Load the complete Adhoc report result into the shared warehouse table?');" />
+                    OnClientClick="return window.confirm('Load the selected Adhoc report range into the shared warehouse table?');" />
             </div>
         </div>
     </div>
@@ -74,6 +106,7 @@
                             <asp:BoundField DataField="StartedAtUtc" HeaderText="Started" DataFormatString="{0:yyyy-MM-dd HH:mm:ss}" />
                             <asp:BoundField DataField="LoadStatus" HeaderText="Status" />
                             <asp:BoundField DataField="ReportName" HeaderText="Report" />
+                            <asp:BoundField DataField="FilterSummary" HeaderText="Loaded range" />
                             <asp:BoundField DataField="SchemaVersion" HeaderText="Schema" />
                             <asp:BoundField DataField="SourceColumnCount" HeaderText="Columns" DataFormatString="{0:N0}" />
                             <asp:BoundField DataField="ExtractedRowCount" HeaderText="Extracted" DataFormatString="{0:N0}" />
@@ -101,4 +134,30 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        (function () {
+            function updateAdhocWarehouseFilterInputs() {
+                var operator = document.getElementById('<%= filterOperatorDropDown.ClientID %>');
+                var fromGroup = document.getElementById('adhocWarehouseFilterFromGroup');
+                var toGroup = document.getElementById('adhocWarehouseFilterToGroup');
+                var fromLabel = document.getElementById('adhocWarehouseFilterFromLabel');
+                if (!operator || !fromGroup || !toGroup) return;
+
+                var value = operator.value;
+                var noValues = value === 'is_null' || value === 'is_not_null' || value === '';
+                fromGroup.style.display = noValues ? 'none' : '';
+                toGroup.style.display = value === 'between' ? '' : 'none';
+                if (fromLabel) {
+                    fromLabel.textContent = value === 'between' ? 'From' : 'Value';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var operator = document.getElementById('<%= filterOperatorDropDown.ClientID %>');
+                if (operator) operator.addEventListener('change', updateAdhocWarehouseFilterInputs);
+                updateAdhocWarehouseFilterInputs();
+            });
+        }());
+    </script>
 </asp:Content>

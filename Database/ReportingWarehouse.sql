@@ -161,6 +161,10 @@ BEGIN
         [ReportID] bigint NOT NULL,
         [ReportName] nvarchar(512) NOT NULL,
         [SourceView] nvarchar(776) NOT NULL,
+        [FilterColumn] nvarchar(256) NULL,
+        [FilterOperator] varchar(20) NULL,
+        [FilterValueFrom] nvarchar(4000) NULL,
+        [FilterValueTo] nvarchar(4000) NULL,
         [SchemaVersion] int NULL,
         [SourceColumnCount] int NULL,
         [ExtractedRowCount] int NULL,
@@ -168,12 +172,32 @@ BEGIN
         [DurationMilliseconds] bigint NULL,
         [ErrorMessage] nvarchar(4000) NULL,
         CONSTRAINT [CK_AdhocReportLoadBatch_LoadStatus]
-            CHECK ([LoadStatus] IN ('Running', 'Completed', 'Failed'))
+            CHECK ([LoadStatus] IN ('Running', 'Completed', 'Failed')),
+        CONSTRAINT [CK_AdhocReportLoadBatch_FilterOperator]
+            CHECK ([FilterOperator] IS NULL OR [FilterOperator] IN
+                ('between', 'equals', 'gte', 'lte', 'contains', 'starts_with', 'is_null', 'is_not_null'))
     );
 
     CREATE INDEX [IX_AdhocReportLoadBatch_Report]
         ON [etl].[AdhocReportLoadBatch]([ReportID], [LoadBatchID] DESC);
 END;
+GO
+
+IF COL_LENGTH(N'[etl].[AdhocReportLoadBatch]', N'FilterColumn') IS NULL
+    ALTER TABLE [etl].[AdhocReportLoadBatch] ADD [FilterColumn] nvarchar(256) NULL;
+IF COL_LENGTH(N'[etl].[AdhocReportLoadBatch]', N'FilterOperator') IS NULL
+    ALTER TABLE [etl].[AdhocReportLoadBatch] ADD [FilterOperator] varchar(20) NULL;
+IF COL_LENGTH(N'[etl].[AdhocReportLoadBatch]', N'FilterValueFrom') IS NULL
+    ALTER TABLE [etl].[AdhocReportLoadBatch] ADD [FilterValueFrom] nvarchar(4000) NULL;
+IF COL_LENGTH(N'[etl].[AdhocReportLoadBatch]', N'FilterValueTo') IS NULL
+    ALTER TABLE [etl].[AdhocReportLoadBatch] ADD [FilterValueTo] nvarchar(4000) NULL;
+GO
+
+IF OBJECT_ID(N'[etl].[CK_AdhocReportLoadBatch_FilterOperator]', N'C') IS NULL
+    ALTER TABLE [etl].[AdhocReportLoadBatch] WITH CHECK
+    ADD CONSTRAINT [CK_AdhocReportLoadBatch_FilterOperator]
+        CHECK ([FilterOperator] IS NULL OR [FilterOperator] IN
+            ('between', 'equals', 'gte', 'lte', 'contains', 'starts_with', 'is_null', 'is_not_null'));
 GO
 
 IF OBJECT_ID(N'[etl].[AdhocReportSchema]', N'U') IS NULL
@@ -240,6 +264,10 @@ AS
         snapshot.[ReportID],
         batch.[ReportName],
         batch.[SourceView],
+        batch.[FilterColumn],
+        batch.[FilterOperator],
+        batch.[FilterValueFrom],
+        batch.[FilterValueTo],
         snapshot.[SchemaVersion],
         snapshot.[SourceRowNumber],
         snapshot.[BusinessKey],
@@ -349,6 +377,8 @@ GRANT INSERT ON [dw].[FactACoAReportSnapshot] TO [ReportingWarehouseLoader];
 GRANT SELECT, INSERT, UPDATE ON [etl].[AdhocReportLoadBatch] TO [ReportingWarehouseLoader];
 GRANT SELECT, INSERT, UPDATE ON [etl].[AdhocReportSchema] TO [ReportingWarehouseLoader];
 GRANT INSERT ON [dw].[AdhocReport] TO [ReportingWarehouseLoader];
+GRANT VIEW DEFINITION ON [analytics].[vw_AdhocReportSnapshots] TO [ReportingWarehouseLoader];
+GRANT VIEW DEFINITION ON [analytics].[vw_AdhocReportCurrent] TO [ReportingWarehouseLoader];
 GRANT SELECT ON SCHEMA::[analytics] TO [ReportingWarehouseReader];
 GO
 

@@ -6,7 +6,7 @@ Adhoc reports can return unrelated column sets, so they share one JSON-backed ph
 
 ## Data model
 
-- `etl.AdhocReportLoadBatch` records status, source view, row counts, duration, user and errors.
+- `etl.AdhocReportLoadBatch` records status, source view, selected filter range, row counts, duration, user and errors.
 - `etl.AdhocReportSchema` records a SHA-256 schema fingerprint and ordered column metadata for each schema version.
 - `dw.AdhocReport` stores one row per source result row. `RowPayload` contains the source columns as JSON.
 - `analytics.vw_AdhocReportCurrent` exposes the latest successful batch for each report.
@@ -17,16 +17,17 @@ The warehouse fact is keyed by `ReportID`, `LoadBatchID`, `SchemaVersion` and `S
 ## Load flow
 
 1. Select an accessible Adhoc report on `AdhocReportWarehouse.aspx`.
-2. Validate the source `dbo.vw_AdhocReport_<ReportID>` and the configured row limit.
-3. Create a `Running` batch record in the warehouse.
-4. Execute the source view outside the warehouse transaction so linked-server queries do not require MSDTC.
-5. Calculate the ordered schema definition and reuse or create its schema version.
-6. Serialize every source row to JSON and bulk-load it into `dw.AdhocReport`.
-7. Commit the rows and mark the batch `Completed`; failures roll back detailed rows and mark the batch `Failed`.
+2. Optionally select a source column and an inclusive range, equality, text, or null condition. The column is checked against the view schema and values are passed as typed SQL parameters.
+3. Validate the source `dbo.vw_AdhocReport_<ReportID>` and the configured row limit.
+4. Create a `Running` batch record in the warehouse, including the filter metadata.
+5. Execute the filtered source view outside the warehouse transaction so linked-server queries do not require MSDTC.
+6. Calculate the ordered schema definition and reuse or create its schema version.
+7. Serialize every source row to JSON and bulk-load it into `dw.AdhocReport`.
+8. Commit the rows and mark the batch `Completed`; failures roll back detailed rows and mark the batch `Failed`.
 
 ## Power BI
 
-Filter either analytics view by `ReportID`, parse `RowPayload` with `Json.Document`, and expand the fields required by that report's semantic model. Refresh against `analytics.vw_AdhocReportCurrent` for the latest dataset or the snapshots view for audit/history.
+Filter either analytics view by `ReportID`, parse `RowPayload` with `Json.Document`, and expand the fields required by that report's semantic model. `FilterColumn`, `FilterOperator`, `FilterValueFrom`, and `FilterValueTo` identify the scope of each snapshot. Refresh against `analytics.vw_AdhocReportCurrent` for the latest dataset or the snapshots view for audit/history.
 
 The Power BI identity should be a member only of `ReportingWarehouseReader`. The application or scheduled-loader identity should be a member of `ReportingWarehouseLoader`.
 

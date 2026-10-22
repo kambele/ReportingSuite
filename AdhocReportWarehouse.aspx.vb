@@ -32,6 +32,7 @@ Public Class AdhocReportWarehousePage
         Try
             If Not IsPostBack Then
                 BindReports()
+                BindFilterColumns()
             End If
             UpdateParameterSummary()
             UpdateWarehouseHealth()
@@ -43,6 +44,7 @@ Public Class AdhocReportWarehousePage
     End Sub
 
     Private Sub reportDropDown_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles reportDropDown.SelectedIndexChanged
+        BindFilterColumns()
         UpdateParameterSummary()
     End Sub
 
@@ -56,7 +58,8 @@ Public Class AdhocReportWarehousePage
                 " returned " & preview.RowCount.ToString("N0", CultureInfo.CurrentCulture) & " rows and " &
                 preview.ColumnCount.ToString("N0", CultureInfo.CurrentCulture) & " columns from <code>" &
                 HttpUtility.HtmlEncode(preview.SourceView) & "</code>. Schema fingerprint: <code>" &
-                HttpUtility.HtmlEncode(preview.SchemaHash.Substring(0, 16)) & "</code>. No warehouse data was written.", False)
+                HttpUtility.HtmlEncode(preview.SchemaHash.Substring(0, 16)) & "</code>. Loaded range: <strong>" &
+                HttpUtility.HtmlEncode(preview.FilterSummary) & "</strong>. No warehouse data was written.", False)
         Catch ex As Exception
             Trace.Warn("AdhocReportWarehouse", "Adhoc extraction validation failed.", ex)
             ShowOperationMessage(HttpUtility.HtmlEncode(GetSafeOperationMessage(ex)), True)
@@ -79,7 +82,8 @@ Public Class AdhocReportWarehousePage
                 result.LoadedRowCount.ToString("N0", CultureInfo.CurrentCulture) & " JSON rows across " &
                 result.ColumnCount.ToString("N0", CultureInfo.CurrentCulture) & " source columns using schema version " &
                 result.SchemaVersion.ToString(CultureInfo.CurrentCulture) & " in " &
-                elapsed.TotalSeconds.ToString("N1", CultureInfo.CurrentCulture) & " seconds.", False)
+                elapsed.TotalSeconds.ToString("N1", CultureInfo.CurrentCulture) & " seconds. Loaded range: <strong>" &
+                HttpUtility.HtmlEncode(result.FilterSummary) & "</strong>.", False)
             BindRecentLoads()
         Catch ex As Exception
             Trace.Warn("AdhocReportWarehouse", "Adhoc warehouse load failed.", ex)
@@ -116,6 +120,36 @@ Public Class AdhocReportWarehousePage
         loadWarehouseButton.Enabled = hasReports
     End Sub
 
+    Private Sub BindFilterColumns()
+        filterColumnDropDown.Items.Clear()
+        filterColumnDropDown.Items.Add(New ListItem("Full report (no filter)", String.Empty))
+        filterOperatorDropDown.SelectedValue = String.Empty
+        filterValueFromTextBox.Text = String.Empty
+        filterValueToTextBox.Text = String.Empty
+
+        Dim reportId As Long
+        If Not Long.TryParse(reportDropDown.SelectedValue, NumberStyles.Integer,
+                             CultureInfo.InvariantCulture, reportId) OrElse reportId <= 0 Then
+            filterColumnDropDown.Enabled = False
+            filterOperatorDropDown.Enabled = False
+            filterValueFromTextBox.Enabled = False
+            filterValueToTextBox.Enabled = False
+            Return
+        End If
+
+        ReportAccessService.DemandReportAccess(Context, reportId)
+        Dim columns As DataTable = CreateWarehouseService().GetFilterColumns(reportId)
+        For Each row As DataRow In columns.Rows
+            Dim columnName As String = Convert.ToString(row("ColumnName"), CultureInfo.InvariantCulture)
+            Dim dataTypeName As String = Convert.ToString(row("DataTypeName"), CultureInfo.InvariantCulture)
+            filterColumnDropDown.Items.Add(New ListItem(columnName & " (" & dataTypeName & ")", columnName))
+        Next
+        filterColumnDropDown.Enabled = filterColumnDropDown.Items.Count > 1
+        filterOperatorDropDown.Enabled = filterColumnDropDown.Enabled
+        filterValueFromTextBox.Enabled = filterColumnDropDown.Enabled
+        filterValueToTextBox.Enabled = filterColumnDropDown.Enabled
+    End Sub
+
     Private Function BuildRequest() As AdhocReportWarehouseRequest
         Dim reportId As Long
         If Not Long.TryParse(reportDropDown.SelectedValue, NumberStyles.Integer,
@@ -125,7 +159,11 @@ Public Class AdhocReportWarehousePage
         ReportAccessService.DemandReportAccess(Context, reportId)
         Return New AdhocReportWarehouseRequest With {
             .ReportId = reportId,
-            .RequestedBy = GetWindowsUserName()
+            .RequestedBy = GetWindowsUserName(),
+            .FilterColumn = filterColumnDropDown.SelectedValue,
+            .FilterOperator = filterOperatorDropDown.SelectedValue,
+            .FilterValueFrom = filterValueFromTextBox.Text,
+            .FilterValueTo = filterValueToTextBox.Text
         }
     End Function
 
@@ -134,10 +172,39 @@ Public Class AdhocReportWarehousePage
             parameterSummaryLiteral.Text = "<span class=""badge badge-light"">No report selected</span>"
             Return
         End If
+        Dim rangeLabel As String = "Full snapshot"
+        If filterColumnDropDown.SelectedItem IsNot Nothing AndAlso
+           Not String.IsNullOrWhiteSpace(filterColumnDropDown.SelectedValue) Then
+            rangeLabel = filterColumnDropDown.SelectedValue & " · " &
+                         GetOperatorDisplayName(filterOperatorDropDown.SelectedValue)
+        End If
         parameterSummaryLiteral.Text = "<span class=""badge badge-light"">" &
             HttpUtility.HtmlEncode(reportDropDown.SelectedItem.Text) & "</span> " &
-            "<span class=""badge badge-light"">Full snapshot</span>"
+            "<span class=""badge badge-light"">" & HttpUtility.HtmlEncode(rangeLabel) & "</span>"
     End Sub
+
+    Private Shared Function GetOperatorDisplayName(ByVal value As String) As String
+        Select Case If(value, String.Empty).Trim().ToLowerInvariant()
+            Case "between"
+                Return "Between"
+            Case "equals"
+                Return "Equal to"
+            Case "gte"
+                Return "On or after"
+            Case "lte"
+                Return "On or before"
+            Case "contains"
+                Return "Contains"
+            Case "starts_with"
+                Return "Starts with"
+            Case "is_null"
+                Return "Is blank"
+            Case "is_not_null"
+                Return "Is not blank"
+            Case Else
+                Return "Select a condition"
+        End Select
+    End Function
 
     Private Sub UpdateWarehouseHealth()
         _warehouseReady = False

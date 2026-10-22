@@ -56,10 +56,31 @@ Public NotInheritable Class AdhocReportWarehouseService
         Return result
     End Function
 
+    Public Function GetFilterColumns(ByVal reportId As Long) As DataTable
+        If reportId <= 0 Then
+            Throw New InvalidOperationException("Select an Adhoc report before choosing a filter column.")
+        End If
+
+        Dim definition As AdhocWarehouseReportDefinition = LoadDefinition(reportId)
+        Dim schema As DataTable = LoadSourceSchema(definition)
+        Dim result As New DataTable("AdhocFilterColumns") With {.Locale = CultureInfo.CurrentCulture}
+        result.Columns.Add("ColumnName", GetType(String))
+        result.Columns.Add("DataTypeName", GetType(String))
+
+        For Each column As DataColumn In schema.Columns
+            If Not IsFilterableType(column.DataType) Then Continue For
+            Dim row As DataRow = result.NewRow()
+            row("ColumnName") = column.ColumnName
+            row("DataTypeName") = GetFriendlyDataTypeName(column.DataType)
+            result.Rows.Add(row)
+        Next
+        Return result
+    End Function
+
     Public Function ValidateExtraction(ByVal request As AdhocReportWarehouseRequest) As AdhocReportWarehousePreview
         ValidateRequest(request)
         Dim definition As AdhocWarehouseReportDefinition = LoadDefinition(request.ReportId)
-        Dim extract As DataTable = ExtractReport(definition)
+        Dim extract As DataTable = ExtractReport(definition, request)
         Dim schemaDefinition As String = BuildSchemaDefinition(extract)
         Return New AdhocReportWarehousePreview With {
             .ReportId = definition.ReportId,
@@ -67,7 +88,9 @@ Public NotInheritable Class AdhocReportWarehouseService
             .SourceView = definition.SourceView,
             .RowCount = extract.Rows.Count,
             .ColumnCount = extract.Columns.Count,
-            .SchemaHash = ToHex(ComputeHash(schemaDefinition))
+            .SchemaHash = ToHex(ComputeHash(schemaDefinition)),
+            .FilterSummary = BuildFilterSummary(request.FilterColumn, request.FilterOperator,
+                                                request.FilterValueFrom, request.FilterValueTo)
         }
     End Function
 
@@ -86,7 +109,7 @@ Public NotInheritable Class AdhocReportWarehouseService
 
             ' Extraction is intentionally completed outside the warehouse transaction.
             ' Adhoc views may reference linked servers that cannot participate in MSDTC.
-            Dim extract As DataTable = ExtractReport(definition)
+            Dim extract As DataTable = ExtractReport(definition, request)
             Dim schemaDefinition As String = BuildSchemaDefinition(extract)
             Dim schemaHash As Byte() = ComputeHash(schemaDefinition)
             Dim snapshotAtUtc As DateTime = DateTime.UtcNow
@@ -117,6 +140,8 @@ Public NotInheritable Class AdhocReportWarehouseService
                         .ColumnCount = extract.Columns.Count,
                         .ExtractedRowCount = extract.Rows.Count,
                         .LoadedRowCount = warehouseRows.Rows.Count,
+                        .FilterSummary = BuildFilterSummary(request.FilterColumn, request.FilterOperator,
+                                                            request.FilterValueFrom, request.FilterValueTo),
                         .StartedAtUtc = startedAtUtc,
                         .CompletedAtUtc = completedAtUtc
                     }
@@ -209,7 +234,8 @@ Public NotInheritable Class AdhocReportWarehouseService
             EnsureWarehouseSchema(connection)
             Using command As New SqlCommand(
                 "SELECT TOP (@MaximumRows) LoadBatchID, StartedAtUtc, CompletedAtUtc, LoadStatus, " &
-                "ReportID, ReportName, SchemaVersion, SourceColumnCount, ExtractedRowCount, LoadedRowCount, " &
+                "ReportID, ReportName, FilterColumn, FilterOperator, FilterValueFrom, FilterValueTo, " &
+                "SchemaVersion, SourceColumnCount, ExtractedRowCount, LoadedRowCount, " &
                 "DurationMilliseconds, RequestedBy FROM [etl].[AdhocReportLoadBatch] " &
                 "ORDER BY LoadBatchID DESC", connection)
                 command.Parameters.Add("@MaximumRows", SqlDbType.Int).Value = Math.Max(1, Math.Min(maximumRows, 100))
@@ -218,6 +244,14 @@ Public NotInheritable Class AdhocReportWarehouseService
                 End Using
             End Using
         End Using
+        result.Columns.Add("FilterSummary", GetType(String))
+        For Each row As DataRow In result.Rows
+            row("FilterSummary") = BuildFilterSummary(
+                Convert.ToString(row("FilterColumn"), CultureInfo.InvariantCulture),
+                Convert.ToString(row("FilterOperator"), CultureInfo.InvariantCulture),
+                Convert.ToString(row("FilterValueFrom"), CultureInfo.InvariantCulture),
+                Convert.ToString(row("FilterValueTo"), CultureInfo.InvariantCulture))
+        Next
         Return result
     End Function
 
@@ -247,21 +281,38 @@ Public NotInheritable Class AdhocReportWarehouseService
         End Using
     End Function
 
-    Private Function ExtractReport(ByVal definition As AdhocWarehouseReportDefinition) As DataTable
-        Dim result As New DataTable("AdhocExtract") With {.Locale = CultureInfo.InvariantCulture}
-        Dim quotedView As String = "[dbo].[" & SourceViewPrefix &
-                                   definition.ReportId.ToString(CultureInfo.InvariantCulture) & "]"
+    Private Function LoadSourceSchema(ByVal definition As AdhocWarehouseReportDefinition) As DataTable
+        Dim quotedView As String = QuoteSourceView(definition.ReportId)
         Using connection As New SqlConnection(_sourceConnectionString)
             connection.Open()
-            Using existenceCommand As New SqlCommand(
-                "SELECT CASE WHEN OBJECT_ID(@ViewName, N'V') IS NULL THEN 0 ELSE 1 END", connection)
-                existenceCommand.Parameters.Add("@ViewName", SqlDbType.NVarChar, 776).Value = definition.SourceView
-                If Convert.ToInt32(existenceCommand.ExecuteScalar(), CultureInfo.InvariantCulture) <> 1 Then
-                    Throw New InvalidOperationException(
-                        "The source view " & definition.SourceView & " does not exist. Save the Adhoc report before loading its warehouse snapshot.")
-                End If
+            EnsureSourceViewExists(connection, definition)
+            Return LoadSourceSchema(connection, quotedView)
+        End Using
+    End Function
+
+    Private Shared Function LoadSourceSchema(ByVal connection As SqlConnection,
+                                             ByVal quotedView As String) As DataTable
+        Dim result As New DataTable("AdhocSourceSchema") With {.Locale = CultureInfo.InvariantCulture}
+        Using command As New SqlCommand("SELECT TOP (0) * FROM " & quotedView, connection)
+            command.CommandTimeout = GetCommandTimeout()
+            Using adapter As New SqlDataAdapter(command)
+                adapter.FillSchema(result, SchemaType.Source)
             End Using
-            Using command As New SqlCommand("SELECT * FROM " & quotedView, connection)
+        End Using
+        Return result
+    End Function
+
+    Private Function ExtractReport(ByVal definition As AdhocWarehouseReportDefinition,
+                                   ByVal request As AdhocReportWarehouseRequest) As DataTable
+        Dim result As New DataTable("AdhocExtract") With {.Locale = CultureInfo.InvariantCulture}
+        Dim quotedView As String = QuoteSourceView(definition.ReportId)
+        Using connection As New SqlConnection(_sourceConnectionString)
+            connection.Open()
+            EnsureSourceViewExists(connection, definition)
+            Dim schema As DataTable = LoadSourceSchema(connection, quotedView)
+            Using command As New SqlCommand()
+                command.Connection = connection
+                command.CommandText = "SELECT * FROM " & quotedView & BuildFilterClause(command, request, schema)
                 command.CommandTimeout = GetCommandTimeout()
                 Using adapter As New SqlDataAdapter(command)
                     adapter.Fill(result)
@@ -280,6 +331,236 @@ Public NotInheritable Class AdhocReportWarehouseService
             Throw New InvalidOperationException("The selected Adhoc report does not expose any columns.")
         End If
         Return result
+    End Function
+
+    Private Shared Sub EnsureSourceViewExists(ByVal connection As SqlConnection,
+                                              ByVal definition As AdhocWarehouseReportDefinition)
+        Using existenceCommand As New SqlCommand(
+            "SELECT CASE WHEN OBJECT_ID(@ViewName, N'V') IS NULL THEN 0 ELSE 1 END", connection)
+            existenceCommand.Parameters.Add("@ViewName", SqlDbType.NVarChar, 776).Value = definition.SourceView
+            If Convert.ToInt32(existenceCommand.ExecuteScalar(), CultureInfo.InvariantCulture) <> 1 Then
+                Throw New InvalidOperationException(
+                    "The source view " & definition.SourceView & " does not exist. Save the Adhoc report before loading its warehouse snapshot.")
+            End If
+        End Using
+    End Sub
+
+    Private Shared Function QuoteSourceView(ByVal reportId As Long) As String
+        Return "[dbo].[" & SourceViewPrefix & reportId.ToString(CultureInfo.InvariantCulture) & "]"
+    End Function
+
+    Private Shared Function BuildFilterClause(ByVal command As SqlCommand,
+                                              ByVal request As AdhocReportWarehouseRequest,
+                                              ByVal schema As DataTable) As String
+        Dim columnName As String = If(request.FilterColumn, String.Empty).Trim()
+        Dim filterOperator As String = NormalizeFilterOperator(request.FilterOperator)
+        Dim valueFrom As String = If(request.FilterValueFrom, String.Empty)
+        Dim valueTo As String = If(request.FilterValueTo, String.Empty)
+
+        If columnName.Length = 0 Then
+            If filterOperator.Length > 0 OrElse valueFrom.Trim().Length > 0 OrElse valueTo.Trim().Length > 0 Then
+                Throw New InvalidOperationException("Select a filter column, or clear the filter condition and values.")
+            End If
+            Return String.Empty
+        End If
+        If filterOperator.Length = 0 Then
+            Throw New InvalidOperationException("Select a filter condition for " & columnName & ".")
+        End If
+
+        Dim sourceColumn As DataColumn = Nothing
+        For Each candidate As DataColumn In schema.Columns
+            If candidate.ColumnName.Equals(columnName, StringComparison.OrdinalIgnoreCase) Then
+                sourceColumn = candidate
+                Exit For
+            End If
+        Next
+        If sourceColumn Is Nothing OrElse Not IsFilterableType(sourceColumn.DataType) Then
+            Throw New InvalidOperationException("The selected filter column is unavailable or cannot be filtered.")
+        End If
+
+        Dim quotedColumn As String = "[" & sourceColumn.ColumnName.Replace("]", "]]" ) & "]"
+        Dim isText As Boolean = sourceColumn.DataType Is GetType(String) OrElse sourceColumn.DataType Is GetType(Char)
+        Select Case filterOperator
+            Case "between"
+                EnsureFilterValue(valueFrom, "From")
+                EnsureFilterValue(valueTo, "To")
+                EnsureRangeSupported(sourceColumn)
+                AddFilterParameter(command, "@FilterFrom", valueFrom, sourceColumn.DataType, sourceColumn.ColumnName)
+                AddFilterParameter(command, "@FilterTo", valueTo, sourceColumn.DataType, sourceColumn.ColumnName)
+                Return " WHERE " & quotedColumn & " >= @FilterFrom AND " & quotedColumn & " <= @FilterTo"
+            Case "equals"
+                EnsureFilterValue(valueFrom, "Value")
+                AddFilterParameter(command, "@FilterValue", valueFrom, sourceColumn.DataType, sourceColumn.ColumnName)
+                Return " WHERE " & quotedColumn & " = @FilterValue"
+            Case "gte"
+                EnsureFilterValue(valueFrom, "Value")
+                EnsureRangeSupported(sourceColumn)
+                AddFilterParameter(command, "@FilterValue", valueFrom, sourceColumn.DataType, sourceColumn.ColumnName)
+                Return " WHERE " & quotedColumn & " >= @FilterValue"
+            Case "lte"
+                EnsureFilterValue(valueFrom, "Value")
+                EnsureRangeSupported(sourceColumn)
+                AddFilterParameter(command, "@FilterValue", valueFrom, sourceColumn.DataType, sourceColumn.ColumnName)
+                Return " WHERE " & quotedColumn & " <= @FilterValue"
+            Case "contains", "starts_with"
+                If Not isText Then
+                    Throw New InvalidOperationException("Contains and starts-with filters can only be used with text columns.")
+                End If
+                EnsureFilterValue(valueFrom, "Value")
+                Dim escapedValue As String = EscapeLikeValue(valueFrom)
+                Dim pattern As String = If(filterOperator = "contains", "%" & escapedValue & "%", escapedValue & "%")
+                command.Parameters.Add("@FilterValue", SqlDbType.NVarChar, -1).Value = pattern
+                Return " WHERE CONVERT(nvarchar(max), " & quotedColumn & ") LIKE @FilterValue ESCAPE N'~'"
+            Case "is_null"
+                If isText Then
+                    Return " WHERE " & quotedColumn & " IS NULL OR NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(max), " &
+                           quotedColumn & "))), N'') IS NULL"
+                End If
+                Return " WHERE " & quotedColumn & " IS NULL"
+            Case "is_not_null"
+                If isText Then
+                    Return " WHERE " & quotedColumn & " IS NOT NULL AND NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(max), " &
+                           quotedColumn & "))), N'') IS NOT NULL"
+                End If
+                Return " WHERE " & quotedColumn & " IS NOT NULL"
+            Case Else
+                Throw New InvalidOperationException("The selected filter condition is not supported.")
+        End Select
+    End Function
+
+    Private Shared Function NormalizeFilterOperator(ByVal value As String) As String
+        Dim normalized As String = If(value, String.Empty).Trim().ToLowerInvariant()
+        Select Case normalized
+            Case "", "between", "equals", "gte", "lte", "contains", "starts_with", "is_null", "is_not_null"
+                Return normalized
+            Case Else
+                Throw New InvalidOperationException("The selected filter condition is not supported.")
+        End Select
+    End Function
+
+    Private Shared Sub EnsureFilterValue(ByVal value As String, ByVal label As String)
+        If String.IsNullOrWhiteSpace(value) Then
+            Throw New InvalidOperationException(label & " is required for the selected filter condition.")
+        End If
+    End Sub
+
+    Private Shared Sub EnsureRangeSupported(ByVal column As DataColumn)
+        If column.DataType Is GetType(Boolean) OrElse column.DataType Is GetType(Guid) OrElse
+           column.DataType Is GetType(Byte()) Then
+            Throw New InvalidOperationException(
+                "Range conditions cannot be used with the " & column.ColumnName & " column. Use Equal to instead.")
+        End If
+    End Sub
+
+    Private Shared Sub AddFilterParameter(ByVal command As SqlCommand,
+                                          ByVal parameterName As String,
+                                          ByVal rawValue As String,
+                                          ByVal dataType As Type,
+                                          ByVal columnName As String)
+        Dim convertedValue As Object = ConvertFilterValue(rawValue, dataType, columnName)
+        If dataType Is GetType(String) OrElse dataType Is GetType(Char) Then
+            command.Parameters.Add(parameterName, SqlDbType.NVarChar, -1).Value = convertedValue
+        Else
+            command.Parameters.AddWithValue(parameterName, convertedValue)
+        End If
+    End Sub
+
+    Private Shared Function ConvertFilterValue(ByVal rawValue As String,
+                                               ByVal dataType As Type,
+                                               ByVal columnName As String) As Object
+        Try
+            If dataType Is GetType(String) Then Return rawValue
+            If dataType Is GetType(Char) Then
+                If rawValue.Length <> 1 Then Throw New FormatException()
+                Return rawValue(0)
+            End If
+            If dataType Is GetType(DateTime) Then
+                Return DateTime.Parse(rawValue, CultureInfo.InvariantCulture,
+                                      DateTimeStyles.AllowWhiteSpaces Or DateTimeStyles.RoundtripKind)
+            End If
+            If dataType Is GetType(DateTimeOffset) Then
+                Return DateTimeOffset.Parse(rawValue, CultureInfo.InvariantCulture,
+                                            DateTimeStyles.AllowWhiteSpaces Or DateTimeStyles.RoundtripKind)
+            End If
+            If dataType Is GetType(TimeSpan) Then Return TimeSpan.Parse(rawValue, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Guid) Then Return Guid.Parse(rawValue)
+            If dataType Is GetType(Boolean) Then
+                If rawValue.Trim() = "1" Then Return True
+                If rawValue.Trim() = "0" Then Return False
+                Return Boolean.Parse(rawValue)
+            End If
+            If dataType Is GetType(Byte) Then Return Byte.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Int16) Then Return Int16.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Int32) Then Return Int32.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Int64) Then Return Int64.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(UInt16) Then Return UInt16.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(UInt32) Then Return UInt32.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(UInt64) Then Return UInt64.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Decimal) Then Return Decimal.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Double) Then Return Double.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+            If dataType Is GetType(Single) Then Return Single.Parse(rawValue, NumberStyles.Any, CultureInfo.InvariantCulture)
+        Catch ex As FormatException
+            Throw New InvalidOperationException(
+                "The filter value is not valid for " & columnName & " (" & GetFriendlyDataTypeName(dataType) & ").", ex)
+        Catch ex As OverflowException
+            Throw New InvalidOperationException(
+                "The filter value is outside the supported range for " & columnName & ".", ex)
+        End Try
+        Throw New InvalidOperationException("The selected filter column uses an unsupported data type.")
+    End Function
+
+    Private Shared Function IsFilterableType(ByVal dataType As Type) As Boolean
+        Return dataType Is GetType(String) OrElse dataType Is GetType(Char) OrElse
+               dataType Is GetType(DateTime) OrElse dataType Is GetType(DateTimeOffset) OrElse
+               dataType Is GetType(TimeSpan) OrElse dataType Is GetType(Guid) OrElse
+               dataType Is GetType(Boolean) OrElse dataType Is GetType(Byte) OrElse
+               dataType Is GetType(Int16) OrElse dataType Is GetType(Int32) OrElse
+               dataType Is GetType(Int64) OrElse dataType Is GetType(UInt16) OrElse
+               dataType Is GetType(UInt32) OrElse dataType Is GetType(UInt64) OrElse
+               dataType Is GetType(Decimal) OrElse dataType Is GetType(Double) OrElse
+               dataType Is GetType(Single)
+    End Function
+
+    Private Shared Function GetFriendlyDataTypeName(ByVal dataType As Type) As String
+        If dataType Is GetType(String) OrElse dataType Is GetType(Char) Then Return "Text"
+        If dataType Is GetType(DateTime) OrElse dataType Is GetType(DateTimeOffset) Then Return "Date/time"
+        If dataType Is GetType(TimeSpan) Then Return "Time"
+        If dataType Is GetType(Boolean) Then Return "Yes/No"
+        If dataType Is GetType(Guid) Then Return "Identifier"
+        If dataType Is GetType(Decimal) OrElse dataType Is GetType(Double) OrElse dataType Is GetType(Single) Then Return "Number"
+        Return "Whole number"
+    End Function
+
+    Private Shared Function EscapeLikeValue(ByVal value As String) As String
+        Return value.Replace("~", "~~").Replace("%", "~%").Replace("_", "~_").Replace("[", "~[")
+    End Function
+
+    Private Shared Function BuildFilterSummary(ByVal columnName As String,
+                                               ByVal filterOperator As String,
+                                               ByVal valueFrom As String,
+                                               ByVal valueTo As String) As String
+        If String.IsNullOrWhiteSpace(columnName) Then Return "Full snapshot"
+        Dim normalizedOperator As String = NormalizeFilterOperator(filterOperator)
+        Select Case normalizedOperator
+            Case "between"
+                Return columnName & " between " & valueFrom & " and " & valueTo
+            Case "equals"
+                Return columnName & " equals " & valueFrom
+            Case "gte"
+                Return columnName & " on/after " & valueFrom
+            Case "lte"
+                Return columnName & " on/before " & valueFrom
+            Case "contains"
+                Return columnName & " contains " & valueFrom
+            Case "starts_with"
+                Return columnName & " starts with " & valueFrom
+            Case "is_null"
+                Return columnName & " is blank/null"
+            Case "is_not_null"
+                Return columnName & " is not blank/null"
+            Case Else
+                Return "Full snapshot"
+        End Select
     End Function
 
     Private Shared Function BuildSchemaDefinition(ByVal extract As DataTable) As String
@@ -440,8 +721,10 @@ Public NotInheritable Class AdhocReportWarehouseService
                                             ByVal startedAtUtc As DateTime) As Long
         Using command As New SqlCommand(
             "INSERT INTO [etl].[AdhocReportLoadBatch] " &
-            "(LoadRunID, StartedAtUtc, LoadStatus, RequestedBy, ReportID, ReportName, SourceView) " &
-            "VALUES (@LoadRunID, @StartedAtUtc, 'Running', @RequestedBy, @ReportID, @ReportName, @SourceView); " &
+            "(LoadRunID, StartedAtUtc, LoadStatus, RequestedBy, ReportID, ReportName, SourceView, " &
+            "FilterColumn, FilterOperator, FilterValueFrom, FilterValueTo) " &
+            "VALUES (@LoadRunID, @StartedAtUtc, 'Running', @RequestedBy, @ReportID, @ReportName, @SourceView, " &
+            "@FilterColumn, @FilterOperator, @FilterValueFrom, @FilterValueTo); " &
             "SELECT CAST(SCOPE_IDENTITY() AS bigint);", connection)
             command.Parameters.Add("@LoadRunID", SqlDbType.UniqueIdentifier).Value = Guid.NewGuid()
             command.Parameters.Add("@StartedAtUtc", SqlDbType.DateTime2).Value = startedAtUtc
@@ -449,6 +732,10 @@ Public NotInheritable Class AdhocReportWarehouseService
             command.Parameters.Add("@ReportID", SqlDbType.BigInt).Value = request.ReportId
             AddNVarChar(command, "@ReportName", 512, definition.ReportName)
             AddNVarChar(command, "@SourceView", 776, definition.SourceView)
+            AddNVarChar(command, "@FilterColumn", 256, request.FilterColumn)
+            AddNVarChar(command, "@FilterOperator", 20, NormalizeFilterOperator(request.FilterOperator))
+            AddNVarChar(command, "@FilterValueFrom", 4000, request.FilterValueFrom)
+            AddNVarChar(command, "@FilterValueTo", 4000, request.FilterValueTo)
             Return Convert.ToInt64(command.ExecuteScalar(), CultureInfo.InvariantCulture)
         End Using
     End Function
@@ -583,6 +870,10 @@ End Class
 Public NotInheritable Class AdhocReportWarehouseRequest
     Public Property ReportId As Long
     Public Property RequestedBy As String
+    Public Property FilterColumn As String
+    Public Property FilterOperator As String
+    Public Property FilterValueFrom As String
+    Public Property FilterValueTo As String
 End Class
 
 Public NotInheritable Class AdhocReportWarehousePreview
@@ -592,6 +883,7 @@ Public NotInheritable Class AdhocReportWarehousePreview
     Public Property RowCount As Integer
     Public Property ColumnCount As Integer
     Public Property SchemaHash As String
+    Public Property FilterSummary As String
 End Class
 
 Public NotInheritable Class AdhocReportWarehouseResult
@@ -602,6 +894,7 @@ Public NotInheritable Class AdhocReportWarehouseResult
     Public Property ColumnCount As Integer
     Public Property ExtractedRowCount As Integer
     Public Property LoadedRowCount As Integer
+    Public Property FilterSummary As String
     Public Property StartedAtUtc As DateTime
     Public Property CompletedAtUtc As DateTime
 End Class

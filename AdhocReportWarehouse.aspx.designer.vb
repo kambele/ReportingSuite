@@ -16,6 +16,10 @@ Partial Public Class AdhocReportWarehousePage
     Protected WithEvents operationMessageLiteral As Global.System.Web.UI.WebControls.Literal
     Protected WithEvents parameterSummaryLiteral As Global.System.Web.UI.WebControls.Literal
     Protected WithEvents reportDropDown As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents filterColumnDropDown As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents filterOperatorDropDown As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents filterValueFromTextBox As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents filterValueToTextBox As Global.System.Web.UI.WebControls.TextBox
     Protected WithEvents previewButton As Global.System.Web.UI.WebControls.Button
     Protected WithEvents loadWarehouseButton As Global.System.Web.UI.WebControls.Button
     Protected WithEvents recentLoadsGrid As Global.System.Web.UI.WebControls.GridView
