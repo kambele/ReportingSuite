@@ -2074,6 +2074,18 @@ body.reporting-app-shell {
     box-shadow: 0 0 0 0.125rem rgba(38, 166, 154, 0.2);
 }
 
+.adhoc-powerbi-query-definition {
+    background: #f8f9fb;
+    color: #263238;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    min-height: 34rem;
+    overflow: auto;
+    resize: vertical;
+    white-space: pre;
+}
+
 .adhoc-loading-state {
     color: #777;
 }

@@ -207,7 +207,16 @@
                     <p class="text-muted mb-0"><%: GetReportDescription(SelectedReport) %></p>
                     <p class="text-muted font-size-sm mb-0 mt-1"><i class="icon-database mr-1"></i>Power BI view: <code><%: PowerBiViewName %></code></p>
                 </div>
-                <div class="header-elements">
+                <div class="header-elements d-flex align-items-center">
+                    <% If PowerBiQueryDefinition.Length > 0 Then %>
+                    <button type="button" class="btn btn-light btn-sm mr-3" data-toggle="modal" data-target="#adhoc-powerbi-query-modal">
+                        <i class="icon-power2 mr-2 text-warning"></i>Power BI query
+                    </button>
+                    <% Else %>
+                    <button type="button" class="btn btn-light btn-sm mr-3" disabled="disabled" title="<%: PowerBiQueryError %>">
+                        <i class="icon-power2 mr-2 text-muted"></i>Power BI query unavailable
+                    </button>
+                    <% End If %>
                     <div class="list-icons">
                         <a href="#" class="list-icons-item" data-action="collapse" data-toggle="tooltip" title="Expand or collapse report data" aria-label="Expand or collapse report data" aria-expanded="true"></a>
                         <a id="adhoc-refresh" href="#" class="list-icons-item" data-toggle="tooltip" title="Refresh data"><i class="icon-sync"></i></a>
@@ -294,6 +303,42 @@
                     <button id="adhoc-clear-advanced" type="button" class="btn btn-light"><i class="icon-reset mr-2"></i>Clear advanced</button>
                     <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
                     <button id="adhoc-apply-advanced" type="button" class="btn bg-teal-400"><i class="icon-checkmark3 mr-2"></i>Apply filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="adhoc-powerbi-query-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="adhoc-powerbi-query-title" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <h5 id="adhoc-powerbi-query-title" class="modal-title"><i class="icon-power2 mr-2 text-warning"></i>Power BI Advanced Editor query</h5>
+                        <p class="text-muted mb-0 font-size-sm">Generated automatically from this report's current column schema.</p>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <% If PowerBiQueryDefinition.Length > 0 Then %>
+                    <div class="alert alert-info border-0 font-size-sm">
+                        In Power BI Desktop, open <strong>Transform data</strong>, create a blank query, select <strong>Advanced Editor</strong>, and replace its contents with this definition.
+                    </div>
+                    <div class="form-group mb-0">
+                        <label for="adhoc-powerbi-query-definition" class="font-weight-semibold">Power Query (M) definition</label>
+                        <textarea id="adhoc-powerbi-query-definition" class="form-control adhoc-powerbi-query-definition" readonly="readonly" spellcheck="false"><%: PowerBiQueryDefinition %></textarea>
+                    </div>
+                    <% Else %>
+                    <div class="alert alert-warning border-0 mb-0"><i class="icon-warning22 mr-2"></i><%: PowerBiQueryError %></div>
+                    <% End If %>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <span id="adhoc-powerbi-copy-status" class="text-success font-size-sm" role="status" aria-live="polite"></span>
+                    <div>
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        <% If PowerBiQueryDefinition.Length > 0 Then %>
+                        <button id="adhoc-copy-powerbi-query" type="button" class="btn bg-teal-400"><i class="icon-copy3 mr-2"></i>Copy query</button>
+                        <% End If %>
+                    </div>
                 </div>
             </div>
         </div>
@@ -485,6 +530,32 @@
     <script src="Content/Template/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
     <script src="Content/Template/global_assets/js/plugins/visualization/c3/c3.min.js"></script>
     <script src="Content/Template/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            var copyButton = document.getElementById('adhoc-copy-powerbi-query');
+            var queryField = document.getElementById('adhoc-powerbi-query-definition');
+            var status = document.getElementById('adhoc-powerbi-copy-status');
+            if (!copyButton || !queryField) return;
+
+            function showCopied() {
+                if (status) status.textContent = 'Power BI query copied to the clipboard.';
+            }
+
+            copyButton.addEventListener('click', function () {
+                var query = queryField.value;
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(query).then(showCopied, function () {
+                        queryField.focus();
+                        queryField.select();
+                    });
+                    return;
+                }
+                queryField.focus();
+                queryField.select();
+                if (document.execCommand('copy')) showCopied();
+            });
+        }());
+    </script>
     <% End If %>
     <script src="Scripts/adhoc-report.js?v=20260916.6"></script>
 </asp:Content>

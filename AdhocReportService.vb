@@ -41,6 +41,138 @@ Public NotInheritable Class AdhocReportService
         End Using
     End Function
 
+    Public Shared Function GetPowerBiQueryDefinition(ByVal reportId As Long) As String
+        Dim metadata As AdhocReportMetadata = GetMetadata(reportId)
+        If metadata.Columns Is Nothing OrElse metadata.Columns.Count = 0 Then
+            Throw New ConfigurationErrorsException("The Adhoc report does not expose any columns for Power BI.")
+        End If
+
+        Dim warehouseConnection As New SqlConnectionStringBuilder(
+            AdhocReportWarehouseService.GetConfiguredWarehouseConnectionString())
+        Dim serverName As String = warehouseConnection.DataSource
+        Dim databaseName As String = warehouseConnection.InitialCatalog
+        If String.IsNullOrWhiteSpace(serverName) OrElse String.IsNullOrWhiteSpace(databaseName) Then
+            Throw New ConfigurationErrorsException(
+                "The ReportingWarehouse connection must define a SQL Server and database name.")
+        End If
+
+        Return BuildPowerBiQuery(reportId, serverName, databaseName, metadata.Columns)
+    End Function
+
+    Private Shared Function BuildPowerBiQuery(ByVal reportId As Long,
+                                              ByVal serverName As String,
+                                              ByVal databaseName As String,
+                                              ByVal columns As IList(Of AdhocReportColumn)) As String
+        Dim query As New StringBuilder()
+        query.AppendLine("let")
+        query.Append("    ReportID = ").Append(reportId.ToString(CultureInfo.InvariantCulture)).AppendLine(",")
+        query.AppendLine()
+        query.AppendLine("    Source =")
+        query.AppendLine("        Sql.Database(")
+        query.Append("            """).Append(EscapePowerQueryText(serverName)).AppendLine(""",")
+        query.Append("            """).Append(EscapePowerQueryText(databaseName)).AppendLine("""")
+        query.AppendLine("        ),")
+        query.AppendLine()
+        query.AppendLine("    CurrentSnapshots =")
+        query.AppendLine("        Source{")
+        query.AppendLine("            [")
+        query.AppendLine("                Schema = ""analytics"",")
+        query.AppendLine("                Item = ""vw_AdhocReportCurrent""")
+        query.AppendLine("            ]")
+        query.AppendLine("        }[Data],")
+        query.AppendLine()
+        query.AppendLine("    // Always select one report before expanding JSON.")
+        query.AppendLine("    SelectedReport =")
+        query.AppendLine("        Table.SelectRows(")
+        query.AppendLine("            CurrentSnapshots,")
+        query.AppendLine("            each [ReportID] = ReportID")
+        query.AppendLine("        ),")
+        query.AppendLine()
+        query.AppendLine("    ParsedPayload =")
+        query.AppendLine("        Table.AddColumn(")
+        query.AppendLine("            SelectedReport,")
+        query.AppendLine("            ""Payload"",")
+        query.AppendLine("            each")
+        query.AppendLine("                try")
+        query.AppendLine("                    Json.Document(")
+        query.AppendLine("                        Text.ToBinary(")
+        query.AppendLine("                            [RowPayload],")
+        query.AppendLine("                            TextEncoding.Utf8")
+        query.AppendLine("                        )")
+        query.AppendLine("                    )")
+        query.AppendLine("                otherwise")
+        query.AppendLine("                    null")
+        query.AppendLine("        ),")
+        query.AppendLine()
+        query.AppendLine("    ValidPayload =")
+        query.AppendLine("        Table.SelectRows(")
+        query.AppendLine("            ParsedPayload,")
+        query.AppendLine("            each [Payload] <> null")
+        query.AppendLine("        ),")
+        query.AppendLine()
+        query.AppendLine("    PayloadColumns = {")
+        For index As Integer = 0 To columns.Count - 1
+            query.Append("        """).Append(EscapePowerQueryText(columns(index).Name)).Append("""")
+            If index < columns.Count - 1 Then query.Append(",")
+            query.AppendLine()
+        Next
+        query.AppendLine("    },")
+        query.AppendLine()
+        query.AppendLine("    ExpandedPayload =")
+        query.AppendLine("        Table.ExpandRecordColumn(")
+        query.AppendLine("            ValidPayload,")
+        query.AppendLine("            ""Payload"",")
+        query.AppendLine("            PayloadColumns,")
+        query.AppendLine("            PayloadColumns")
+        query.AppendLine("        ),")
+        query.AppendLine()
+        query.AppendLine("    AppliedTypes =")
+        query.AppendLine("        Table.TransformColumnTypes(")
+        query.AppendLine("            ExpandedPayload,")
+        query.AppendLine("            {")
+        For index As Integer = 0 To columns.Count - 1
+            query.Append("                {""").Append(EscapePowerQueryText(columns(index).Name)).
+                Append(""", ").Append(GetPowerQueryType(columns(index).DataType)).Append("}")
+            If index < columns.Count - 1 Then query.Append(",")
+            query.AppendLine()
+        Next
+        query.AppendLine("            }")
+        query.AppendLine("        ),")
+        query.AppendLine()
+        query.AppendLine("    RemovedRawPayload =")
+        query.AppendLine("        Table.RemoveColumns(")
+        query.AppendLine("            AppliedTypes,")
+        query.AppendLine("            {""RowPayload"", ""RowHash""}")
+        query.AppendLine("        )")
+        query.AppendLine("in")
+        query.Append("    RemovedRawPayload")
+        Return query.ToString()
+    End Function
+
+    Private Shared Function GetPowerQueryType(ByVal dataType As String) As String
+        Select Case If(dataType, String.Empty).Trim().ToLowerInvariant()
+            Case "boolean"
+                Return "type logical"
+            Case "byte", "sbyte", "int16", "uint16", "int32", "uint32", "int64", "uint64"
+                Return "Int64.Type"
+            Case "decimal", "double", "single"
+                Return "type number"
+            Case "datetime"
+                Return "type datetime"
+            Case "datetimeoffset"
+                Return "type datetimezone"
+            Case "timespan"
+                Return "type duration"
+            Case Else
+                Return "type text"
+        End Select
+    End Function
+
+    Private Shared Function EscapePowerQueryText(ByVal value As String) As String
+        Dim quote As String = ChrW(34)
+        Return If(value, String.Empty).Replace(quote, quote & quote)
+    End Function
+
     Public Shared Function GetPage(ByVal request As AdhocReportPageRequest) As AdhocReportPageResult
         If request Is Nothing Then
             Throw New ArgumentNullException("request")

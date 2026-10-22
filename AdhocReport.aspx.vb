@@ -13,6 +13,8 @@ Public Class AdhocReport
     Public Property IsAdminUser As Boolean
     Public Property CreateRequestToken As String = String.Empty
     Public Property LoadError As String = String.Empty
+    Public Property PowerBiQueryDefinition As String = String.Empty
+    Public Property PowerBiQueryError As String = String.Empty
 
     Public ReadOnly Property PowerBiViewName As String
         Get
@@ -61,6 +63,14 @@ Public Class AdhocReport
                         Response.TrySkipIisCustomErrors = True
                         SelectedReport = Nothing
                         LoadError = denialReason
+                    Else
+                        Try
+                            PowerBiQueryDefinition = AdhocReportService.GetPowerBiQueryDefinition(ReportId)
+                        Catch ex As Exception
+                            Trace.Warn("AdhocReport", "Unable to generate the Power BI query definition.", ex)
+                            PowerBiQueryError =
+                                "The Power BI query could not be generated. Validate the Adhoc report schema and warehouse configuration."
+                        End Try
                     End If
                 End If
             Else
