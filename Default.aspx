@@ -54,6 +54,10 @@
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Pension Fund Dashboard" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
                     <a href="PF_Dashboard.aspx" class="workspace-module-link"><span class="workspace-module-icon is-purple"><i class="icon-pie-chart6"></i></span><span class="workspace-module-copy"><strong>Pension Fund Dashboard</strong><small>Open pension fund datasets and monitoring views.</small></span><i class="icon-arrow-up-right2 workspace-module-arrow" aria-hidden="true"></i></a>
                 </article>
+                <article class="workspace-module-card" data-module-id="power-bi-portal">
+                    <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Power BI Portal" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                    <a href="https://namfisabiportal/powerbiportal" target="_blank" rel="noopener noreferrer" class="workspace-module-link" aria-label="Open Power BI Portal in a new tab"><span class="workspace-module-icon is-gold"><i class="icon-stats-bars2"></i></span><span class="workspace-module-copy"><strong>Power BI Portal</strong><small>Open NAMFISA dashboards and analytical reports.</small></span><i class="icon-new-tab2 workspace-module-arrow" aria-hidden="true"></i></a>
+                </article>
                 <article class="workspace-module-card" data-module-id="catalogue">
                     <button type="button" class="workspace-pin js-module-pin" aria-label="Pin Report catalogue" aria-pressed="false"><i class="fa fa-star-o" aria-hidden="true"></i></button>
                     <a href="#report-catalogue" class="workspace-module-link"><span class="workspace-module-icon is-green"><i class="icon-stack-text"></i></span><span class="workspace-module-copy"><strong>Report catalogue</strong><small>Browse <%: TotalReports %> reports available to your account.</small></span><i class="icon-arrow-down8 workspace-module-arrow" aria-hidden="true"></i></a>
