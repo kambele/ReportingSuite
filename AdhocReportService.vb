@@ -145,6 +145,8 @@ Public NotInheritable Class AdhocReportService
                 Throw New ConfigurationErrorsException("The adhoc query must return at least one named column.")
             End If
 
+            Dim nextSortOrder As Integer
+            Dim reportId As Long
             Using transaction = connection.BeginTransaction(IsolationLevel.Serializable)
                 Using sectionCommand = CreateCommand(connection, "SELECT COUNT(1) FROM dbo.Sections WHERE SectionID = @sectionId")
                     sectionCommand.Transaction = transaction
@@ -161,7 +163,6 @@ Public NotInheritable Class AdhocReportService
                     End If
                 End Using
 
-                Dim nextSortOrder As Integer
                 Using orderCommand = CreateCommand(connection,
                     "SELECT ISNULL(MAX(Sort_Order), 0) + 1 FROM dbo.Reports WITH (UPDLOCK, HOLDLOCK) " &
                     "WHERE Is_Deleted = 0 AND NULLIF(LTRIM(RTRIM(AdhocQuery)), '') IS NOT NULL")
@@ -175,7 +176,6 @@ Public NotInheritable Class AdhocReportService
                     "VALUES (@reportName, @reportTitle, @sortOrder, @sectionId, 3, 0, 0, @adhocQuery); " &
                     "SELECT CAST(SCOPE_IDENTITY() AS bigint);"
 
-                Dim reportId As Long
                 Using insertCommand = CreateCommand(connection, insertSql)
                     insertCommand.Transaction = transaction
                     insertCommand.Parameters.Add("@reportName", SqlDbType.VarChar, 200).Value = request.ReportName
@@ -186,16 +186,35 @@ Public NotInheritable Class AdhocReportService
                     reportId = Convert.ToInt64(insertCommand.ExecuteScalar(), CultureInfo.InvariantCulture)
                 End Using
 
-                CreateOrAlterAdhocView(connection, transaction, reportId, query)
-
                 transaction.Commit()
-                Return New AdhocReportCreateResult With {
-                    .ReportId = reportId,
-                    .SortOrder = nextSortOrder,
-                    .ViewName = GetPowerBiViewName(reportId),
-                    .Url = "AdhocReport.aspx?reportId=" & reportId.ToString(CultureInfo.InvariantCulture)
-                }
             End Using
+
+            Try
+                ' Publish outside the local transaction. A view that references a linked
+                ' server otherwise promotes the operation to an unavailable MSDTC transaction.
+                CreateOrAlterAdhocView(connection, Nothing, reportId, query)
+            Catch viewException As Exception
+                Try
+                    Using cleanupCommand = CreateCommand(connection,
+                        "DELETE FROM dbo.Reports WHERE ReportID = @reportId")
+                        cleanupCommand.Parameters.Add("@reportId", SqlDbType.BigInt).Value = reportId
+                        cleanupCommand.ExecuteNonQuery()
+                    End Using
+                Catch cleanupException As Exception
+                    Throw New ConfigurationErrorsException(
+                        viewException.Message & " The incomplete report definition could not be removed automatically; review ReportID " &
+                        reportId.ToString(CultureInfo.InvariantCulture) & ".",
+                        New AggregateException(viewException, cleanupException))
+                End Try
+                Throw
+            End Try
+
+            Return New AdhocReportCreateResult With {
+                .ReportId = reportId,
+                .SortOrder = nextSortOrder,
+                .ViewName = GetPowerBiViewName(reportId),
+                .Url = "AdhocReport.aspx?reportId=" & reportId.ToString(CultureInfo.InvariantCulture)
+            }
         End Using
     End Function
 
@@ -226,6 +245,12 @@ Public NotInheritable Class AdhocReportService
                 Throw New ConfigurationErrorsException("The adhoc query must return at least one named column.")
             End If
 
+            Dim previousReportName As String = String.Empty
+            Dim previousReportTitle As String = String.Empty
+            Dim previousSortOrder As Integer
+            Dim previousSectionId As Long
+            Dim previousQuery As String = String.Empty
+
             Using transaction = connection.BeginTransaction(IsolationLevel.Serializable)
                 Using sectionCommand = CreateCommand(connection, "SELECT COUNT(1) FROM dbo.Sections WHERE SectionID = @sectionId")
                     sectionCommand.Transaction = transaction
@@ -233,6 +258,24 @@ Public NotInheritable Class AdhocReportService
                     If Convert.ToInt32(sectionCommand.ExecuteScalar(), CultureInfo.InvariantCulture) = 0 Then
                         Throw New ArgumentException("The selected division is unavailable.", "SectionId")
                     End If
+                End Using
+
+                Using currentCommand = CreateCommand(connection,
+                    "SELECT Report_Name, Report_Title, Sort_Order, SectionID, AdhocQuery " &
+                    "FROM dbo.Reports WITH (UPDLOCK, HOLDLOCK) WHERE ReportID = @reportId " &
+                    "AND Is_Deleted = 0 AND NULLIF(LTRIM(RTRIM(AdhocQuery)), '') IS NOT NULL")
+                    currentCommand.Transaction = transaction
+                    currentCommand.Parameters.Add("@reportId", SqlDbType.BigInt).Value = request.ReportId
+                    Using reader = currentCommand.ExecuteReader(CommandBehavior.SingleRow)
+                        If Not reader.Read() Then
+                            Throw New KeyNotFoundException("The selected adhoc report is unavailable.")
+                        End If
+                        previousReportName = Convert.ToString(reader("Report_Name"), CultureInfo.InvariantCulture)
+                        previousReportTitle = Convert.ToString(reader("Report_Title"), CultureInfo.InvariantCulture)
+                        previousSortOrder = Convert.ToInt32(reader("Sort_Order"), CultureInfo.InvariantCulture)
+                        previousSectionId = Convert.ToInt64(reader("SectionID"), CultureInfo.InvariantCulture)
+                        previousQuery = Convert.ToString(reader("AdhocQuery"), CultureInfo.InvariantCulture)
+                    End Using
                 End Using
 
                 Const updateSql As String =
@@ -254,10 +297,34 @@ Public NotInheritable Class AdhocReportService
                     End If
                 End Using
 
-                CreateOrAlterAdhocView(connection, transaction, request.ReportId, query)
-
                 transaction.Commit()
             End Using
+
+            Try
+                ' Keep linked-server metadata access out of the local report transaction.
+                CreateOrAlterAdhocView(connection, Nothing, request.ReportId, query)
+            Catch viewException As Exception
+                Try
+                    Using restoreCommand = CreateCommand(connection,
+                        "UPDATE dbo.Reports SET Report_Name = @reportName, Report_Title = @reportTitle, " &
+                        "Sort_Order = @sortOrder, SectionID = @sectionId, AdhocQuery = @adhocQuery " &
+                        "WHERE ReportID = @reportId")
+                        restoreCommand.Parameters.Add("@reportName", SqlDbType.VarChar, 200).Value = previousReportName
+                        restoreCommand.Parameters.Add("@reportTitle", SqlDbType.VarChar, 100).Value = previousReportTitle
+                        restoreCommand.Parameters.Add("@sortOrder", SqlDbType.Int).Value = previousSortOrder
+                        restoreCommand.Parameters.Add("@sectionId", SqlDbType.BigInt).Value = previousSectionId
+                        restoreCommand.Parameters.Add("@adhocQuery", SqlDbType.VarChar, -1).Value = previousQuery
+                        restoreCommand.Parameters.Add("@reportId", SqlDbType.BigInt).Value = request.ReportId
+                        restoreCommand.ExecuteNonQuery()
+                    End Using
+                Catch restoreException As Exception
+                    Throw New ConfigurationErrorsException(
+                        viewException.Message & " The previous report definition could not be restored automatically; review ReportID " &
+                        request.ReportId.ToString(CultureInfo.InvariantCulture) & ".",
+                        New AggregateException(viewException, restoreException))
+                End Try
+                Throw
+            End Try
         End Using
 
         Return New AdhocReportUpdateResult With {
