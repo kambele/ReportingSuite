@@ -29,7 +29,7 @@ The warehouse fact is keyed by `ReportID`, `LoadBatchID`, `SchemaVersion` and `S
 
 Filter either analytics view by `ReportID`, parse `RowPayload` with `Json.Document`, and expand the fields required by that report's semantic model. `FilterColumn`, `FilterOperator`, `FilterValueFrom`, and `FilterValueTo` identify the scope of each snapshot. Refresh against `analytics.vw_AdhocReportCurrent` for the latest dataset or the snapshots view for audit/history.
 
-The Power BI identity should be a member only of `ReportingWarehouseReader`. The application or scheduled-loader identity should be a member of `ReportingWarehouseLoader`.
+The Power BI identity should be a member only of `ReportingWarehouseReader`. The application or scheduled-loader identity should be a member of `ReportingWarehouseLoader`. The loader role has `SELECT` and `INSERT` on `dw.AdhocReport`; `SELECT` is required by `SqlBulkCopy` to read destination metadata. It does not receive `ALTER TABLE` or bulk-administrator permissions.
 
 ## Deployment
 

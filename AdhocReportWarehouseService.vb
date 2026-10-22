@@ -193,6 +193,7 @@ Public NotInheritable Class AdhocReportWarehouseService
                     "HAS_PERMS_BY_NAME(N'etl.AdhocReportSchema', N'OBJECT', N'SELECT') AS SchemaSelect, " &
                     "HAS_PERMS_BY_NAME(N'etl.AdhocReportSchema', N'OBJECT', N'INSERT') AS SchemaInsert, " &
                     "HAS_PERMS_BY_NAME(N'etl.AdhocReportSchema', N'OBJECT', N'UPDATE') AS SchemaUpdate, " &
+                    "HAS_PERMS_BY_NAME(N'dw.AdhocReport', N'OBJECT', N'SELECT') AS FactSelect, " &
                     "HAS_PERMS_BY_NAME(N'dw.AdhocReport', N'OBJECT', N'INSERT') AS FactInsert", connection)
                     Using reader As SqlDataReader = permissionCommand.ExecuteReader()
                         If reader.Read() Then
@@ -202,6 +203,7 @@ Public NotInheritable Class AdhocReportWarehouseService
                             AddMissingPermission(reader("SchemaSelect"), "SELECT on etl.AdhocReportSchema", missingPermissions)
                             AddMissingPermission(reader("SchemaInsert"), "INSERT on etl.AdhocReportSchema", missingPermissions)
                             AddMissingPermission(reader("SchemaUpdate"), "UPDATE on etl.AdhocReportSchema", missingPermissions)
+                            AddMissingPermission(reader("FactSelect"), "SELECT on dw.AdhocReport", missingPermissions)
                             AddMissingPermission(reader("FactInsert"), "INSERT on dw.AdhocReport", missingPermissions)
                         End If
                     End Using

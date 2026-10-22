@@ -376,7 +376,10 @@ GRANT SELECT, INSERT, UPDATE ON [etl].[ACoAReportLoadBatch] TO [ReportingWarehou
 GRANT INSERT ON [dw].[FactACoAReportSnapshot] TO [ReportingWarehouseLoader];
 GRANT SELECT, INSERT, UPDATE ON [etl].[AdhocReportLoadBatch] TO [ReportingWarehouseLoader];
 GRANT SELECT, INSERT, UPDATE ON [etl].[AdhocReportSchema] TO [ReportingWarehouseLoader];
-GRANT INSERT ON [dw].[AdhocReport] TO [ReportingWarehouseLoader];
+-- SqlBulkCopy reads destination metadata before sending rows, so the loader
+-- requires SELECT as well as INSERT. CheckConstraints keeps the fact-table
+-- checks active without granting ALTER TABLE or bulk-administrator rights.
+GRANT SELECT, INSERT ON [dw].[AdhocReport] TO [ReportingWarehouseLoader];
 GRANT VIEW DEFINITION ON [analytics].[vw_AdhocReportSnapshots] TO [ReportingWarehouseLoader];
 GRANT VIEW DEFINITION ON [analytics].[vw_AdhocReportCurrent] TO [ReportingWarehouseLoader];
 GRANT SELECT ON SCHEMA::[analytics] TO [ReportingWarehouseReader];
