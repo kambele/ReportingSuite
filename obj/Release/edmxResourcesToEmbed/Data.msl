@@ -1,0 +1,863 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReportingSuiteModelStoreContainer" CdmEntityContainer="ReportingSuiteEntities3">
+    <EntitySetMapping Name="AggregationTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.AggregationType">
+        <MappingFragment StoreEntitySet="AggregationTypes">
+          <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+          <ScalarProperty Name="AggregationTypeName" ColumnName="AggregationTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalculatedBies">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.CalculatedBy">
+        <MappingFragment StoreEntitySet="CalculatedBy">
+          <ScalarProperty Name="CalculatedByID" ColumnName="CalculatedByID" />
+          <ScalarProperty Name="CalculatedBy1" ColumnName="CalculatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Copy_of_Pension_Funds_Data_Update__002_">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Copy_of_Pension_Funds_Data_Update__002_">
+        <MappingFragment StoreEntitySet="Copy of Pension-Funds-Data-Update (002)">
+          <ScalarProperty Name="Fund_" ColumnName="Fund " />
+          <ScalarProperty Name="Fund_Name" ColumnName="Fund Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Column_3" ColumnName="Column 3" />
+          <ScalarProperty Name="STATUS_MATCHED" ColumnName="STATUS MATCHED" />
+          <ScalarProperty Name="To_be_actioned" ColumnName="To be actioned" />
+          <ScalarProperty Name="Assigned_To" ColumnName="Assigned To" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityGroupLineItem_Columns">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.EntityGroupLineItem_Columns">
+        <MappingFragment StoreEntitySet="EntityGroupLineItem_Columns">
+          <ScalarProperty Name="EntityGroupLineItem_ColumnID" ColumnName="EntityGroupLineItem_ColumnID" />
+          <ScalarProperty Name="LineItemColumnID" ColumnName="LineItemColumnID" />
+          <ScalarProperty Name="EntityGroupID" ColumnName="EntityGroupID" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="StoredProc" ColumnName="StoredProc" />
+          <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+          <ScalarProperty Name="CountParameter" ColumnName="CountParameter" />
+          <ScalarProperty Name="CountDataType" ColumnName="CountDataType" />
+          <ScalarProperty Name="Is_CalculatedValue" ColumnName="Is_CalculatedValue" />
+          <ScalarProperty Name="Expression" ColumnName="Expression" />
+          <ScalarProperty Name="SchemaFieldName" ColumnName="SchemaFieldName" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EntityGroups">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.EntityGroup">
+        <MappingFragment StoreEntitySet="EntityGroups">
+          <ScalarProperty Name="EntityGroupID" ColumnName="EntityGroupID" />
+          <ScalarProperty Name="EntityGroupName" ColumnName="EntityGroupName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinUpdates">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.FinUpdate">
+        <MappingFragment StoreEntitySet="FinUpdates">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Is_Updated" ColumnName="Is_Updated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormStatus">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.FormStatu">
+        <MappingFragment StoreEntitySet="FormStatus">
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="FormStatusID" ColumnName="FormStatusID" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="ERSStatusName" ColumnName="ERSStatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineItemTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.LineItemType">
+        <MappingFragment StoreEntitySet="LineItemTypes">
+          <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+          <ScalarProperty Name="LineItemTypeName" ColumnName="LineItemTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Months">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Month">
+        <MappingFragment StoreEntitySet="Months">
+          <ScalarProperty Name="MonthID" ColumnName="MonthID" />
+          <ScalarProperty Name="Month1" ColumnName="Month" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_Fund_Submissions">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_Fund_Submissions">
+        <MappingFragment StoreEntitySet="PF_Fund_Submissions">
+          <ScalarProperty Name="PF_Fund_SubmissionID" ColumnName="PF_Fund_SubmissionID" />
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="PF_SubmissionTypeID" ColumnName="PF_SubmissionTypeID" />
+          <ScalarProperty Name="ReportingDate" ColumnName="ReportingDate" />
+          <ScalarProperty Name="LastSubmitted" ColumnName="LastSubmitted" />
+          <ScalarProperty Name="NextDue" ColumnName="NextDue" />
+          <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="PeriodFrom" ColumnName="PeriodFrom" />
+          <ScalarProperty Name="PeriodTo" ColumnName="PeriodTo" />
+          <ScalarProperty Name="submission_pack_instance_id" ColumnName="submission_pack_instance_id" />
+          <ScalarProperty Name="Is_ERS" ColumnName="Is_ERS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_Funds">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_Funds">
+        <MappingFragment StoreEntitySet="PF_Funds">
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="FundName" ColumnName="FundName" />
+          <ScalarProperty Name="PrincipalOfficer" ColumnName="PrincipalOfficer" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="FinYearEnd" ColumnName="FinYearEnd" />
+          <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+          <ScalarProperty Name="LastDateReviewed" ColumnName="LastDateReviewed" />
+          <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+          <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+          <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+          <ScalarProperty Name="entity_group_id" ColumnName="entity_group_id" />
+          <ScalarProperty Name="schema_instance_id" ColumnName="schema_instance_id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_Indicators">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_Indicators">
+        <MappingFragment StoreEntitySet="PF_Indicators">
+          <ScalarProperty Name="PF_IndicatorID" ColumnName="PF_IndicatorID" />
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="ReportingDate" ColumnName="ReportingDate" />
+          <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+          <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+          <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+          <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+          <ScalarProperty Name="ReviewedBy" ColumnName="ReviewedBy" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_IndicatorTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_IndicatorTypes">
+        <MappingFragment StoreEntitySet="PF_IndicatorTypes">
+          <ScalarProperty Name="PF_IndicatorTypeID" ColumnName="PF_IndicatorTypeID" />
+          <ScalarProperty Name="RatingCode" ColumnName="RatingCode" />
+          <ScalarProperty Name="RatingDescription" ColumnName="RatingDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_InterimAllocationTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_InterimAllocationTypes">
+        <MappingFragment StoreEntitySet="PF_InterimAllocationTypes">
+          <ScalarProperty Name="PF_InterimAllocationTypeID" ColumnName="PF_InterimAllocationTypeID" />
+          <ScalarProperty Name="InterimAllocation" ColumnName="InterimAllocation" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_PortfolioTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_PortfolioTypes">
+        <MappingFragment StoreEntitySet="PF_PortfolioTypes">
+          <ScalarProperty Name="PF_PortfolioTypeID" ColumnName="PF_PortfolioTypeID" />
+          <ScalarProperty Name="PortfolioName" ColumnName="PortfolioName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PF_SubmissionTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.PF_SubmissionTypes">
+        <MappingFragment StoreEntitySet="PF_SubmissionTypes">
+          <ScalarProperty Name="PF_SubmissionTypeID" ColumnName="PF_SubmissionTypeID" />
+          <ScalarProperty Name="PF_SubmissionType" ColumnName="PF_SubmissionType" />
+          <ScalarProperty Name="formset_id" ColumnName="formset_id" />
+          <ScalarProperty Name="MonthNextDue" ColumnName="MonthNextDue" />
+          <ScalarProperty Name="MonthNextReporting" ColumnName="MonthNextReporting" />
+          <ScalarProperty Name="IsFinYearReportingDate" ColumnName="IsFinYearReportingDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcessTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ProcessType">
+        <MappingFragment StoreEntitySet="ProcessTypes">
+          <ScalarProperty Name="ProcessTypeID" ColumnName="ProcessTypeID" />
+          <ScalarProperty Name="ProcessTypeName" ColumnName="ProcessTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quarters">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Quarter">
+        <MappingFragment StoreEntitySet="Quarters">
+          <ScalarProperty Name="QuarterID" ColumnName="QuarterID" />
+          <ScalarProperty Name="Quarter1" ColumnName="Quarter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_Columns">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Report_Columns">
+        <MappingFragment StoreEntitySet="Report_Columns">
+          <ScalarProperty Name="QueryWhere" ColumnName="QueryWhere" />
+          <ScalarProperty Name="Inherited_Report_ColumnID" ColumnName="Inherited_Report_ColumnID" />
+          <ScalarProperty Name="Is_Inherited" ColumnName="Is_Inherited" />
+          <ScalarProperty Name="AddMonthToReportingPeriod" ColumnName="AddMonthToReportingPeriod" />
+          <ScalarProperty Name="Is_Static_Value" ColumnName="Is_Static_Value" />
+          <ScalarProperty Name="Expression" ColumnName="Expression" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="Report_ColumnID" ColumnName="Report_ColumnID" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
+          <ScalarProperty Name="Is_Calculated" ColumnName="Is_Calculated" />
+          <ScalarProperty Name="CalculatedByID" ColumnName="CalculatedByID" />
+          <ScalarProperty Name="CalculationValue" ColumnName="CalculationValue" />
+          <ScalarProperty Name="CalculatedFromReportColumnID" ColumnName="CalculatedFromReportColumnID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Report_LineItems">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Report_LineItems">
+        <MappingFragment StoreEntitySet="Report_LineItems">
+          <ScalarProperty Name="QueryWhere" ColumnName="QueryWhere" />
+          <ScalarProperty Name="Inherited_Report_LineItemID" ColumnName="Inherited_Report_LineItemID" />
+          <ScalarProperty Name="Is_Inherited" ColumnName="Is_Inherited" />
+          <ScalarProperty Name="AddMonthToReportingPeriod" ColumnName="AddMonthToReportingPeriod" />
+          <ScalarProperty Name="Is_Static_Value" ColumnName="Is_Static_Value" />
+          <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="Line_itemName" ColumnName="Line_itemName" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="Is_Main" ColumnName="Is_Main" />
+          <ScalarProperty Name="StoredProc" ColumnName="StoredProc" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+          <ScalarProperty Name="CountParameter" ColumnName="CountParameter" />
+          <ScalarProperty Name="CountDataType" ColumnName="CountDataType" />
+          <ScalarProperty Name="SchemaID" ColumnName="SchemaID" />
+          <ScalarProperty Name="Is_Calculated_Value" ColumnName="Is_Calculated_Value" />
+          <ScalarProperty Name="Expression" ColumnName="Expression" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="SchemaFieldName" ColumnName="SchemaFieldName" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
+          <ScalarProperty Name="Is_Title" ColumnName="Is_Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportDataCubes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ReportDataCube">
+        <MappingFragment StoreEntitySet="ReportDataCube">
+          <ScalarProperty Name="ReportDataID" ColumnName="ReportDataID" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="Report_Name" ColumnName="Report_Name" />
+          <ScalarProperty Name="Report_Title" ColumnName="Report_Title" />
+          <ScalarProperty Name="Entity_GroupID" ColumnName="Entity_GroupID" />
+          <ScalarProperty Name="Report_Description" ColumnName="Report_Description" />
+          <ScalarProperty Name="Report_Subtitle" ColumnName="Report_Subtitle" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+          <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+          <ScalarProperty Name="Is_Dynamic" ColumnName="Is_Dynamic" />
+          <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+          <ScalarProperty Name="Line_ItemName" ColumnName="Line_ItemName" />
+          <ScalarProperty Name="Is_Main" ColumnName="Is_Main" />
+          <ScalarProperty Name="LineItemValue" ColumnName="LineItemValue" />
+          <ScalarProperty Name="Sort_Order2" ColumnName="Sort_Order2" />
+          <ScalarProperty Name="Sort_Order3" ColumnName="Sort_Order3" />
+          <ScalarProperty Name="EntityGroupName" ColumnName="EntityGroupName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="EntityName" ColumnName="EntityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportEntityGroups">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ReportEntityGroup">
+        <MappingFragment StoreEntitySet="ReportEntityGroups">
+          <ScalarProperty Name="ReportEntityGroupID" ColumnName="ReportEntityGroupID" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="EntityGroupID" ColumnName="EntityGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportParameters">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ReportParameter">
+        <MappingFragment StoreEntitySet="ReportParameters">
+          <ScalarProperty Name="ReportParameterID" ColumnName="ReportParameterID" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="YearFrom" ColumnName="YearFrom" />
+          <ScalarProperty Name="YearTo" ColumnName="YearTo" />
+          <ScalarProperty Name="QuarterFrom" ColumnName="QuarterFrom" />
+          <ScalarProperty Name="QuarterTo" ColumnName="QuarterTo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportRoles">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ReportRole">
+        <MappingFragment StoreEntitySet="ReportRoles">
+          <ScalarProperty Name="ReportRoleID" ColumnName="ReportRoleID" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+          <ScalarProperty Name="Grantee" ColumnName="Grantee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Report">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="Report_Name" ColumnName="Report_Name" />
+          <ScalarProperty Name="Report_Title" ColumnName="Report_Title" />
+          <ScalarProperty Name="Entity_GroupID" ColumnName="Entity_GroupID" />
+          <ScalarProperty Name="Report_Description" ColumnName="Report_Description" />
+          <ScalarProperty Name="Report_SubTitle" ColumnName="Report_SubTitle" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+          <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+          <ScalarProperty Name="Is_Dynamic" ColumnName="Is_Dynamic" />
+          <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_MulitpleEntities" ColumnName="Is_MulitpleEntities" />
+          <ScalarProperty Name="YearFrom" ColumnName="YearFrom" />
+          <ScalarProperty Name="YearTo" ColumnName="YearTo" />
+          <ScalarProperty Name="QuarterFrom" ColumnName="QuarterFrom" />
+          <ScalarProperty Name="QuarterTo" ColumnName="QuarterTo" />
+          <ScalarProperty Name="ReportCode" ColumnName="ReportCode" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="ShowMappedItems" ColumnName="ShowMappedItems" />
+          <ScalarProperty Name="AdhocQuery" ColumnName="AdhocQuery" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportSections">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ReportSection">
+        <MappingFragment StoreEntitySet="ReportSections">
+          <ScalarProperty Name="ReportSectionID" ColumnName="ReportSectionID" />
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="ReportSectionName" ColumnName="ReportSectionName" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.ReportType">
+        <MappingFragment StoreEntitySet="ReportTypes">
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+          <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleTypes">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.RoleType">
+        <MappingFragment StoreEntitySet="RoleTypes">
+          <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+          <ScalarProperty Name="RoleTypeName" ColumnName="RoleTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schemata">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Schema">
+        <MappingFragment StoreEntitySet="Schema">
+          <ScalarProperty Name="SchemaID" ColumnName="SchemaID" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="DatabaseTable" ColumnName="DatabaseTable" />
+          <ScalarProperty Name="DatabaseField" ColumnName="DatabaseField" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchemaDictionaries">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.SchemaDictionary">
+        <MappingFragment StoreEntitySet="SchemaDictionaries">
+          <ScalarProperty Name="SchemaDictionaryID" ColumnName="SchemaDictionaryID" />
+          <ScalarProperty Name="FormSet" ColumnName="FormSet" />
+          <ScalarProperty Name="Form" ColumnName="Form" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="DatabaseTable" ColumnName="DatabaseTable" />
+          <ScalarProperty Name="DatabaseColumn" ColumnName="DatabaseColumn" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchemaGroups">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.SchemaGroup">
+        <MappingFragment StoreEntitySet="SchemaGroups">
+          <ScalarProperty Name="SchemaGroupID" ColumnName="SchemaGroupID" />
+          <ScalarProperty Name="SchemaGroupName" ColumnName="SchemaGroupName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchemaResources">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.SchemaResource">
+        <MappingFragment StoreEntitySet="SchemaResources">
+          <ScalarProperty Name="SchemaResourseID" ColumnName="SchemaResourseID" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sections">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Section">
+        <MappingFragment StoreEntitySet="Sections">
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusUpdates">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.StatusUpdate">
+        <MappingFragment StoreEntitySet="StatusUpdate">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+          <ScalarProperty Name="Is_Admin" ColumnName="Is_Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Years">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Year">
+        <MappingFragment StoreEntitySet="Years">
+          <ScalarProperty Name="Year1" ColumnName="Year" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gaps">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.Gap">
+        <MappingFragment StoreEntitySet="Gaps">
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="License" ColumnName="License" />
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="Financial_year_end_date" ColumnName="Financial year end date" />
+          <ScalarProperty Name="Physical_Address" ColumnName="Physical Address" />
+          <ScalarProperty Name="Postal_address" ColumnName="Postal address" />
+          <ScalarProperty Name="Registration_date" ColumnName="Registration date" />
+          <ScalarProperty Name="De_registration_date" ColumnName="De-registration date" />
+          <ScalarProperty Name="POName" ColumnName="POName" />
+          <ScalarProperty Name="POemail_address" ColumnName="POemail address" />
+          <ScalarProperty Name="POTelephone_number" ColumnName="POTelephone number" />
+          <ScalarProperty Name="AName" ColumnName="AName" />
+          <ScalarProperty Name="Aemail_address" ColumnName="Aemail address" />
+          <ScalarProperty Name="ATelephone_number" ColumnName="ATelephone number" />
+          <ScalarProperty Name="VName" ColumnName="VName" />
+          <ScalarProperty Name="Vemail_address" ColumnName="Vemail address" />
+          <ScalarProperty Name="VTelephone_number" ColumnName="VTelephone number" />
+          <ScalarProperty Name="Column_17" ColumnName="Column 17" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CreateStoredFunctions" FunctionName="ReportingSuiteModel.Store.CreateStoredFunctions" />
+    <FunctionImportMapping FunctionImportName="FormStatusGet" FunctionName="ReportingSuiteModel.Store.FormStatusGet">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.FormStatusGet_Result">
+          <ScalarProperty Name="FormStatusID" ColumnName="FormStatusID" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="ERSStatusName" ColumnName="ERSStatusName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllActiveCompanies" FunctionName="ReportingSuiteModel.Store.GetAllActiveCompanies">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetAllActiveCompanies_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="Type_of_Company" ColumnName="Type of Company" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Month_Number" ColumnName="Month Number" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+          <ScalarProperty Name="Principal_Officer_Name" ColumnName="Principal Officer Name" />
+          <ScalarProperty Name="Principal_Officer_Email" ColumnName="Principal Officer Email" />
+          <ScalarProperty Name="Principal_Officer_Contact_Info" ColumnName="Principal Officer Contact Info" />
+          <ScalarProperty Name="AUDITOR_NAME" ColumnName="AUDITOR NAME" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllActiveCompaniesByGroup" FunctionName="ReportingSuiteModel.Store.GetAllActiveCompaniesByGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetAllActiveCompaniesByGroup_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllActiveCompaniesWithNoFinYear" FunctionName="ReportingSuiteModel.Store.GetAllActiveCompaniesWithNoFinYear">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetAllActiveCompaniesWithNoFinYear_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="Type_of_Company" ColumnName="Type of Company" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Month_Number" ColumnName="Month Number" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+          <ScalarProperty Name="Principal_Officer_Name" ColumnName="Principal Officer Name" />
+          <ScalarProperty Name="Principal_Officer_Email" ColumnName="Principal Officer Email" />
+          <ScalarProperty Name="Principal_Officer_Contact_Info" ColumnName="Principal Officer Contact Info" />
+          <ScalarProperty Name="AUDITOR_NAME" ColumnName="AUDITOR NAME" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllBrokersCompanies" FunctionName="ReportingSuiteModel.Store.GetAllBrokersCompanies">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetAllBrokersCompanies_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="Type_of_Company" ColumnName="Type of Company" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="De_Registration_Date" ColumnName="De-Registration Date" />
+          <ScalarProperty Name="PI_Renewal_Date" ColumnName="PI Renewal Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+          <ScalarProperty Name="Principal_Officer_Name" ColumnName="Principal Officer Name" />
+          <ScalarProperty Name="Principal_Officer_Email" ColumnName="Principal Officer Email" />
+          <ScalarProperty Name="Principal_Officer_Contact_Info" ColumnName="Principal Officer Contact Info" />
+          <ScalarProperty Name="AUDITOR_NAME" ColumnName="AUDITOR NAME" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetAllSubmissionPacksDates" FunctionName="ReportingSuiteModel.Store.GetAllSubmissionPacksDates">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetAllSubmissionPacksDates_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+          <ScalarProperty Name="submission_pack_instance_id" ColumnName="submission_pack_instance_id" />
+          <ScalarProperty Name="formset_version_id" ColumnName="formset_version_id" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCompanyDetail" FunctionName="ReportingSuiteModel.Store.GetCompanyDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetCompanyDetail_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="Type_of_Company" ColumnName="Type of Company" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="De_Registration_Date" ColumnName="De-Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+          <ScalarProperty Name="Gen_ID" ColumnName="Gen ID" />
+          <ScalarProperty Name="PO_ID" ColumnName="PO ID" />
+          <ScalarProperty Name="Principal_Officer_Name" ColumnName="Principal Officer Name" />
+          <ScalarProperty Name="Principal_Officer_Email" ColumnName="Principal Officer Email" />
+          <ScalarProperty Name="Principal_Officer_Contact_Info" ColumnName="Principal Officer Contact Info" />
+          <ScalarProperty Name="AUDITOR_NAME" ColumnName="AUDITOR NAME" />
+          <ScalarProperty Name="item_valuatorname" ColumnName="item_valuatorname" />
+          <ScalarProperty Name="vtelephone" ColumnName="vtelephone" />
+          <ScalarProperty Name="vemail" ColumnName="vemail" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCompanyDetailV" FunctionName="ReportingSuiteModel.Store.GetCompanyDetailV">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetCompanyDetailV_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="Type_of_Company" ColumnName="Type of Company" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="De_Registration_Date" ColumnName="De-Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+          <ScalarProperty Name="Gen_ID" ColumnName="Gen ID" />
+          <ScalarProperty Name="PO_ID" ColumnName="PO ID" />
+          <ScalarProperty Name="Principal_Officer_Name" ColumnName="Principal Officer Name" />
+          <ScalarProperty Name="Principal_Officer_Email" ColumnName="Principal Officer Email" />
+          <ScalarProperty Name="Principal_Officer_Contact_Info" ColumnName="Principal Officer Contact Info" />
+          <ScalarProperty Name="AUDITOR_NAME" ColumnName="AUDITOR NAME" />
+          <ScalarProperty Name="item_valuatorname" ColumnName="item_valuatorname" />
+          <ScalarProperty Name="vtelephone" ColumnName="vtelephone" />
+          <ScalarProperty Name="vemail" ColumnName="vemail" />
+          <ScalarProperty Name="V_ID" ColumnName="V_ID" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPFDashboardCompanies" FunctionName="ReportingSuiteModel.Store.GetPFDashboardCompanies">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetPFDashboardCompanies_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="entity_instance_id" ColumnName="entity_instance_id" />
+          <ScalarProperty Name="owner_schema_instance_id" ColumnName="owner_schema_instance_id" />
+          <ScalarProperty Name="item_poname" ColumnName="item_poname" />
+          <ScalarProperty Name="item_email" ColumnName="item_email" />
+          <ScalarProperty Name="item_telephone" ColumnName="item_telephone" />
+          <ScalarProperty Name="Company_Status" ColumnName="Company Status" />
+          <ScalarProperty Name="Registration_Date" ColumnName="Registration Date" />
+          <ScalarProperty Name="De_Registration_Date" ColumnName="De-Registration Date" />
+          <ScalarProperty Name="Financial_Year_End" ColumnName="Financial Year End" />
+          <ScalarProperty Name="Physical_Address_1" ColumnName="Physical Address 1" />
+          <ScalarProperty Name="Physical_Address_2" ColumnName="Physical Address 2" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSchemaDatabaseColumnByFieldName" FunctionName="ReportingSuiteModel.Store.GetSchemaDatabaseColumnByFieldName">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSchemaDatabaseColumnByFieldName_Result">
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="dependency" ColumnName="dependency" />
+          <ScalarProperty Name="calculated_value" ColumnName="calculated_value" />
+          <ScalarProperty Name="column_name" ColumnName="column_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSchemaGroupByPath" FunctionName="ReportingSuiteModel.Store.GetSchemaGroupByPath">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSchemaGroupByPath_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="dependency" ColumnName="dependency" />
+          <ScalarProperty Name="table_name" ColumnName="table_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSubmissionPacks" FunctionName="ReportingSuiteModel.Store.GetSubmissionPacks">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSubmissionPacks_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSubmissionPacks2" FunctionName="ReportingSuiteModel.Store.GetSubmissionPacks2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSubmissionPacks2_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSubmissionPacks3" FunctionName="ReportingSuiteModel.Store.GetSubmissionPacks3">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSubmissionPacks3_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="Levy" ColumnName="Levy" />
+          <ScalarProperty Name="Payment_Reference" ColumnName="Payment Reference" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSubmissionPacksByEntityType" FunctionName="ReportingSuiteModel.Store.GetSubmissionPacksByEntityType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSubmissionPacksByEntityType_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSubmissionPacksDates" FunctionName="ReportingSuiteModel.Store.GetSubmissionPacksDates">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSubmissionPacksDates_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="reference" ColumnName="reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="FormStatusName" ColumnName="FormStatusName" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ReportDataCubeEmpty" FunctionName="ReportingSuiteModel.Store.ReportDataCubeEmpty" />
+    <FunctionImportMapping FunctionImportName="ReportDataCubeFill" FunctionName="ReportingSuiteModel.Store.ReportDataCubeFill" />
+    <FunctionImportMapping FunctionImportName="ReportsList" FunctionName="ReportingSuiteModel.Store.ReportsList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.ReportsList_Result">
+          <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+          <ScalarProperty Name="Report_Name" ColumnName="Report_Name" />
+          <ScalarProperty Name="Report_Title" ColumnName="Report_Title" />
+          <ScalarProperty Name="Entity_GroupID" ColumnName="Entity_GroupID" />
+          <ScalarProperty Name="Report_Description" ColumnName="Report_Description" />
+          <ScalarProperty Name="Report_SubTitle" ColumnName="Report_SubTitle" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+          <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+          <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+          <ScalarProperty Name="Is_Dynamic" ColumnName="Is_Dynamic" />
+          <ScalarProperty Name="LineItemTypeID" ColumnName="LineItemTypeID" />
+          <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+          <ScalarProperty Name="Is_MulitpleEntities" ColumnName="Is_MulitpleEntities" />
+          <ScalarProperty Name="YearFrom" ColumnName="YearFrom" />
+          <ScalarProperty Name="YearTo" ColumnName="YearTo" />
+          <ScalarProperty Name="QuarterFrom" ColumnName="QuarterFrom" />
+          <ScalarProperty Name="QuarterTo" ColumnName="QuarterTo" />
+          <ScalarProperty Name="ReportCode" ColumnName="ReportCode" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="ShowMappedItems" ColumnName="ShowMappedItems" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SubmissionReports" FunctionName="ReportingSuiteModel.Store.SubmissionReports">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.SubmissionReports_Result">
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="License_Number" ColumnName="License Number" />
+          <ScalarProperty Name="Submission_Date" ColumnName="Submission Date" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="submission_pack_name" ColumnName="submission_pack_name" />
+          <ScalarProperty Name="Industry" ColumnName="Industry" />
+          <ScalarProperty Name="Date_Created" ColumnName="Date Created" />
+          <ScalarProperty Name="Date_Created1" ColumnName="Date Created1" />
+          <ScalarProperty Name="action_performed" ColumnName="action_performed" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="Form_Name" ColumnName="Form Name" />
+          <ScalarProperty Name="Number_of_Submissions" ColumnName="Number of Submissions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UpdateBIViews" FunctionName="ReportingSuiteModel.Store.UpdateBIViews" />
+    <FunctionImportMapping FunctionImportName="UpdateBIGroupViews" FunctionName="ReportingSuiteModel.Store.UpdateBIGroupViews" />
+    <FunctionImportMapping FunctionImportName="UpdateBIGroupViewFinal" FunctionName="ReportingSuiteModel.Store.UpdateBIGroupViewFinal" />
+    <FunctionImportMapping FunctionImportName="GetSchemaItems" FunctionName="ReportingSuiteModel.Store.GetSchemaItems">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSchemaItems_Result">
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSchemaItems2" FunctionName="ReportingSuiteModel.Store.GetSchemaItems2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReportingSuiteModel.GetSchemaItems2_Result">
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="column_name" ColumnName="column_name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CreateStoredFunctionsv2" FunctionName="ReportingSuiteModel.Store.CreateStoredFunctionsv2" />
+    <EntitySetMapping Name="LineItem_Columns">
+      <EntityTypeMapping TypeName="ReportingSuiteModel.LineItem_Columns">
+        <MappingFragment StoreEntitySet="LineItem_Columns">
+          <ScalarProperty Name="QueryWhere" ColumnName="QueryWhere" />
+          <ScalarProperty Name="Static_Value" ColumnName="Static_Value" />
+          <ScalarProperty Name="Is_Static_Value" ColumnName="Is_Static_Value" />
+          <ScalarProperty Name="RuntimeExpression" ColumnName="RuntimeExpression" />
+          <ScalarProperty Name="ProcessTypeID" ColumnName="ProcessTypeID" />
+          <ScalarProperty Name="Inherited_Lineitem_ColumnID" ColumnName="Inherited_Lineitem_ColumnID" />
+          <ScalarProperty Name="Is_Inherited" ColumnName="Is_Inherited" />
+          <ScalarProperty Name="AddMonthToReportingPeriod" ColumnName="AddMonthToReportingPeriod" />
+          <ScalarProperty Name="EntityGroupBasedMapping" ColumnName="EntityGroupBasedMapping" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="SchemaFieldName" ColumnName="SchemaFieldName" />
+          <ScalarProperty Name="Expression" ColumnName="Expression" />
+          <ScalarProperty Name="Is_CalculatedValue" ColumnName="Is_CalculatedValue" />
+          <ScalarProperty Name="Sort_Order" ColumnName="Sort_Order" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="SchemaID" ColumnName="SchemaID" />
+          <ScalarProperty Name="CountDataType" ColumnName="CountDataType" />
+          <ScalarProperty Name="CountParameter" ColumnName="CountParameter" />
+          <ScalarProperty Name="AggregationTypeID" ColumnName="AggregationTypeID" />
+          <ScalarProperty Name="StoredProc" ColumnName="StoredProc" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="Report_ColumnID" ColumnName="Report_ColumnID" />
+          <ScalarProperty Name="Report_LineItemID" ColumnName="Report_LineItemID" />
+          <ScalarProperty Name="LineItemColumnID" ColumnName="LineItemColumnID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CreateStoredFunctionsv3" FunctionName="ReportingSuiteModel.Store.CreateStoredFunctionsv3" />
+  </EntityContainerMapping>
+</Mapping>

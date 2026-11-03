@@ -16,8 +16,8 @@ Public Class AdhocReportData
         context.Response.Cache.SetNoStore()
         context.Response.TrySkipIisCustomErrors = True
 
+        Dim action = Convert.ToString(context.Request("action")).Trim().ToLowerInvariant()
         Try
-            Dim action = Convert.ToString(context.Request("action")).Trim().ToLowerInvariant()
             Select Case action
                 Case "create"
                     RequirePost(context)
@@ -119,12 +119,59 @@ Public Class AdhocReportData
             WriteError(context, 400, ex.Message)
         Catch ex As SqlException
             context.Trace.Warn("AdhocReport", "Database operation failed while loading an adhoc report.", ex)
-            WriteError(context, 500, "The report could not be loaded. Review the saved query and application trace.")
+            WriteError(context, 500, GetAdminErrorMessage(
+                context,
+                action,
+                "The report could not be loaded. Review the saved query and application trace.",
+                ex))
         Catch ex As Exception
             context.Trace.Warn("AdhocReport", "Unexpected error while loading an adhoc report.", ex)
-            WriteError(context, 500, "The report could not be loaded. Review the application trace for details.")
+            WriteError(context, 500, GetAdminErrorMessage(
+                context,
+                action,
+                "The report could not be loaded. Review the application trace for details.",
+                ex))
         End Try
     End Sub
+
+    Private Shared Function GetAdminErrorMessage(ByVal context As HttpContext,
+                                                 ByVal action As String,
+                                                 ByVal fallback As String,
+                                                 ByVal exception As Exception) As String
+        If Not String.Equals(action, "create", StringComparison.OrdinalIgnoreCase) AndAlso
+           Not String.Equals(action, "edit", StringComparison.OrdinalIgnoreCase) Then
+            Return fallback
+        End If
+
+        Try
+            If Not AdhocReportService.IsCurrentUserAdmin(context) Then
+                Return fallback
+            End If
+        Catch
+            Return fallback
+        End Try
+
+        Dim details As New List(Of String)()
+        Dim current = exception
+        While current IsNot Nothing AndAlso details.Count < 3
+            Dim text = System.Text.RegularExpressions.Regex.Replace(
+                Convert.ToString(current.Message),
+                "\s+",
+                " ").Trim()
+            If text.Length > 600 Then
+                text = text.Substring(0, 600) & "..."
+            End If
+            If text.Length > 0 AndAlso Not details.Contains(text) Then
+                details.Add(text)
+            End If
+            current = current.InnerException
+        End While
+
+        If details.Count = 0 Then
+            Return fallback
+        End If
+        Return "The report could not be saved. " & String.Join(" ", details)
+    End Function
 
     Private Shared Function ReadFilters(ByVal value As String) As List(Of AdhocReportColumnFilter)
         If String.IsNullOrWhiteSpace(value) Then

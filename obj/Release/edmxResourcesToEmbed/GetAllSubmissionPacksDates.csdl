@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReportingSuiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GetAllSubmissionPacksDates" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="GetAllSubmissionPacksDates" ReturnType="Collection(ReportingSuiteModel.GetAllSubmissionPacksDates_Result)">
+      <Parameter Name="start" Mode="In" Type="DateTime" />
+      <Parameter Name="end" Mode="In" Type="DateTime" />
+      <Parameter Name="type" Mode="In" Type="String" />
+      <Parameter Name="formset" Mode="In" Type="String" />
+      <Parameter Name="status" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="GetAllSubmissionPacksDates_Result">
+    <Property Type="String" Name="Company_Name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="License_Number" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Industry" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="Submission_Date" Nullable="true" Precision="23" />
+    <Property Type="String" Name="reference" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="submission_pack_name" Nullable="true" MaxLength="250" />
+    <Property Type="DateTime" Name="end_date" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="created_on" Nullable="true" Precision="23" />
+    <Property Type="String" Name="action_performed" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FormStatusName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="entity_instance_id" Nullable="true" />
+    <Property Type="Int32" Name="submission_pack_instance_id" Nullable="false" />
+    <Property Type="Guid" Name="formset_version_id" Nullable="true" />
+    <Property Type="String" Name="FormName" Nullable="true" />
+  </ComplexType>
+</Schema>

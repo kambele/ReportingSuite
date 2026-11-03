@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VSABModelStoreContainer" CdmEntityContainer="VSABEntities">
+    <EntitySetMapping Name="schema_item_details">
+      <EntityTypeMapping TypeName="VSABModel.schema_item_details">
+        <MappingFragment StoreEntitySet="schema_item_details">
+          <ScalarProperty Name="item_version_id" ColumnName="item_version_id" />
+          <ScalarProperty Name="item_id" ColumnName="item_id" />
+          <ScalarProperty Name="version_number" ColumnName="version_number" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="owner_schema_id" ColumnName="owner_schema_id" />
+          <ScalarProperty Name="parent_element_id" ColumnName="parent_element_id" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="dependency" ColumnName="dependency" />
+          <ScalarProperty Name="initial_value" ColumnName="initial_value" />
+          <ScalarProperty Name="calculated_value" ColumnName="calculated_value" />
+          <ScalarProperty Name="is_mandatory" ColumnName="is_mandatory" />
+          <ScalarProperty Name="data_type_name" ColumnName="data_type_name" />
+          <ScalarProperty Name="column_name" ColumnName="column_name" />
+          <ScalarProperty Name="is_primary_key" ColumnName="is_primary_key" />
+          <ScalarProperty Name="initial_Value_type" ColumnName="initial_Value_type" />
+          <ScalarProperty Name="data_type_guid" ColumnName="data_type_guid" />
+          <ScalarProperty Name="data_type_version_number" ColumnName="data_type_version_number" />
+          <ScalarProperty Name="is_searchable" ColumnName="is_searchable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

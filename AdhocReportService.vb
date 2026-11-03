@@ -380,7 +380,7 @@ Public NotInheritable Class AdhocReportService
             Dim previousReportName As String = String.Empty
             Dim previousReportTitle As String = String.Empty
             Dim previousSortOrder As Integer
-            Dim previousSectionId As Long
+            Dim previousSectionId As Nullable(Of Long)
             Dim previousQuery As String = String.Empty
 
             Using transaction = connection.BeginTransaction(IsolationLevel.Serializable)
@@ -405,7 +405,11 @@ Public NotInheritable Class AdhocReportService
                         previousReportName = Convert.ToString(reader("Report_Name"), CultureInfo.InvariantCulture)
                         previousReportTitle = Convert.ToString(reader("Report_Title"), CultureInfo.InvariantCulture)
                         previousSortOrder = Convert.ToInt32(reader("Sort_Order"), CultureInfo.InvariantCulture)
-                        previousSectionId = Convert.ToInt64(reader("SectionID"), CultureInfo.InvariantCulture)
+                        If reader.IsDBNull(reader.GetOrdinal("SectionID")) Then
+                            previousSectionId = Nothing
+                        Else
+                            previousSectionId = Convert.ToInt64(reader("SectionID"), CultureInfo.InvariantCulture)
+                        End If
                         previousQuery = Convert.ToString(reader("AdhocQuery"), CultureInfo.InvariantCulture)
                     End Using
                 End Using
@@ -444,7 +448,10 @@ Public NotInheritable Class AdhocReportService
                         restoreCommand.Parameters.Add("@reportName", SqlDbType.VarChar, 200).Value = previousReportName
                         restoreCommand.Parameters.Add("@reportTitle", SqlDbType.VarChar, 100).Value = previousReportTitle
                         restoreCommand.Parameters.Add("@sortOrder", SqlDbType.Int).Value = previousSortOrder
-                        restoreCommand.Parameters.Add("@sectionId", SqlDbType.BigInt).Value = previousSectionId
+                        restoreCommand.Parameters.Add("@sectionId", SqlDbType.BigInt).Value =
+                            If(previousSectionId.HasValue,
+                               DirectCast(previousSectionId.Value, Object),
+                               DBNull.Value)
                         restoreCommand.Parameters.Add("@adhocQuery", SqlDbType.VarChar, -1).Value = previousQuery
                         restoreCommand.Parameters.Add("@reportId", SqlDbType.BigInt).Value = request.ReportId
                         restoreCommand.ExecuteNonQuery()
